@@ -1,0 +1,39 @@
+{
+	"name": "x3p0-media-data",
+	"description": "Media Data via WordPress blocks.",
+	"author": "Justin Tadlock",
+	"homepage": "https://github.com/x3p0-dev/x3p0-media-data",
+	"scripts": {
+		"start": "npm run start:blocks && npm run manifest",
+		"build": "npm run build:blocks && npm run manifest",
+		"start:blocks": "wp-scripts start --webpack-src-dir=resources/blocks --output-path=public/blocks",
+		"build:blocks": "wp-scripts build --webpack-src-dir=resources/blocks --output-path=public/blocks",
+		"manifest": "wp-scripts build-blocks-manifest --input=resources --output=public/blocks/manifest.php"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/x3p0-dev/x3p0-media-data.git"
+	},
+	"bugs": {
+		"url": "https://github.com/x3p0-dev/x3p0-media-data/issues"
+	},
+	"devDependencies": {
+		"@wordpress/scripts": "^30.25.0"
+	},
+	"dependencies": {
+		"@wordpress/block-editor": "^15.5.0",
+		"@wordpress/blocks": "^15.5.0",
+		"@wordpress/components": "^30.5.0",
+		"@wordpress/compose": "^7.32.0",
+		"@wordpress/core-data": "^7.32.0",
+		"@wordpress/data": "^10.32.0",
+		"@wordpress/date": "^5.33.0",
+		"@wordpress/element": "^6.32.0",
+		"@wordpress/hooks": "^4.32.0",
+		"@wordpress/i18n": "^6.5.0",
+		"@wordpress/icons": "^10.32.0",
+		"@wordpress/notices": "^5.33.0",
+		"@wordpress/primitives": "^4.32.0",
+		"clsx": "^2.1.1"
+	}
+}

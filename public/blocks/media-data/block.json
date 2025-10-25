@@ -1,0 +1,54 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "x3p0/media-data",
+  "version": "1.0.0",
+  "title": "Media Data",
+  "category": "media",
+  "icon": "info-outline",
+  "description": "Display data for media attachments.",
+  "keywords": [
+    "media",
+    "metadata",
+    "attachment",
+    "exif"
+  ],
+  "textdomain": "x3p0-media-data",
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": true,
+      "blockGap": true
+    },
+    "color": {
+      "text": true,
+      "background": true,
+      "link": true
+    },
+    "typography": {
+      "fontSize": true,
+      "lineHeight": true
+    }
+  },
+  "providesContext": {
+    "x3p0/mediaId": "mediaId"
+  },
+  "usesContext": [
+    "x3p0/mediaId",
+    "postId",
+    "postType"
+  ],
+  "attributes": {
+    "mediaId": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css"
+}

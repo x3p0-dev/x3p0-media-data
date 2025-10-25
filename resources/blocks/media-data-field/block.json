@@ -1,0 +1,64 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "x3p0/media-data-field",
+	"version": "1.0.0",
+	"title": "Media Data Field",
+	"category": "media",
+	"icon": "tag",
+	"description": "Display a single data field for media.",
+	"keywords": ["media", "metadata", "field", "meta"],
+	"parent": ["x3p0/media-data"],
+	"textdomain": "x3p0-media-data",
+	"supports": {
+		"html": false,
+		"__experimentalStyle": {
+			"css": "&.is-layout-flex { gap: var(--wp--custom--x-3-p-0-media-data--gap, 0.5rem); }",
+			"spacing": {
+				"blockGap": "var(--wp--custom--x-3-p-0-media-meta--gap, 0.5rem)"
+			}
+		},
+		"spacing": {
+			"margin": true,
+			"padding": true
+		},
+		"color": {
+			"text": true,
+			"background": true,
+			"link": true
+		},
+		"layout": {
+			"allowCustomContentAndWideSize": false,
+			"allowEditing": false,
+			"allowInheriting": false,
+			"allowJustification": true,
+			"allowOrientation": true,
+			"allowSizingOnChildren": false,
+			"allowSwitching": true,
+			"allowVerticalAlignment": true,
+			"default": {
+				"type": "flex",
+				"flexWrap": "wrap",
+				"orientation": "horizontal",
+				"justifyContent": "space-between"
+			}
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true
+		}
+	},
+	"usesContext": ["x3p0/mediaId"],
+	"attributes": {
+		"field": {
+			"type": "string",
+			"default": "title"
+		},
+		"label": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}
