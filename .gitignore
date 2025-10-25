@@ -1,0 +1,9 @@
+/.idea
+/.idea
+/node_modules
+/vendor
+/phpcs.xml
+/.phpcs.xml
+*.map
+*.zip
+.DS_Store
