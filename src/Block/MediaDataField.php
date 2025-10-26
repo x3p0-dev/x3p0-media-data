@@ -54,7 +54,7 @@ class MediaDataField implements Block
 		protected array             $attributes,
 		protected WP_Block          $block
 	) {
-		$this->attributes['field'] = $this->attributes['field'] ?? 'file_name';
+		$this->attributes['field'] = $this->attributes['field'] ?? 'title';
 		$this->attributes['label'] = $this->attributes['label'] ?? '';
 
 		$this->mediaId = $this->block->context['x3p0/mediaId'] ?? 0;
