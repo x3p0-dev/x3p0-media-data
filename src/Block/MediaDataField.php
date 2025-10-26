@@ -50,7 +50,7 @@ class MediaDataField implements Block
 	 * Sets the block attributes.
 	 */
 	public function __construct(
-		protected MediaFieldService $mediaService,
+		protected MediaFieldService $mediaFieldService,
 		protected array             $attributes,
 		protected WP_Block          $block
 	) {
@@ -74,7 +74,7 @@ class MediaDataField implements Block
 		}
 
 		// Gets the field object.
-		$field = $this->mediaService->getField(
+		$field = $this->mediaFieldService->getField(
 			$this->mediaId,
 			$this->attributes['field']
 		);

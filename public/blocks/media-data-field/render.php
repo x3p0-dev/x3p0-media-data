@@ -13,7 +13,7 @@ use X3P0\MediaData\Block\MediaDataField;
  * @global WP_Block $block      Block instance.
  */
 echo (new MediaDataField(
-	mediaService: plugin()->get(MediaFieldService::class),
+	mediaFieldService: plugin()->get(MediaFieldService::class),
 	attributes: $attributes,
 	block: $block
 ))->render();

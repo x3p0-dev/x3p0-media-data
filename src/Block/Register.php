@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace X3P0\MediaData\Block;
 
 use X3P0\MediaData\Contracts\Bootable;
-use X3P0\MediaData\Field\FieldTypes;
 
 class Register implements Bootable
 {
@@ -30,7 +29,6 @@ class Register implements Bootable
 	public function boot(): void
 	{
 		add_action('init', [$this, 'register']);
-	//	add_filter('block_type_metadata', [$this, 'setMetadata']);
 	}
 
 	/**
@@ -42,21 +40,5 @@ class Register implements Bootable
 			$this->path,
 			"{$this->path}/manifest.php"
 		);
-	}
-
-	/**
-	 * Adds a context provider to the `core/media-text` block to provide its
-	 * `mediaId` attribute so that we can use it in our blocks.
-	 */
-	public function setMetadata(array $metadata): array
-	{
-		if ('core/media-text' !== $metadata['name']) {
-			return $metadata;
-		}
-
-		$metadata['providesContext'] ??= [];
-		$metadata['providesContext']['x3p0/mediaId'] = 'mediaId';
-
-		return $metadata;
 	}
 }
