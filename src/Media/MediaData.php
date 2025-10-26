@@ -18,9 +18,9 @@ use X3P0\MediaData\Field\FieldFactory;
 use X3P0\MediaData\Contracts\Field;
 
 /**
- * Manages field data for a single media attachment. Coordinates between
- * the field system and raw WordPress attachment metadata, caching field
- * instances for performance.
+ * Manages field data for a single media attachment. Coordinates between the
+ * field system and raw WordPress attachment metadata, caching field instances
+ * for performance.
  */
 class MediaData
 {
@@ -59,6 +59,14 @@ class MediaData
 	}
 
 	/**
+	 * Returns the raw metadata array.
+	 */
+	public function metadata(): array
+	{
+		return $this->rawMetadata;
+	}
+
+	/**
 	 * Checks if the field exists and has a value for this media.
 	 */
 	public function has(string $key): bool
@@ -78,7 +86,10 @@ class MediaData
 		return $field ? $field->render() : '';
 	}
 
-	public function label(string $key): string
+	/**
+	 * Returns the field label.
+	 */
+	public function getLabel(string $key): string
 	{
 		$field = $this->getField($key);
 
@@ -95,20 +106,10 @@ class MediaData
 			return $this->fields[$key];
 		}
 
-		// Create new field instance via factory.
-		$field = $this->fieldFactory->make($key, $this->context);
+		// Create new field instance via factory. This also caches null
+		// fields to avoid repeated lookups.
+		$this->fields[$key] = $this->fieldFactory->make($key, $this->context);
 
-		// Cache the field (even if null) to avoid repeated lookups.
-		$this->fields[$key] = $field;
-
-		return $field;
-	}
-
-	/**
-	 * Returns the raw metadata array.
-	 */
-	public function metadata(): array
-	{
-		return $this->rawMetadata;
+		return $this->fields[$key];
 	}
 }

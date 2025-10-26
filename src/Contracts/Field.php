@@ -22,11 +22,6 @@ use X3P0\MediaData\Media\MediaContext;
 interface Field
 {
 	/**
-	 * Creates a new field instance with the given context.
-	 */
-	public function __construct(MediaContext $context);
-
-	/**
 	 * Checks if the field has a value for the current media.
 	 */
 	public function exists(): bool;
@@ -41,5 +36,8 @@ interface Field
 	 */
 	public function render(): string;
 
+	/**
+	 * Returns the internationalized field label.
+	 */
 	public function label(): string;
 }

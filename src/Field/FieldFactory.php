@@ -34,27 +34,12 @@ class FieldFactory
 	 */
 	public function make(string $key, MediaContext $context): ?Field
 	{
-		// Check if the field is registered.
+		if (! $this->registry->isRegistered($key)) {
+			return null;
+		}
+
 		$fieldClass = $this->registry->get($key);
 
-		if (! $fieldClass) {
-			return null;
-		}
-
-		// Verify the class exists and implements the Field interface.
-		if (! class_exists($fieldClass) || ! is_subclass_of($fieldClass, Field::class)) {
-			return null;
-		}
-
-		// Instantiate and return the field.
 		return new $fieldClass($context);
-	}
-
-	/**
-	 * Gets the registry instance.
-	 */
-	public function registry(): FieldRegistry
-	{
-		return $this->registry;
 	}
 }

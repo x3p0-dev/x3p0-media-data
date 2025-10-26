@@ -18,7 +18,7 @@ use X3P0\MediaData\Contracts\Block;
 use X3P0\MediaData\Media\MediaRepository;
 
 /**
- * Renders the Breadcrumbs block on the front end.
+ * Renders the `x3p0/media-data-field` block on the front end.
  */
 class MediaDataField implements Block
 {
@@ -41,6 +41,9 @@ class MediaDataField implements Block
 		'b'       => true
 	];
 
+	/**
+	 * The media attachment ID.
+	 */
 	protected int $mediaId = 0;
 
 	/**
@@ -70,14 +73,16 @@ class MediaDataField implements Block
 			return '';
 		}
 
-		$mediaData = $this->mediaRepository->get($this->mediaId);
+		// Gets the media data object for managing field data.
+		$mediaData = $this->mediaRepository->find($this->mediaId);
 
-		// Bail if the field doesn't exist.
-		if (! $mediaData->has($this->attributes['field'])) {
+		// If no media data or it doesn't have data for the field, bail.
+		if (! $mediaData || ! $mediaData->has($this->attributes['field'])) {
 			return '';
 		}
 
-		$label = $this->attributes['label'] ?: $mediaData->label(
+		// Get the user-customized label, fall back to field label.
+		$label = $this->attributes['label'] ?: $mediaData->getLabel(
 			$this->attributes['field']
 		);
 

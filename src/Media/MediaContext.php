@@ -16,8 +16,8 @@ namespace X3P0\MediaData\Media;
 use WP_Post;
 
 /**
- * Immutable value object that carries all the data a field might need.
- * Acts as a data transfer object between MediaData and field instances.
+ * Immutable value object that carries all the data a field might need. Acts as
+ * a data transfer object between MediaData and field instances.
  */
 class MediaContext
 {
@@ -37,14 +37,6 @@ class MediaContext
 	}
 
 	/**
-	 * Gets the raw attachment metadata array.
-	 */
-	public function metadata(): array
-	{
-		return $this->metadata;
-	}
-
-	/**
 	 * Gets the attachment post ID.
 	 */
 	public function postId(): ?int
@@ -53,15 +45,19 @@ class MediaContext
 	}
 
 	/**
+	 * Gets the raw attachment metadata array.
+	 */
+	public function metadata(): array
+	{
+		return $this->metadata;
+	}
+
+	/**
 	 * Checks if a metadata key exists.
 	 */
-	public function has(string $key, string $type = ''): bool
+	public function has(string $key): bool
 	{
-		return match ($type) {
-			'image' => isset($this->metadata['image_meta'][$key]),
-			'audio' => isset($this->metadata['audio'][$key]),
-			default => isset($this->metadata[$key])
-		};
+		return $this->get($key) !== null;
 	}
 
 	/**
@@ -69,14 +65,9 @@ class MediaContext
 	 */
 	public function get(string $key): mixed
 	{
-		if ($this->has($key)) {
-			return $this->metadata[$key];
-		} elseif ($this->has($key, 'image')) {
-			return $this->metadata['image_meta'][$key];
-		} elseif ($this->has($key, 'audio')) {
-			return $this->metadata['audio'][$key];
-		}
-
-		return null;
+		return $this->metadata[$key]
+			?? $this->metadata['image_meta'][$key]
+			?? $this->metadata['audio'][$key]
+			?? null;
 	}
 }

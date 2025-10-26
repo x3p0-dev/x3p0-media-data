@@ -65,7 +65,7 @@ const variations = [
 	},
 	{
 		name: 'length_formatted',
-		title: __('Run Time', 'x3p0-media-data'),
+		title: __('Duration', 'x3p0-media-data'),
 		description: __('Displays the media length/duration.', 'x3p0-media-data')
 	},
 	{

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Field registry class.
+ * Field type registry class.
  *
  * @author    Justin Tadlock <justintadlock@gmail.com>
  * @copyright Copyright (c) 2008-2025, Justin Tadlock
@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Field;
 
+use TypeError;
 use X3P0\MediaData\Contracts\Field;
 
 /**
- * Registry for mapping field keys to their implementing classes and metadata.
- * Allows registration of custom fields and provides lookup functionality
- * without requiring class instantiation for metadata access.
+ * Registry for mapping field type keys to their implementing classes. Allows
+ * registration of custom field types.
  */
 class FieldRegistry
 {
@@ -28,22 +28,33 @@ class FieldRegistry
 	private array $fields = [];
 
 	/**
-	 * Registers a field class with metadata for a given key.
+	 * Registers a field type.
 	 *
-	 * @param class-string<Field> $fieldClass
+	 * @param class-string<Field> $className
 	 */
-	public function register(string $key, string $fieldClass): void
+	public function register(string $key, string $className): void
 	{
-		$this->fields[$key] = $fieldClass;
+		if (! is_subclass_of($className, Field::class)) {
+			throw new TypeError(esc_html(sprintf(
+				// Translators: %s is a PHP class name.
+				__('Only %s classes can be registered', 'x3p0-media-data'),
+				Field::class
+			)));
+		}
+
+		$this->fields[$key] = $className;
 	}
 
+	/**
+	 * Determines if a field type is registered.
+	 */
 	public function isRegistered(string $key): bool
 	{
 		return isset($this->fields[$key]);
 	}
 
 	/**
-	 * Gets the field class name for a given key.
+	 * Returns the field type class name for a given key.
 	 */
 	public function get(string $key): ?string
 	{
@@ -51,7 +62,7 @@ class FieldRegistry
 	}
 
 	/**
-	 * Unregisters a field for the given key.
+	 * Unregisters a field type for the given key.
 	 */
 	public function unregister(string $key): void
 	{
@@ -59,7 +70,7 @@ class FieldRegistry
 	}
 
 	/**
-	 * Gets all registered field keys.
+	 * Returns all registered field type keys.
 	 */
 	public function keys(): array
 	{
@@ -67,7 +78,7 @@ class FieldRegistry
 	}
 
 	/**
-	 * Gets all registered fields with full descriptors.
+	 * Returns all registered field types.
 	 */
 	public function all(): array
 	{

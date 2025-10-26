@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * File Size field class.
+ *
+ * @author    Justin Tadlock <justintadlock@gmail.com>
+ * @copyright Copyright (c) 2008-2025, Justin Tadlock
+ * @license   https://gnu.org/licenses/old-licenses/gpl-2.0.html GPL-2.0-or-later
+ * @link      https://github.com/x3p0-dev/x3p0-media-data
+ */
+
 declare(strict_types=1);
 
 namespace X3P0\MediaData\Field\Type;
@@ -7,15 +16,21 @@ namespace X3P0\MediaData\Field\Type;
 use X3P0\MediaData\Field\Field;
 
 /**
- * File size field - displays media file size.
+ * Displays the media file size.
  */
 class FileSize extends Field
 {
+	/**
+	 * {@inheritDoc}
+	 */
 	public function label(): string
 	{
 		return __('File Size', 'x3p0-media-data');
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function value(): mixed
 	{
 		// Try to get filesize from metadata first.
@@ -38,6 +53,9 @@ class FileSize extends Field
 		return null;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function render(): string
 	{
 		$filesize = $this->value();

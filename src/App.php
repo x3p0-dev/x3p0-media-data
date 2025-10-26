@@ -80,11 +80,11 @@ class App implements Bootable, Container
 	{
 		$fieldRegistry = new FieldRegistry();
 
-		$this->instance('media.repository', new MediaRepository(
+		$this->instance(MediaRepository::class, new MediaRepository(
 			fieldFactory: new FieldFactory($fieldRegistry)
 		));
 
-		$this->instance('block.register', new Block\Register(
+		$this->instance(Block\Register::class, new Block\Register(
 			path: __DIR__ . '/../public/blocks'
 		));
 
