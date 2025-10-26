@@ -42,7 +42,6 @@ return array(
 			'x3p0/mediaId' => 'mediaId'
 		),
 		'usesContext' => array(
-			'x3p0/mediaId',
 			'postId',
 			'postType'
 		),

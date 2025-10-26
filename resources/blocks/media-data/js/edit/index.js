@@ -10,7 +10,6 @@ import {
 import {MenuItem, ToolbarButton} from '@wordpress/components';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
-import {useEffect, useMemo} from '@wordpress/element';
 import { store as noticesStore } from '@wordpress/notices';
 import {createBlock} from "@wordpress/blocks";
 
@@ -25,25 +24,19 @@ const TEMPLATE = [
 	['x3p0/media-data-field', { field: 'file_size' }],
 ];
 
-export default function Edit({ attributes, setAttributes, context, clientId, isSelected: isSingleSelected }) {
+export default function Edit({
+	attributes,
+	setAttributes,
+	context,
+	clientId,
+	isSelected: isSingleSelected
+}) {
 	const { mediaId } = attributes;
 	const { postId, postType } = context;
 
 	// Determine the effective media ID
-	const effectiveMediaId = mediaId || (postType === 'attachment' ? postId : 0);
-
-	/*
-	// --- GOOD CODE: NEEDS TO BE REFINED FOR CONTEXTUAL MEDIA IDS ---
-	const contextualMediaId = useMemo(() => {
-		return context?.['x3p0/mediaId'] || null;
-	}, [context]);
-
-	useEffect(() => {
-		if (contextualMediaId) {
-			setAttributes({mediaId: contextualMediaId});
-		}
-	}, [contextualMediaId]);
-	// */
+	const effectiveMediaId = mediaId
+		|| (postType === 'attachment' && postId ? postId : 0);
 
 	// Fetch media details using the new API
 	const media = useSelect(
@@ -57,9 +50,7 @@ export default function Edit({ attributes, setAttributes, context, clientId, isS
 	);
 
 	const { createErrorNotice } = useDispatch(noticesStore);
-
-	const { insertBlock } =
-		useDispatch( blockEditorStore );
+	const { insertBlock } = useDispatch( blockEditorStore );
 
 	const blockProps = useBlockProps();
 
@@ -74,20 +65,27 @@ export default function Edit({ attributes, setAttributes, context, clientId, isS
 	);
 
 	const addFieldBlock = () => {
-		// When adding, set the header's level to current headingLevel
-		const newAccordionItem = createBlock('x3p0/media-data-field', {});
-		insertBlock( newAccordionItem, undefined, clientId );
+		void insertBlock(createBlock('x3p0/media-data-field', {}), undefined, clientId);
 	};
 
 	const onUploadError = (message) => {
 		void createErrorNotice(message, {
 			type: 'snackbar',
-			isDismissible: true,
+			isDismissible: true
 		});
 	};
 
-	// Show placeholder if no media is available
-	if (!effectiveMediaId) {
+	const onSelectMedia = (selectedMedia) => {
+		if (! selectedMedia?.id) {
+			return;
+		}
+		setAttributes({ mediaId: selectedMedia.id });
+	};
+
+	const onRemoveMedia = () => setAttributes({ mediaId: 0 });
+
+	// Show placeholder if no media is available.
+	if (! effectiveMediaId) {
 		return (
 			<div {...blockProps}>
 				<MediaPlaceholder
@@ -99,13 +97,7 @@ export default function Edit({ attributes, setAttributes, context, clientId, isS
 							'x3p0-media-data'
 						),
 					}}
-					onSelect={(selectedMedia) => {
-						// Ensure we have valid media with an ID
-						if (!selectedMedia?.id) {
-							return;
-						}
-						setAttributes({ mediaId: selectedMedia.id });
-					}}
+					onSelect={onSelectMedia}
 					onError={onUploadError}
 					accept="*"
 					allowedTypes={['image', 'video', 'audio', 'application']}
@@ -113,17 +105,6 @@ export default function Edit({ attributes, setAttributes, context, clientId, isS
 			</div>
 		);
 	}
-
-	const onSelectMedia = (selectedMedia) => {
-		if (!selectedMedia?.id) {
-			return;
-		}
-		setAttributes({ mediaId: selectedMedia.id });
-	};
-
-	const onRemoveMedia = () => {
-		setAttributes({ mediaId: 0 });
-	};
 
 	return (
 		<>
@@ -138,18 +119,16 @@ export default function Edit({ attributes, setAttributes, context, clientId, isS
 					popoverProps={{ placement: 'bottom-start' }}
 				>
 					{mediaId && (
-						<MenuItem
-							onClick={onRemoveMedia}
-						>
+						<MenuItem onClick={onRemoveMedia}>
 							{__('Reset', 'x3p0-media-data')}
 						</MenuItem>
 					)}
 				</MediaReplaceFlow>
-				{ isSingleSelected && (
+				{isSingleSelected && (
 					<ToolbarButton onClick={ addFieldBlock }>
 						{ __( 'Add', 'x3p0-media-data' ) }
 					</ToolbarButton>
-				) }
+				)}
 			</BlockControls>
 			<div {...innerBlocksProps} />
 		</>

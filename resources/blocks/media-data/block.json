@@ -30,7 +30,7 @@
 	"providesContext": {
 		"x3p0/mediaId": "mediaId"
 	},
-	"usesContext": ["x3p0/mediaId","postId", "postType"],
+	"usesContext": ["postId", "postType"],
 	"attributes": {
 		"mediaId": {
 			"type": "number",
