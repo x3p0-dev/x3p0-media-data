@@ -31,8 +31,8 @@ class Camera extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function value(): mixed
+	public function getValue(): mixed
 	{
-		return $this->context->get('camera');
+		return $this->media->get('camera');
 	}
 }

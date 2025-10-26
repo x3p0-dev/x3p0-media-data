@@ -31,8 +31,8 @@ class Artist extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function value(): mixed
+	public function getValue(): mixed
 	{
-		return $this->context->get('artist');
+		return $this->media->get('artist');
 	}
 }

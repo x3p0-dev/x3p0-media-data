@@ -31,10 +31,10 @@ class DisplayOrientation extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function value(): ?string
+	public function getValue(): ?string
 	{
-		$width  = $this->context->get('width');
-		$height = $this->context->get('height');
+		$width  = $this->media->get('width');
+		$height = $this->media->get('height');
 
 		if (! $width || ! $height) {
 			return null;
@@ -52,7 +52,7 @@ class DisplayOrientation extends BaseField
 	 */
 	public function render(): string
 	{
-		if (! $value = $this->value()) {
+		if (! $value = $this->getValue()) {
 			return '';
 		}
 

@@ -20,9 +20,9 @@ use X3P0\MediaData\Field\BaseField;
  */
 class Year extends BaseField
 {
-	public function value(): mixed
+	public function getValue(): mixed
 	{
-		return $this->context->get('year');
+		return $this->media->get('year');
 	}
 
 	public function renderLabel(): string

@@ -31,9 +31,9 @@ class ShutterSpeed extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function value(): mixed
+	public function getValue(): mixed
 	{
-		return $this->context->get('shutter_speed');
+		return $this->media->get('shutter_speed');
 	}
 
 	/**
@@ -41,7 +41,7 @@ class ShutterSpeed extends BaseField
 	 */
 	public function render(): string
 	{
-		if (! $shutter = $this->value()) {
+		if (! $shutter = $this->getValue()) {
 			return '';
 		}
 

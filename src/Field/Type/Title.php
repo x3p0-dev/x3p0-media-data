@@ -23,9 +23,9 @@ class Title extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function value(): string
+	public function getValue(): string
 	{
-		$post_id = $this->context->mediaId();
+		$post_id = $this->media->mediaId();
 
 		return $post_id ? get_the_title($post_id) : '';
 	}
@@ -35,7 +35,7 @@ class Title extends BaseField
 	 */
 	public function render(): string
 	{
-		$value = $this->value();
+		$value = $this->getValue();
 
 		return $value ? wp_strip_all_tags($value) : '';
 	}

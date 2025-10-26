@@ -31,15 +31,15 @@ class FileSize extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function value(): mixed
+	public function getValue(): mixed
 	{
 		// Try to get filesize from metadata first.
-		if ($filesize = $this->context->get('filesize')) {
+		if ($filesize = $this->media->get('filesize')) {
 			return $filesize;
 		}
 
 		// Fall back to checking the actual file.
-		$mediaId = $this->context->mediaId();
+		$mediaId = $this->media->mediaId();
 
 		if (! $mediaId) {
 			return null;
@@ -59,7 +59,7 @@ class FileSize extends BaseField
 	 */
 	public function render(): string
 	{
-		$filesize = $this->value();
+		$filesize = $this->getValue();
 
 		if (! $filesize) {
 			return '';

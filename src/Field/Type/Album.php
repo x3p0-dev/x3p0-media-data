@@ -31,8 +31,8 @@ class Album extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function value(): mixed
+	public function getValue(): mixed
 	{
-		return $this->context->get('album');
+		return $this->media->get('album');
 	}
 }

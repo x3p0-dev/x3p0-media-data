@@ -31,9 +31,9 @@ class ExifOrientation extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function value(): ?int
+	public function getValue(): ?int
 	{
-		$orientation = $this->context->get('orientation');
+		$orientation = $this->media->get('orientation');
 
 		return is_numeric($orientation) && $orientation >= 1 && $orientation <= 8
 			? absint($orientation)
@@ -45,7 +45,7 @@ class ExifOrientation extends BaseField
 	 */
 	public function render(): string
 	{
-		if (! $value = $this->value()) {
+		if (! $value = $this->getValue()) {
 			return '';
 		}
 

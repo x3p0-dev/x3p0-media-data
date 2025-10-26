@@ -31,9 +31,9 @@ class Aperture extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function value(): mixed
+	public function getValue(): mixed
 	{
-		return $this->context->get('aperture');
+		return $this->media->get('aperture');
 	}
 
 	/**
@@ -41,7 +41,7 @@ class Aperture extends BaseField
 	 */
 	public function render(): string
 	{
-		$aperture = $this->value();
+		$aperture = $this->getValue();
 
 		if (! $aperture) {
 			return '';

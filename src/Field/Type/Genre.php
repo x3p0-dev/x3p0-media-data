@@ -31,8 +31,8 @@ class Genre extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function value(): mixed
+	public function getValue(): mixed
 	{
-		return $this->context->get('genre');
+		return $this->media->get('genre');
 	}
 }

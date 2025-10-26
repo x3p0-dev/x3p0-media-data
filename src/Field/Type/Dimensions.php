@@ -33,18 +33,18 @@ class Dimensions extends BaseField
 	 */
 	public function exists(): bool
 	{
-		$value = $this->value();
+		$value = $this->getValue();
 		return ! empty($value['width']) && ! empty($value['height']);
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function value(): array
+	public function getValue(): array
 	{
 		return [
-			'width'  => $this->context->get('width'),
-			'height' => $this->context->get('height')
+			'width'  => $this->media->get('width'),
+			'height' => $this->media->get('height')
 		];
 	}
 
@@ -53,7 +53,7 @@ class Dimensions extends BaseField
 	 */
 	public function render(): string
 	{
-		$value = $this->value();
+		$value = $this->getValue();
 		$width  = absint($value['width']);
 		$height = absint($value['height']);
 

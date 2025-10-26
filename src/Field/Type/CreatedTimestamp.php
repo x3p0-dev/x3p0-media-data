@@ -31,9 +31,9 @@ class CreatedTimestamp extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function value(): mixed
+	public function getValue(): mixed
 	{
-		return $this->context->get('created_timestamp');
+		return $this->media->get('created_timestamp');
 	}
 
 	/**
@@ -41,7 +41,7 @@ class CreatedTimestamp extends BaseField
 	 */
 	public function render(): string
 	{
-		if (! $timestamp = $this->value()) {
+		if (! $timestamp = $this->getValue()) {
 			return '';
 		}
 

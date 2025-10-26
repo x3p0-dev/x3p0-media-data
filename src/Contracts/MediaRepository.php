@@ -23,12 +23,12 @@ interface MediaRepository
 	 * Finds a MediaData instance by post ID. Creates and caches if not
 	 * already loaded.
 	 */
-	public function find(int $mediaId): ?MediaData;
+	public function find(int $mediaId): ?Media;
 
 	/**
 	 * Caches a `MediaMeta` instance or `null` by post ID.
 	 */
-	public function save(int $mediaId, ?MediaData $mediaData): void;
+	public function save(int $mediaId, ?Media $media): void;
 
 	/**
 	 * Deletes a specific instance from the cache.

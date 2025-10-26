@@ -31,8 +31,8 @@ class TrackNumber extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function value(): string|int|null
+	public function getValue(): string|int|null
 	{
-		return $this->context->get('track_number');
+		return $this->media->get('track_number');
 	}
 }

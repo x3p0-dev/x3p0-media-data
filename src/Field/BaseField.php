@@ -13,18 +13,18 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Field;
 
-use X3P0\MediaData\Contracts\{Field, MediaContext};
+use X3P0\MediaData\Contracts\{Media, MediaField};
 
 /**
  * Abstract field class, which serves as a helper between the contract and field
  * type subclasses by defining reasonable defaults for some methods.
  */
-abstract class BaseField implements Field
+abstract class BaseField implements MediaField
 {
 	/**
 	 * Creates a new field instance with the given context.
 	 */
-	public function __construct(protected MediaContext $context)
+	public function __construct(protected Media $media)
 	{}
 
 	/**
@@ -32,7 +32,7 @@ abstract class BaseField implements Field
 	 */
 	public function exists(): bool
 	{
-		return ! empty($this->value());
+		return ! empty($this->getValue());
 	}
 
 	/**
@@ -40,6 +40,6 @@ abstract class BaseField implements Field
 	 */
 	public function render(): string
 	{
-		return esc_html($this->value());
+		return esc_html($this->getValue());
 	}
 }

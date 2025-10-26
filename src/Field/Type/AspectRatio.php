@@ -30,10 +30,10 @@ class AspectRatio extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function value(): ?array
+	public function getValue(): ?array
 	{
-		$width  = $this->context->get('width');
-		$height = $this->context->get('height');
+		$width  = $this->media->get('width');
+		$height = $this->media->get('height');
 
 		if (! $width || ! $height) {
 			return null;
@@ -57,7 +57,7 @@ class AspectRatio extends BaseField
 	 */
 	public function render(): string
 	{
-		$ratio = $this->value();
+		$ratio = $this->getValue();
 
 		if (! $ratio) {
 			return '';

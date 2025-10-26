@@ -31,9 +31,9 @@ class FocalLength extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function value(): mixed
+	public function getValue(): mixed
 	{
-		return $this->context->get('focal_length');
+		return $this->media->get('focal_length');
 	}
 
 	/**
@@ -41,7 +41,7 @@ class FocalLength extends BaseField
 	 */
 	public function render(): string
 	{
-		if (! $focal = $this->value()) {
+		if (! $focal = $this->getValue()) {
 			return '';
 		}
 

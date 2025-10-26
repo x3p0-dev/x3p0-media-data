@@ -31,9 +31,9 @@ class FileName extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function value(): mixed
+	public function getValue(): mixed
 	{
-		$mediaId = $this->context->mediaId();
+		$mediaId = $this->media->mediaId();
 
 		if (! $mediaId) {
 			return null;
@@ -49,7 +49,7 @@ class FileName extends BaseField
 	 */
 	public function render(): string
 	{
-		$filename = $this->value();
+		$filename = $this->getValue();
 
 		return $filename ? esc_html($filename) : '';
 	}

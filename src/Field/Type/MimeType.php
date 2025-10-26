@@ -31,9 +31,9 @@ class MimeType extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function value(): mixed
+	public function getValue(): mixed
 	{
-		$mediaId = $this->context->mediaId();
+		$mediaId = $this->media->mediaId();
 
 		if (! $mediaId) {
 			return null;
@@ -45,7 +45,7 @@ class MimeType extends BaseField
 		}
 
 		// Fall back to metadata.
-		return $this->context->get('mime_type');
+		return $this->media->get('mime_type');
 	}
 
 	/**
@@ -53,7 +53,7 @@ class MimeType extends BaseField
 	 */
 	public function render(): string
 	{
-		$mimeType = $this->value();
+		$mimeType = $this->getValue();
 
 		return $mimeType ? esc_html($mimeType) : '';
 	}

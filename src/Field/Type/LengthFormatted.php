@@ -33,8 +33,8 @@ class LengthFormatted extends BaseField
 	 *
 	 * @todo - if no `length_formatted` but `length`, format it.
 	 */
-	public function value(): mixed
+	public function getValue(): mixed
 	{
-		return $this->context->get('length_formatted');
+		return $this->media->get('length_formatted');
 	}
 }

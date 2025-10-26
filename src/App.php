@@ -13,22 +13,13 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData;
 
-use X3P0\MediaData\Attachment\{
-	AttachmentFactory,
-	AttachmentRepository,
-	AttachmentService
-};
-
 use X3P0\MediaData\Contracts\{
 	Bootable,
 	Container,
-	FieldTypeRegistry,
-	MediaFactory,
-	MediaRepository,
-	MediaService
+	FieldTypeRegistry
 };
 
-use X3P0\MediaData\Field\{FieldFactory, FieldTypeProvider, FieldTypes};
+use X3P0\MediaData\Field\{FieldTypeProvider};
 
 /**
  * The App class is a simple container used to store and reference the various
@@ -89,30 +80,23 @@ class App implements Bootable, Container
 	 */
 	private function registerDefaultBindings(): void
 	{
-		$this->instance(FieldTypeRegistry::class, new FieldTypes());
+		$repository = new AttachmentRepository();
+		$registry   = new FieldTypes();
+		$factory    = new FieldFactory($registry);
 
-		$this->instance(FieldFactory::class, new FieldFactory(
-			registry: $this->get(FieldTypeRegistry::class)
-		));
-
-		$this->instance(MediaRepository::class, new AttachmentRepository());
-
-		$this->instance(MediaFactory::class, new AttachmentFactory(
-			fieldFactory: new FieldFactory($this->get(FieldTypeRegistry::class))
-		));
-
-		$this->instance(MediaService::class, new AttachmentService(
-			repository: $this->get(MediaRepository::class),
-			factory:    $this->get(MediaFactory::class)
+		$this->instance(MediaFieldService::class, new MediaFieldService(
+			repository: $repository,
+			registry:   $registry,
+			factory:    $factory
 		));
 
 		$this->instance(Block\Register::class, new Block\Register(
 			path: __DIR__ . '/../public/blocks'
 		));
 
-		// Register fields on `init` when translations are ready.
-		add_action('init', function() {
-			FieldTypeProvider::register($this->get(FieldTypeRegistry::class));
+		// Register field types on `init`.
+		add_action('init', function() use ($registry) {
+			FieldTypeProvider::register($registry);
 		}, PHP_INT_MIN);
 	}
 }
