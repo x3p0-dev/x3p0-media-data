@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Media context class.
+ * Attachment context class.
  *
  * @author    Justin Tadlock <justintadlock@gmail.com>
  * @copyright Copyright (c) 2008-2025, Justin Tadlock
@@ -11,15 +11,16 @@
 
 declare(strict_types=1);
 
-namespace X3P0\MediaData\Media;
+namespace X3P0\MediaData\Attachment;
 
 use WP_Post;
+use X3P0\MediaData\Contracts\MediaContext;
 
 /**
  * Immutable value object that carries all the data a field might need. Acts as
  * a data transfer object between MediaData and field instances.
  */
-class MediaContext
+class AttachmentContext implements MediaContext
 {
 	/**
 	 * Creates a new media context.
@@ -29,17 +30,9 @@ class MediaContext
 	}
 
 	/**
-	 * Gets the attachment post object.
-	 */
-	public function post(): ?WP_Post
-	{
-		return $this->post;
-	}
-
-	/**
 	 * Gets the attachment post ID.
 	 */
-	public function postId(): ?int
+	public function mediaId(): ?int
 	{
 		return $this->post?->ID ?? null;
 	}
@@ -47,7 +40,7 @@ class MediaContext
 	/**
 	 * Gets the raw attachment metadata array.
 	 */
-	public function metadata(): array
+	public function data(): array
 	{
 		return $this->metadata;
 	}

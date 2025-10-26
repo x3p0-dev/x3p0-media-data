@@ -13,14 +13,13 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Field;
 
-use X3P0\MediaData\Contracts;
-use X3P0\MediaData\Media\MediaContext;
+use X3P0\MediaData\Contracts\{Field, MediaContext};
 
 /**
  * Abstract field class, which serves as a helper between the contract and field
  * type subclasses by defining reasonable defaults for some methods.
  */
-abstract class Field implements Contracts\Field
+abstract class BaseField implements Field
 {
 	/**
 	 * Creates a new field instance with the given context.

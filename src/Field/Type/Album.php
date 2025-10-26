@@ -13,19 +13,19 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Field\Type;
 
-use X3P0\MediaData\Field\Field;
+use X3P0\MediaData\Field\BaseField;
 
 /**
  * Displays an audio album field.
  */
-class Album extends Field
+class Album extends BaseField
 {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function label(): string
+	public function renderLabel(): string
 	{
-		return __('Album', 'x3p0-media-data');
+		return esc_html__('Album', 'x3p0-media-data');
 	}
 
 	/**

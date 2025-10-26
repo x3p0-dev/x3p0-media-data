@@ -12,19 +12,19 @@
 
 namespace X3P0\MediaData\Field\Type;
 
-use X3P0\MediaData\Field\Field;
+use X3P0\MediaData\Field\BaseField;
 
 /**
  * Displays the media aspect ratio (generally for image and video types).
  */
-class AspectRatio extends Field
+class AspectRatio extends BaseField
 {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function label(): string
+	public function renderLabel(): string
 	{
-		return __('Aspect Ratio', 'x3p0-media-data');
+		return esc_html__('Aspect Ratio', 'x3p0-media-data');
 	}
 
 	/**

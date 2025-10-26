@@ -13,19 +13,19 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Field\Type;
 
-use X3P0\MediaData\Field\Field;
+use X3P0\MediaData\Field\BaseField;
 
 /**
  * Displays the media width and height.
  */
-class Dimensions extends Field
+class Dimensions extends BaseField
 {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function label(): string
+	public function renderLabel(): string
 	{
-		return __('Dimensions', 'x3p0-media-data');
+		return esc_html__('Dimensions', 'x3p0-media-data');
 	}
 
 	/**

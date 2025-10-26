@@ -14,23 +14,21 @@ declare(strict_types=1);
 namespace X3P0\MediaData\Field;
 
 use TypeError;
-use X3P0\MediaData\Contracts\Field;
+use X3P0\MediaData\Contracts\{Field, FieldTypeRegistry};
 
 /**
  * Registry for mapping field type keys to their implementing classes. Allows
  * registration of custom field types.
  */
-class FieldRegistry
+class FieldTypes implements FieldTypeRegistry
 {
 	/**
-	 * Stores field metadata and class mappings.
+	 * Stores field type class names, indexed by key.
 	 */
-	private array $fields = [];
+	private array $types = [];
 
 	/**
-	 * Registers a field type.
-	 *
-	 * @param class-string<Field> $className
+	 * {@inheritDoc}
 	 */
 	public function register(string $key, string $className): void
 	{
@@ -42,46 +40,46 @@ class FieldRegistry
 			)));
 		}
 
-		$this->fields[$key] = $className;
+		$this->types[$key] = $className;
 	}
 
 	/**
-	 * Determines if a field type is registered.
+	 * {@inheritDoc}
 	 */
 	public function isRegistered(string $key): bool
 	{
-		return isset($this->fields[$key]);
+		return isset($this->types[$key]);
 	}
 
 	/**
-	 * Returns the field type class name for a given key.
+	 * {@inheritDoc}
 	 */
 	public function get(string $key): ?string
 	{
-		return $this->isRegistered($key) ? $this->fields[$key] : null;
+		return $this->isRegistered($key) ? $this->types[$key] : null;
 	}
 
 	/**
-	 * Unregisters a field type for the given key.
+	 * {@inheritDoc}
 	 */
 	public function unregister(string $key): void
 	{
-		unset($this->fields[$key]);
+		unset($this->types[$key]);
 	}
 
 	/**
-	 * Returns all registered field type keys.
+	 * {@inheritDoc}
 	 */
 	public function keys(): array
 	{
-		return array_keys($this->fields);
+		return array_keys($this->types);
 	}
 
 	/**
-	 * Returns all registered field types.
+	 * {@inheritDoc}
 	 */
 	public function all(): array
 	{
-		return $this->fields;
+		return $this->types;
 	}
 }

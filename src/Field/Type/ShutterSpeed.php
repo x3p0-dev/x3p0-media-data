@@ -13,19 +13,19 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Field\Type;
 
-use X3P0\MediaData\Field\Field;
+use X3P0\MediaData\Field\BaseField;
 
 /**
  * Displays the image camera shutter speed.
  */
-class ShutterSpeed extends Field
+class ShutterSpeed extends BaseField
 {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function label(): string
+	public function renderLabel(): string
 	{
-		return __('Shutter Speed', 'x3p0-media-data');
+		return esc_html__('Shutter Speed', 'x3p0-media-data');
 	}
 
 	/**

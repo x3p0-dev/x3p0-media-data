@@ -13,19 +13,19 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Field\Type;
 
-use X3P0\MediaData\Field\Field;
+use X3P0\MediaData\Field\BaseField;
 
 /**
  * Displays the media filename.
  */
-class FileName extends Field
+class FileName extends BaseField
 {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function label(): string
+	public function renderLabel(): string
 	{
-		return __('File Name', 'x3p0-media-data');
+		return esc_html__('File Name', 'x3p0-media-data');
 	}
 
 	/**
@@ -33,13 +33,13 @@ class FileName extends Field
 	 */
 	public function value(): mixed
 	{
-		$post = $this->context->post();
+		$mediaId = $this->context->mediaId();
 
-		if (! $post) {
+		if (! $mediaId) {
 			return null;
 		}
 
-		$file = get_attached_file($post->ID);
+		$file = get_attached_file($mediaId);
 
 		return $file ? basename($file) : null;
 	}

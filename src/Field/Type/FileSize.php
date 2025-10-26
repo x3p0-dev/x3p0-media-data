@@ -13,19 +13,19 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Field\Type;
 
-use X3P0\MediaData\Field\Field;
+use X3P0\MediaData\Field\BaseField;
 
 /**
  * Displays the media file size.
  */
-class FileSize extends Field
+class FileSize extends BaseField
 {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function label(): string
+	public function renderLabel(): string
 	{
-		return __('File Size', 'x3p0-media-data');
+		return esc_html__('File Size', 'x3p0-media-data');
 	}
 
 	/**
@@ -39,12 +39,13 @@ class FileSize extends Field
 		}
 
 		// Fall back to checking the actual file.
-		$post = $this->context->post();
-		if (! $post) {
+		$mediaId = $this->context->mediaId();
+
+		if (! $mediaId) {
 			return null;
 		}
 
-		$file = get_attached_file($post->ID);
+		$file = get_attached_file($mediaId);
 
 		if (file_exists($file)) {
 			return filesize($file);

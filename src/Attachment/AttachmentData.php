@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Media data handler class.
+ * Attachment media data handler class.
  *
  * @author    Justin Tadlock <justintadlock@gmail.com>
  * @copyright Copyright (c) 2008-2025, Justin Tadlock
@@ -11,23 +11,23 @@
 
 declare(strict_types=1);
 
-namespace X3P0\MediaData\Media;
+namespace X3P0\MediaData\Attachment;
 
 use WP_Post;
+use X3P0\MediaData\Contracts\{Field, MediaContext, MediaData};
 use X3P0\MediaData\Field\FieldFactory;
-use X3P0\MediaData\Contracts\Field;
 
 /**
  * Manages field data for a single media attachment. Coordinates between the
  * field system and raw WordPress attachment metadata, caching field instances
  * for performance.
  */
-class MediaData
+class AttachmentData implements MediaData
 {
 	/**
-	 * Stores the raw attachment metadata.
+	 * Stores the raw attachment data.
 	 */
-	private array $rawMetadata = [];
+	private array $data = [];
 
 	/**
 	 * Stores instantiated field objects, keyed by field name.
@@ -51,19 +51,20 @@ class MediaData
 			$this->post instanceof WP_Post
 			&& 'attachment' === get_post_type($this->post)
 		) {
-			$this->rawMetadata = wp_get_attachment_metadata($this->post->ID);
+			$this->data = wp_get_attachment_metadata($this->post->ID);
 		}
 
 		// Create the context object that will be passed to fields.
-		$this->context = new MediaContext($this->post, $this->rawMetadata);
+		$this->context = new AttachmentContext($this->post, $this->data);
 	}
 
 	/**
+	 *
 	 * Returns the raw metadata array.
 	 */
-	public function metadata(): array
+	public function data(): array
 	{
-		return $this->rawMetadata;
+		return $this->data;
 	}
 
 	/**
@@ -89,11 +90,11 @@ class MediaData
 	/**
 	 * Returns the field label.
 	 */
-	public function getLabel(string $key): string
+	public function renderLabel(string $key): string
 	{
 		$field = $this->getField($key);
 
-		return $field ? $field->label() : '';
+		return $field ? $field->renderLabel() : '';
 	}
 
 	/**

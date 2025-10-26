@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Contracts;
 
-use X3P0\MediaData\Media\MediaContext;
-
 /**
  * Contract that all field classes must implement. Fields are responsible for
  * retrieving, formatting, and rendering specific pieces of media data.
@@ -37,7 +35,7 @@ interface Field
 	public function render(): string;
 
 	/**
-	 * Returns the internationalized field label.
+	 * Returns the escaped and internationalized field label.
 	 */
-	public function label(): string;
+	public function renderLabel(): string;
 }

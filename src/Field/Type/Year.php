@@ -13,20 +13,20 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Field\Type;
 
-use X3P0\MediaData\Field\Field;
+use X3P0\MediaData\Field\BaseField;
 
 /**
  * Displays the media published year.
  */
-class Year extends Field
+class Year extends BaseField
 {
 	public function value(): mixed
 	{
 		return $this->context->get('year');
 	}
 
-	public function label(): string
+	public function renderLabel(): string
 	{
-		return __('Year', 'x3p0-media-data');
+		return esc_html__('Year', 'x3p0-media-data');
 	}
 }

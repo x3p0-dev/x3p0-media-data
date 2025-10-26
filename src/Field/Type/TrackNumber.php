@@ -13,19 +13,19 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Field\Type;
 
-use X3P0\MediaData\Field\Field;
+use X3P0\MediaData\Field\BaseField;
 
 /**
  * Displays the audio track number from an album.
  */
-class TrackNumber extends Field
+class TrackNumber extends BaseField
 {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function label(): string
+	public function renderLabel(): string
 	{
-		return __('Track Number', 'x3p0-media-data');
+		return esc_html__('Track Number', 'x3p0-media-data');
 	}
 
 	/**

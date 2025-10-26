@@ -13,10 +13,12 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Field;
 
+use X3P0\MediaData\Contracts\FieldTypeRegistry;
+
 /**
  * Static helper class for registering the default field types for the plugin.
  */
-class FieldProvider
+class FieldTypeProvider
 {
 	private const FIELDS = [
 		'album'               => Type\Album::class,
@@ -44,7 +46,7 @@ class FieldProvider
 	/**
 	 * Registers default fields with the registry.
 	 */
-	public static function register(FieldRegistry $registry): void
+	public static function register(FieldTypeRegistry $registry): void
 	{
 		foreach (static::FIELDS as $name => $className) {
 			$registry->register($name, $className);

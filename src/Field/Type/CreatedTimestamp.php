@@ -13,19 +13,19 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Field\Type;
 
-use X3P0\MediaData\Field\Field;
+use X3P0\MediaData\Field\BaseField;
 
 /**
  * Displays the media's created timestamp, formatted.
  */
-class CreatedTimestamp extends Field
+class CreatedTimestamp extends BaseField
 {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function label(): string
+	public function renderLabel(): string
 	{
-		return __('Created', 'x3p0-media-data');
+		return esc_html__('Created', 'x3p0-media-data');
 	}
 
 	/**

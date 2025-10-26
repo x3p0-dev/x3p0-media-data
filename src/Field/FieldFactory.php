@@ -13,8 +13,7 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Field;
 
-use X3P0\MediaData\Contracts\Field;
-use X3P0\MediaData\Media\MediaContext;
+use X3P0\MediaData\Contracts\{Field, FieldTypeRegistry, MediaContext};
 
 /**
  * Factory for creating field instances. Consults the field registry to
@@ -25,7 +24,7 @@ class FieldFactory
 	/**
 	 * Sets up the factory with its dependencies.
 	 */
-	public function __construct(private FieldRegistry $registry)
+	public function __construct(private FieldTypeRegistry $registry)
 	{
 	}
 

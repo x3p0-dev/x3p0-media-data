@@ -13,19 +13,19 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Field\Type;
 
-use X3P0\MediaData\Field\Field;
+use X3P0\MediaData\Field\BaseField;
 
 /**
  * Displays the media MIME type.
  */
-class MimeType extends Field
+class MimeType extends BaseField
 {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function label(): string
+	public function renderLabel(): string
 	{
-		return __('MIME Type', 'x3p0-media-data');
+		return esc_html__('MIME Type', 'x3p0-media-data');
 	}
 
 	/**
@@ -33,14 +33,14 @@ class MimeType extends Field
 	 */
 	public function value(): mixed
 	{
-		$post = $this->context->post();
+		$mediaId = $this->context->mediaId();
 
-		if (! $post) {
+		if (! $mediaId) {
 			return null;
 		}
 
 		// Try to get from post first.
-		if ($mime = get_post_mime_type($post)) {
+		if ($mime = get_post_mime_type($mediaId)) {
 			return $mime;
 		}
 

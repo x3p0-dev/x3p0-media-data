@@ -13,19 +13,19 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Field\Type;
 
-use X3P0\MediaData\Field\Field;
+use X3P0\MediaData\Field\BaseField;
 
 /**
  * Displays the image camera title.
  */
-class Title extends Field
+class Title extends BaseField
 {
 	/**
 	 * {@inheritDoc}
 	 */
 	public function value(): string
 	{
-		$post_id = $this->context->postId();
+		$post_id = $this->context->mediaId();
 
 		return $post_id ? get_the_title($post_id) : '';
 	}
@@ -43,8 +43,8 @@ class Title extends Field
 	/**
 	 * {@inheritDoc}
 	 */
-	public function label(): string
+	public function renderLabel(): string
 	{
-		return __('Title', 'x3p0-media-data');
+		return esc_html__('Title', 'x3p0-media-data');
 	}
 }

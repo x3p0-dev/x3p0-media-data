@@ -13,11 +13,11 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData;
 
-use X3P0\MediaData\Contracts\{Bootable, Container};
-use X3P0\MediaData\Field\FieldProvider;
-use X3P0\MediaData\Field\FieldFactory;
-use X3P0\MediaData\Field\FieldRegistry;
-use X3P0\MediaData\Media\MediaRepository;
+use X3P0\MediaData\Contracts\{Bootable, Container, FieldTypeRegistry, MediaFactory, MediaRepository, MediaService};
+use X3P0\MediaData\Field\{FieldFactory, FieldTypeProvider, FieldTypes};
+use X3P0\MediaData\Attachment\AttachmentFactory;
+use X3P0\MediaData\Attachment\AttachmentRepository;
+use X3P0\MediaData\Attachment\AttachmentService;
 
 /**
  * The App class is a simple container used to store and reference the various
@@ -29,6 +29,8 @@ class App implements Bootable, Container
 	 * Stored definitions of single instances.
 	 */
 	private array $instances = [];
+
+	private array $bindings = [];
 
 	/**
 	 * Registers the default container bindings.
@@ -78,10 +80,21 @@ class App implements Bootable, Container
 	 */
 	private function registerDefaultBindings(): void
 	{
-		$fieldRegistry = new FieldRegistry();
+		$this->instance(FieldTypeRegistry::class, new FieldTypes());
 
-		$this->instance(MediaRepository::class, new MediaRepository(
-			fieldFactory: new FieldFactory($fieldRegistry)
+		$this->instance(FieldFactory::class, new FieldFactory(
+			registry: $this->get(FieldTypeRegistry::class)
+		));
+
+		$this->instance(MediaRepository::class, new AttachmentRepository());
+
+		$this->instance(MediaFactory::class, new AttachmentFactory(
+			fieldFactory: new FieldFactory($this->get(FieldTypeRegistry::class))
+		));
+
+		$this->instance(MediaService::class, new AttachmentService(
+			repository: $this->get(MediaRepository::class),
+			factory:    $this->get(MediaFactory::class)
 		));
 
 		$this->instance(Block\Register::class, new Block\Register(
@@ -89,8 +102,8 @@ class App implements Bootable, Container
 		));
 
 		// Register fields on `init` when translations are ready.
-		add_action('init', function() use ($fieldRegistry) {
-			FieldProvider::register($fieldRegistry);
+		add_action('init', function() {
+			FieldTypeProvider::register($this->get(FieldTypeRegistry::class));
 		}, PHP_INT_MIN);
 	}
 }

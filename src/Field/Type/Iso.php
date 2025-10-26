@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Field\Type;
 
-use X3P0\MediaData\Field\Field;
+use X3P0\MediaData\Field\BaseField;
 
 /**
  * Displays the image ISO field.
  */
-class Iso extends Field
+class Iso extends BaseField
 {
 	/**
 	 * {@inheritDoc}
@@ -31,8 +31,8 @@ class Iso extends Field
 	/**
 	 * {@inheritDoc}
 	 */
-	public function label(): string
+	public function renderLabel(): string
 	{
-		return __('ISO', 'x3p0-media-data');
+		return esc_html__('ISO', 'x3p0-media-data');
 	}
 }

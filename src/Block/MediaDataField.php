@@ -14,8 +14,7 @@ declare(strict_types=1);
 namespace X3P0\MediaData\Block;
 
 use WP_Block;
-use X3P0\MediaData\Contracts\Block;
-use X3P0\MediaData\Media\MediaRepository;
+use X3P0\MediaData\Contracts\{Block, MediaService};
 
 /**
  * Renders the `x3p0/media-data-field` block on the front end.
@@ -50,9 +49,9 @@ class MediaDataField implements Block
 	 * Sets the block attributes.
 	 */
 	public function __construct(
-		protected MediaRepository $mediaRepository,
-		protected array $attributes,
-		protected WP_Block $block
+		protected MediaService $mediaService,
+		protected array        $attributes,
+		protected WP_Block     $block
 	) {
 		$this->attributes['field'] = $this->attributes['field'] ?? 'file_name';
 		$this->attributes['label'] = $this->attributes['label'] ?? '';
@@ -74,21 +73,21 @@ class MediaDataField implements Block
 		}
 
 		// Gets the media data object for managing field data.
-		$mediaData = $this->mediaRepository->find($this->mediaId);
+		$mediaData = $this->mediaService->find($this->mediaId);
 
 		// If no media data or it doesn't have data for the field, bail.
 		if (! $mediaData || ! $mediaData->has($this->attributes['field'])) {
 			return '';
 		}
 
-		// Get the user-customized label, fall back to field label.
-		$label = $this->attributes['label'] ?: $mediaData->getLabel(
-			$this->attributes['field']
-		);
+		// Get the user label if there is one. Fall back to field label.
+		$label = $this->attributes['label']
+			? wp_kses($this->attributes['label'], self::ALLOWED_HTML)
+			: $mediaData->renderLabel($this->attributes['field']);
 
 		// Create the label HTML.
 		$labelHtml = '<div class="wp-block-x3p0-media-data-field__label">';
-		$labelHtml .= wp_kses($label, self::ALLOWED_HTML);
+		$labelHtml .= $label;
 		$labelHtml .= '</div>';
 
 		// Create the content HTML.

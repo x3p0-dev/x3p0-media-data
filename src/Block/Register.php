@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace X3P0\MediaData\Block;
 
 use X3P0\MediaData\Contracts\Bootable;
-use X3P0\MediaData\Field\FieldRegistry;
+use X3P0\MediaData\Field\FieldTypes;
 
 class Register implements Bootable
 {

@@ -13,19 +13,19 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Field\Type;
 
-use X3P0\MediaData\Field\Field;
+use X3P0\MediaData\Field\BaseField;
 
 /**
  * Displays the media's duration/length, formatted.
  */
-class LengthFormatted extends Field
+class LengthFormatted extends BaseField
 {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function label(): string
+	public function renderLabel(): string
 	{
-		return __('Duration', 'x3p0-media-data');
+		return esc_html__('Duration', 'x3p0-media-data');
 	}
 
 	/**
