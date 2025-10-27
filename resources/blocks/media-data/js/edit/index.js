@@ -2,16 +2,14 @@ import { __ } from '@wordpress/i18n';
 import {
 	useBlockProps,
 	useInnerBlocksProps,
-	BlockControls,
-	MediaReplaceFlow,
 	MediaPlaceholder,
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
-import {MenuItem, ToolbarButton} from '@wordpress/components';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
 import { store as noticesStore } from '@wordpress/notices';
-import {createBlock} from "@wordpress/blocks";
+import { createBlock } from '@wordpress/blocks';
+import Toolbar from './toolbar';
 
 const mediaIcon = (
 	<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M360-440h400L622-620l-92 120-62-80-108 140ZM120-120q-33 0-56.5-23.5T40-200v-520h80v520h680v80H120Zm160-160q-33 0-56.5-23.5T200-360v-440q0-33 23.5-56.5T280-880h200l80 80h280q33 0 56.5 23.5T920-720v360q0 33-23.5 56.5T840-280H280Zm0-80h560v-360H527l-80-80H280v440Zm0 0v-440 440Z"/></svg>
@@ -24,13 +22,8 @@ const TEMPLATE = [
 	['x3p0/media-data-field', { field: 'file_size' }],
 ];
 
-export default function Edit({
-	attributes,
-	setAttributes,
-	context,
-	clientId,
-	isSelected: isSingleSelected
-}) {
+export default (props) => {
+	const { attributes, setAttributes, context, clientId } = props;
 	const { mediaId } = attributes;
 	const { postId, postType } = context;
 
@@ -38,7 +31,7 @@ export default function Edit({
 	const effectiveMediaId = mediaId
 		|| (postType === 'attachment' && postId ? postId : 0);
 
-	// Fetch media details using the new API
+	// Fetch media details
 	const media = useSelect(
 		(select) => {
 			if (!effectiveMediaId) {
@@ -50,7 +43,7 @@ export default function Edit({
 	);
 
 	const { createErrorNotice } = useDispatch(noticesStore);
-	const { insertBlock } = useDispatch( blockEditorStore );
+	const { insertBlock } = useDispatch(blockEditorStore);
 
 	const blockProps = useBlockProps();
 
@@ -64,10 +57,7 @@ export default function Edit({
 		}
 	);
 
-	const addFieldBlock = () => {
-		void insertBlock(createBlock('x3p0/media-data-field', {}), undefined, clientId);
-	};
-
+	// Shared handlers
 	const onUploadError = (message) => {
 		void createErrorNotice(message, {
 			type: 'snackbar',
@@ -76,7 +66,7 @@ export default function Edit({
 	};
 
 	const onSelectMedia = (selectedMedia) => {
-		if (! selectedMedia?.id) {
+		if (!selectedMedia?.id) {
 			return;
 		}
 		setAttributes({ mediaId: selectedMedia.id });
@@ -84,8 +74,12 @@ export default function Edit({
 
 	const onRemoveMedia = () => setAttributes({ mediaId: 0 });
 
-	// Show placeholder if no media is available.
-	if (! effectiveMediaId) {
+	const addFieldBlock = () => {
+		void insertBlock(createBlock('x3p0/media-data-field', {}), undefined, clientId);
+	};
+
+	// Show placeholder if no media is available
+	if (!effectiveMediaId) {
 		return (
 			<div {...blockProps}>
 				<MediaPlaceholder
@@ -108,29 +102,15 @@ export default function Edit({
 
 	return (
 		<>
-			<BlockControls group="other">
-				<MediaReplaceFlow
-					mediaId={effectiveMediaId}
-					mediaURL={media?.source_url}
-					allowedTypes={['image', 'video', 'audio', 'application']}
-					accept="*"
-					onSelect={onSelectMedia}
-					name={__('Replace', 'x3p0-media-data')}
-					popoverProps={{ placement: 'bottom-start' }}
-				>
-					{mediaId && (
-						<MenuItem onClick={onRemoveMedia}>
-							{__('Reset', 'x3p0-media-data')}
-						</MenuItem>
-					)}
-				</MediaReplaceFlow>
-				{isSingleSelected && (
-					<ToolbarButton onClick={ addFieldBlock }>
-						{ __( 'Add', 'x3p0-media-data' ) }
-					</ToolbarButton>
-				)}
-			</BlockControls>
+			<Toolbar
+				{...props}
+				mediaUrl={media?.source_url}
+				effectiveMediaId={effectiveMediaId}
+				onSelectMedia={onSelectMedia}
+				onRemoveMedia={onRemoveMedia}
+				onAddFieldBlock={addFieldBlock}
+			/>
 			<div {...innerBlocksProps} />
 		</>
 	);
-}
+};

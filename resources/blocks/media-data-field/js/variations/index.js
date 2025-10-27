@@ -109,7 +109,7 @@ const variations = [
 export default variations.map(variation => ({
 	icon: icons?.[variation.name] || null,
 	attributes: { field: variation.name },
-	scope: ['inserter', 'transform'],
+	scope: ['inserter'],
 	isActive: ['field'],
 	...variation
 }));

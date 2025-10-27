@@ -23,6 +23,25 @@ return array(
 				'wide',
 				'full'
 			),
+			'__experimentalStyle' => array(
+				'css' => '&.is-layout-flex { gap: var(--wp--custom--x-3-p-0-media-data--gap, 0.5rem); }',
+				'spacing' => array(
+					'blockGap' => 'var(--wp--custom--x-3-p-0-media-meta--gap, 0.5rem)'
+				)
+			),
+			'layout' => array(
+				'allowCustomContentAndWideSize' => false,
+				'allowEditing' => false,
+				'allowInheriting' => false,
+				'allowJustification' => true,
+				'allowOrientation' => false,
+				'allowSizingOnChildren' => false,
+				'allowSwitching' => true,
+				'allowVerticalAlignment' => true,
+				'default' => array(
+					'type' => 'constrained'
+				)
+			),
 			'spacing' => array(
 				'margin' => true,
 				'padding' => true,

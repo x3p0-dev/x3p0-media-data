@@ -261,7 +261,13 @@ const mediaFieldExtractors = {
 	 * Extracts filename from full path
 	 */
 	file_name: (media) => {
-		const file = getNestedProperty(media, 'media_details.file');
+		let file = getNestedProperty(media, 'media_details.file');
+
+		// Use the source URL if file meta not found.
+		if (! file) {
+			file = media?.source_url ?? '';
+		}
+
 		return file ? file.split(/[\\/]/).pop() : '';
 	},
 
