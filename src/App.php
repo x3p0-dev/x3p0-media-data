@@ -89,6 +89,8 @@ class App implements Bootable, Container
 			path: __DIR__ . '/../public/blocks'
 		));
 
+		$this->instance(Block\Bindings::class, new Block\Bindings());
+
 		// Register field types on `init`.
 		add_action('init', function() use ($registry) {
 			FieldTypeProvider::register($registry);
