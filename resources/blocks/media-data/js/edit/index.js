@@ -8,7 +8,7 @@ import {
 import { useDispatch, useSelect } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
 import { store as noticesStore } from '@wordpress/notices';
-import { createBlock } from '@wordpress/blocks';
+import {createBlock, getBlockBindingsSource} from '@wordpress/blocks';
 import Toolbar from './toolbar';
 
 const mediaIcon = (
@@ -23,23 +23,18 @@ const TEMPLATE = [
 ];
 
 export default (props) => {
-	const { attributes, setAttributes, context, clientId } = props;
-	const { mediaId } = attributes;
-	const { postId, postType } = context;
-
-	// Determine the effective media ID
-	const effectiveMediaId = mediaId
-		|| (postType === 'attachment' && postId ? postId : 0);
+	const { attributes, context, setAttributes, clientId, isSelected: isSingleSelected } = props;
+	const { mediaId, metadata } = attributes;
 
 	// Fetch media details
 	const media = useSelect(
 		(select) => {
-			if (!effectiveMediaId) {
+			if (!mediaId) {
 				return null;
 			}
-			return select(coreStore).getEntityRecord('postType', 'attachment', effectiveMediaId);
+			return select(coreStore).getEntityRecord('postType', 'attachment', mediaId);
 		},
-		[effectiveMediaId]
+		[mediaId]
 	);
 
 	const { createErrorNotice } = useDispatch(noticesStore);
@@ -79,7 +74,7 @@ export default (props) => {
 	};
 
 	// Show placeholder if no media is available
-	if (!effectiveMediaId) {
+	if (! mediaId) {
 		return (
 			<div {...blockProps}>
 				<MediaPlaceholder
@@ -105,7 +100,6 @@ export default (props) => {
 			<Toolbar
 				{...props}
 				mediaUrl={media?.source_url}
-				effectiveMediaId={effectiveMediaId}
 				onSelectMedia={onSelectMedia}
 				onRemoveMedia={onRemoveMedia}
 				onAddFieldBlock={addFieldBlock}

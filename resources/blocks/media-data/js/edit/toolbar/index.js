@@ -6,7 +6,6 @@ export default ({
 	attributes,
 	isSelected,
 	mediaUrl,
-	effectiveMediaId,
 	onSelectMedia,
 	onRemoveMedia,
 	onAddFieldBlock,
@@ -16,7 +15,7 @@ export default ({
 	return (
 		<BlockControls group="other">
 			<MediaReplaceFlow
-				mediaId={effectiveMediaId}
+				mediaId={mediaId}
 				mediaURL={mediaUrl}
 				allowedTypes={['image', 'video', 'audio', 'application']}
 				accept="*"

@@ -56,7 +56,8 @@
     }
   },
   "usesContext": [
-    "x3p0/mediaId"
+    "x3p0/mediaId",
+    "x3p0-media-data/metadata"
   ],
   "attributes": {
     "field": {

@@ -29,6 +29,11 @@ class Register implements Bootable
 	public function boot(): void
 	{
 		add_action('init', [$this, 'register']);
+
+		add_filter(
+			'block_bindings_supported_attributes_x3p0/media-data',
+			[$this, 'addBlockBindingsSupportedAttributes']
+		);
 	}
 
 	/**
@@ -40,5 +45,16 @@ class Register implements Bootable
 			$this->path,
 			"{$this->path}/manifest.php"
 		);
+	}
+
+	/**
+	 * Add attributes to the `x3p0/media-data` block that support block
+	 * being connected to a Block Bindings source.
+	 */
+	public function addBlockBindingsSupportedAttributes(array $attrs): array
+	{
+		$attrs[] = 'mediaId';
+
+		return $attrs;
 	}
 }
