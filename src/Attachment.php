@@ -33,7 +33,6 @@ class Attachment implements Media
 	public function has(string $key): bool
 	{
 		return $this->get($key) !== null;
-		//return array_key_exists($key, $this->data);
 	}
 
 	public function get(string $key): mixed
@@ -42,6 +41,5 @@ class Attachment implements Media
 			?? $this->data['image_meta'][$key]
 			?? $this->data['audio'][$key]
 			?? null;
-		//return $this->data[$key] ?? null;
 	}
 }

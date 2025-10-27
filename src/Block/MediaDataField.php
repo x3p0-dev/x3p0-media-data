@@ -58,10 +58,6 @@ class MediaDataField implements Block
 		$this->attributes['label'] = $this->attributes['label'] ?? '';
 
 		$this->mediaId = $this->block->context['x3p0-media-data/mediaId'] ?? 0;
-
-		if (! $this->mediaId && 'attachment' === get_post_type()) {
-			$this->mediaId = get_the_ID() ?: 0;
-		}
 	}
 
 	/**
@@ -85,34 +81,27 @@ class MediaDataField implements Block
 		}
 
 		// Get the user label if there is one. Fall back to field label.
-		$label = $this->attributes['label']
-			? wp_kses($this->attributes['label'], self::ALLOWED_HTML)
-			: $field->renderLabel();
+		$label = $this->attributes['label'] ?: $field->getLabel();
 
 		// Create the label HTML.
 		$labelHtml = '<div class="wp-block-x3p0-media-data-field__label">';
-		$labelHtml .= $label;
+		$labelHtml .= wp_kses($label, self::ALLOWED_HTML);
 		$labelHtml .= '</div>';
 
 		// Create the content HTML.
 		$contentHtml = '<div class="wp-block-x3p0-media-data-field__content">';
-		$contentHtml .= $field->render();
+		$contentHtml .= $field->renderValue();
 		$contentHtml .= '</div>';
 
 		// Get the block HTML attributes.
 		$attr = get_block_wrapper_attributes([
-			'class' => sprintf(
+			'class' => sanitize_html_class(sprintf(
 				'wp-block-x3p0-media-data-field--%s',
-				esc_attr(str_replace('_', '-', $this->attributes['field']))
-			)
+				str_replace('_', '-', $this->attributes['field'])
+			))
 		]);
 
 		// Return the formatted block.
-		return sprintf(
-			'<div %s>%s %s</div>',
-			$attr,
-			$labelHtml,
-			$contentHtml
-		);
+		return "<div {$attr}>{$labelHtml} {$contentHtml}</div>";
 	}
 }

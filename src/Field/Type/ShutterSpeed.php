@@ -23,9 +23,9 @@ class ShutterSpeed extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function renderLabel(): string
+	public function getLabel(): string
 	{
-		return esc_html__('Shutter Speed', 'x3p0-media-data');
+		return __('Shutter Speed', 'x3p0-media-data');
 	}
 
 	/**
@@ -39,7 +39,7 @@ class ShutterSpeed extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function render(): string
+	public function renderValue(): string
 	{
 		if (! $shutter = $this->getValue()) {
 			return '';

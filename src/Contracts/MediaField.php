@@ -8,7 +8,7 @@ interface MediaField
 	/**
 	 * Checks if the field has a value for the current media.
 	 */
-	public function exists(): bool;
+	public function hasValue(): bool;
 
 	/**
 	 * Returns the raw, unformatted value of the field.
@@ -18,10 +18,10 @@ interface MediaField
 	/**
 	 * Returns the escaped and formatted field value as a string.
 	 */
-	public function render(): string;
+	public function renderValue(): string;
 
 	/**
-	 * Returns the escaped and internationalized field label.
+	 * Returns the field label.
 	 */
-	public function renderLabel(): string;
+	public function getLabel(): string;
 }

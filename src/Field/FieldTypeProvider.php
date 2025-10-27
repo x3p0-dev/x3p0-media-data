@@ -48,8 +48,8 @@ class FieldTypeProvider
 	 */
 	public static function register(FieldTypeRegistry $registry): void
 	{
-		foreach (static::FIELDS as $name => $className) {
-			$registry->register($name, $className);
+		foreach (static::FIELDS as $key => $fieldClass) {
+			$registry->register($key, $fieldClass);
 		}
 	}
 }

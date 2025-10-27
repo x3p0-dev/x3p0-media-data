@@ -5,5 +5,5 @@ namespace X3P0\MediaData\Contracts;
 
 interface FieldFactory
 {
-	public function make(string $fieldKey, Media $media): ?MediaField;
+	public function make(string $key, Media $media): ?MediaField;
 }

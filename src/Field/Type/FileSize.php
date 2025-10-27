@@ -23,9 +23,9 @@ class FileSize extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function renderLabel(): string
+	public function getLabel(): string
 	{
-		return esc_html__('File Size', 'x3p0-media-data');
+		return __('File Size', 'x3p0-media-data');
 	}
 
 	/**
@@ -57,7 +57,7 @@ class FileSize extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function render(): string
+	public function renderValue(): string
 	{
 		$filesize = $this->getValue();
 

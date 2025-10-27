@@ -23,15 +23,15 @@ class Dimensions extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function renderLabel(): string
+	public function getLabel(): string
 	{
-		return esc_html__('Dimensions', 'x3p0-media-data');
+		return __('Dimensions', 'x3p0-media-data');
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function exists(): bool
+	public function hasValue(): bool
 	{
 		$value = $this->getValue();
 		return ! empty($value['width']) && ! empty($value['height']);
@@ -51,7 +51,7 @@ class Dimensions extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function render(): string
+	public function renderValue(): string
 	{
 		$value = $this->getValue();
 		$width  = absint($value['width']);

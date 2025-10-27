@@ -23,9 +23,9 @@ class DisplayOrientation extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function renderLabel(): string
+	public function getLabel(): string
 	{
-		return esc_html__('Orientation', 'x3p0-media-data');
+		return __('Orientation', 'x3p0-media-data');
 	}
 
 	/**
@@ -50,7 +50,7 @@ class DisplayOrientation extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function render(): string
+	public function renderValue(): string
 	{
 		if (! $value = $this->getValue()) {
 			return '';

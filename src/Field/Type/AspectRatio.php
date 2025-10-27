@@ -22,9 +22,9 @@ class AspectRatio extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function renderLabel(): string
+	public function getLabel(): string
 	{
-		return esc_html__('Aspect Ratio', 'x3p0-media-data');
+		return __('Aspect Ratio', 'x3p0-media-data');
 	}
 
 	/**
@@ -55,7 +55,7 @@ class AspectRatio extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function render(): string
+	public function renderValue(): string
 	{
 		$ratio = $this->getValue();
 

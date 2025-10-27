@@ -23,9 +23,9 @@ class LengthFormatted extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function renderLabel(): string
+	public function getLabel(): string
 	{
-		return esc_html__('Duration', 'x3p0-media-data');
+		return __('Duration', 'x3p0-media-data');
 	}
 
 	/**

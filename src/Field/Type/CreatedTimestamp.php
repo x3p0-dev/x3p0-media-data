@@ -23,9 +23,9 @@ class CreatedTimestamp extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function renderLabel(): string
+	public function getLabel(): string
 	{
-		return esc_html__('Created', 'x3p0-media-data');
+		return __('Created', 'x3p0-media-data');
 	}
 
 	/**
@@ -39,7 +39,7 @@ class CreatedTimestamp extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function render(): string
+	public function renderValue(): string
 	{
 		if (! $timestamp = $this->getValue()) {
 			return '';

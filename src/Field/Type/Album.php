@@ -23,9 +23,9 @@ class Album extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function renderLabel(): string
+	public function getLabel(): string
 	{
-		return esc_html__('Album', 'x3p0-media-data');
+		return __('Album', 'x3p0-media-data');
 	}
 
 	/**

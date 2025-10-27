@@ -25,8 +25,8 @@ class Year extends BaseField
 		return $this->media->get('year');
 	}
 
-	public function renderLabel(): string
+	public function getLabel(): string
 	{
-		return esc_html__('Year', 'x3p0-media-data');
+		return __('Year', 'x3p0-media-data');
 	}
 }

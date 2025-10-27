@@ -13,12 +13,7 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData;
 
-use X3P0\MediaData\Contracts\{
-	Bootable,
-	Container,
-	FieldTypeRegistry
-};
-
+use X3P0\MediaData\Contracts\{Bootable, Container};
 use X3P0\MediaData\Field\{FieldTypeProvider};
 
 /**

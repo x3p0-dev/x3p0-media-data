@@ -23,9 +23,9 @@ class TrackNumber extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function renderLabel(): string
+	public function getLabel(): string
 	{
-		return esc_html__('Track Number', 'x3p0-media-data');
+		return __('Track Number', 'x3p0-media-data');
 	}
 
 	/**

@@ -11,8 +11,7 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData;
 
-use X3P0\MediaData\Contracts\Media;
-use X3P0\MediaData\Contracts\MediaRepository;
+use X3P0\MediaData\Contracts\{Media, MediaRepository};
 
 final class AttachmentRepository implements MediaRepository
 {

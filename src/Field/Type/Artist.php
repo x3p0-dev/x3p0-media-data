@@ -23,9 +23,9 @@ class Artist extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function renderLabel(): string
+	public function getLabel(): string
 	{
-		return esc_html__('Artist', 'x3p0-media-data');
+		return __('Artist', 'x3p0-media-data');
 	}
 
 	/**

@@ -23,9 +23,9 @@ class Genre extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function renderLabel(): string
+	public function getLabel(): string
 	{
-		return esc_html__('Genre', 'x3p0-media-data');
+		return __('Genre', 'x3p0-media-data');
 	}
 
 	/**

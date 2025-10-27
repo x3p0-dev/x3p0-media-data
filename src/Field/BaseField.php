@@ -30,7 +30,7 @@ abstract class BaseField implements MediaField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function exists(): bool
+	public function hasValue(): bool
 	{
 		return ! empty($this->getValue());
 	}
@@ -38,7 +38,7 @@ abstract class BaseField implements MediaField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function render(): string
+	public function renderValue(): string
 	{
 		return esc_html($this->getValue());
 	}

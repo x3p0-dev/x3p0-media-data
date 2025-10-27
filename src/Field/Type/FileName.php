@@ -23,9 +23,9 @@ class FileName extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function renderLabel(): string
+	public function getLabel(): string
 	{
-		return esc_html__('File Name', 'x3p0-media-data');
+		return __('File Name', 'x3p0-media-data');
 	}
 
 	/**
@@ -47,7 +47,7 @@ class FileName extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function render(): string
+	public function renderValue(): string
 	{
 		$filename = $this->getValue();
 

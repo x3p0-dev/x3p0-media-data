@@ -23,9 +23,9 @@ class Aperture extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function renderLabel(): string
+	public function getLabel(): string
 	{
-		return esc_html__('Aperture', 'x3p0-media-data');
+		return __('Aperture', 'x3p0-media-data');
 	}
 
 	/**
@@ -39,7 +39,7 @@ class Aperture extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function render(): string
+	public function renderValue(): string
 	{
 		$aperture = $this->getValue();
 

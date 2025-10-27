@@ -11,10 +11,12 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData;
 
-use X3P0\MediaData\Contracts\FieldFactory as FieldFactoryContract;
-use X3P0\MediaData\Contracts\FieldTypeRegistry;
-use X3P0\MediaData\Contracts\Media;
-use X3P0\MediaData\Contracts\MediaField;
+use X3P0\MediaData\Contracts\{
+	FieldFactory as FieldFactoryContract,
+	FieldTypeRegistry,
+	Media,
+	MediaField
+};
 
 final class FieldFactory implements FieldFactoryContract
 {
@@ -22,14 +24,10 @@ final class FieldFactory implements FieldFactoryContract
 		private FieldTypeRegistry $registry
 	) {}
 
-	public function make(string $fieldKey, Media $media): ?MediaField
+	public function make(string $key, Media $media): ?MediaField
 	{
-		$fieldClass = $this->registry->get($fieldKey);
+		$fieldClass = $this->registry->get($key);
 
-		if (!$fieldClass) {
-			return null;
-		}
-
-		return new $fieldClass($media);
+		return $fieldClass ? new $fieldClass($media) : null;
 	}
 }

@@ -23,9 +23,9 @@ class MimeType extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function renderLabel(): string
+	public function getLabel(): string
 	{
-		return esc_html__('MIME Type', 'x3p0-media-data');
+		return __('MIME Type', 'x3p0-media-data');
 	}
 
 	/**
@@ -51,7 +51,7 @@ class MimeType extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function render(): string
+	public function renderValue(): string
 	{
 		$mimeType = $this->getValue();
 
