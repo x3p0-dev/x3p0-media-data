@@ -55,7 +55,7 @@
     }
   },
   "providesContext": {
-    "x3p0/mediaId": "mediaId",
+    "x3p0-media-data/mediaId": "mediaId",
     "x3p0-media-data/metadata": "metadata"
   },
   "usesContext": [

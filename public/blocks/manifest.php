@@ -58,7 +58,7 @@ return array(
 			)
 		),
 		'providesContext' => array(
-			'x3p0/mediaId' => 'mediaId',
+			'x3p0-media-data/mediaId' => 'mediaId',
 			'x3p0-media-data/metadata' => 'metadata'
 		),
 		'usesContext' => array(
@@ -132,7 +132,7 @@ return array(
 			)
 		),
 		'usesContext' => array(
-			'x3p0/mediaId',
+			'x3p0-media-data/mediaId',
 			'x3p0-media-data/metadata'
 		),
 		'attributes' => array(

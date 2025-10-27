@@ -9,7 +9,7 @@ import {getBlockBindingsSource} from "@wordpress/blocks";
 export default (props) => {
 	const { attributes, setAttributes, context, clientId, isSelected } = props;
 	const { field, label } = attributes;
-	const mediaId = context['x3p0/mediaId'];
+	const mediaId = context['x3p0-media-data/mediaId'];
 	const parentMetadata = context['x3p0-media-data/metadata'];
 
 	useBlockInsertOnEnter(clientId, isSelected);

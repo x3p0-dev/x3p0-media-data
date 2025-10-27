@@ -57,7 +57,7 @@ class MediaDataField implements Block
 		$this->attributes['field'] = $this->attributes['field'] ?? 'title';
 		$this->attributes['label'] = $this->attributes['label'] ?? '';
 
-		$this->mediaId = $this->block->context['x3p0/mediaId'] ?? 0;
+		$this->mediaId = $this->block->context['x3p0-media-data/mediaId'] ?? 0;
 
 		if (! $this->mediaId && 'attachment' === get_post_type()) {
 			$this->mediaId = get_the_ID() ?: 0;

@@ -7,7 +7,7 @@ import { useBlockPosition, useMediaField } from '../hooks';
 export default (props) => {
 	const { clientId, context, attributes } = props;
 	const { field } = attributes;
-	const mediaId = context['x3p0/mediaId'];
+	const mediaId = context['x3p0-media-data/mediaId'];
 	const { media } = useMediaField(mediaId, field);
 	const { parentClientId } = useBlockPosition(clientId);
 	const { updateBlockAttributes } = useDispatch(blockEditorStore);
