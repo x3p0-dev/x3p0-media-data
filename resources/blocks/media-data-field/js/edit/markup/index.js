@@ -73,7 +73,7 @@ export default (props) => {
 				onChange={(value) => setAttributes({ label: value })}
 				placeholder={displayLabel}
 			/>
-			<div className="wp-block-x3p0-media-data-field__content">
+			<div className="wp-block-x3p0-media-data-field__value">
 				{renderFieldContent()}
 			</div>
 		</div>

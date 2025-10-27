@@ -89,7 +89,7 @@ class MediaDataField implements Block
 		$labelHtml .= '</div>';
 
 		// Create the content HTML.
-		$contentHtml = '<div class="wp-block-x3p0-media-data-field__content">';
+		$contentHtml = '<div class="wp-block-x3p0-media-data-field__value">';
 		$contentHtml .= $field->renderValue();
 		$contentHtml .= '</div>';
 
