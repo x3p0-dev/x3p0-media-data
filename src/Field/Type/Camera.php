@@ -16,23 +16,23 @@ namespace X3P0\MediaData\Field\Type;
 use X3P0\MediaData\Field\BaseField;
 
 /**
- * Displays the image camera field.
+ * Displays the image camera.
  */
 class Camera extends BaseField
 {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getLabel(): string
+	public function getValue(): mixed
 	{
-		return __('Camera', 'x3p0-media-data');
+		return $this->media->get('camera');
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getValue(): mixed
+	public function getLabel(): string
 	{
-		return $this->media->get('camera');
+		return __('Camera', 'x3p0-media-data');
 	}
 }

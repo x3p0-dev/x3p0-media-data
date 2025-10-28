@@ -23,16 +23,16 @@ class Artist extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getLabel(): string
+	public function getValue(): mixed
 	{
-		return __('Artist', 'x3p0-media-data');
+		return $this->media->get('artist');
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getValue(): mixed
+	public function getLabel(): string
 	{
-		return $this->media->get('artist');
+		return __('Artist', 'x3p0-media-data');
 	}
 }

@@ -23,18 +23,10 @@ class Dimensions extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getLabel(): string
-	{
-		return __('Dimensions', 'x3p0-media-data');
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
 	public function hasValue(): bool
 	{
-		$value = $this->getValue();
-		return ! empty($value['width']) && ! empty($value['height']);
+		['width' => $width, 'height' => $height] = $this->getValue();
+		return $width && $height;
 	}
 
 	/**
@@ -43,8 +35,8 @@ class Dimensions extends BaseField
 	public function getValue(): array
 	{
 		return [
-			'width'  => $this->media->get('width'),
-			'height' => $this->media->get('height')
+			'width'  => $this->media->get('width') ?: null,
+			'height' => $this->media->get('height') ?: null
 		];
 	}
 
@@ -53,9 +45,7 @@ class Dimensions extends BaseField
 	 */
 	public function renderValue(): string
 	{
-		$value = $this->getValue();
-		$width  = absint($value['width']);
-		$height = absint($value['height']);
+		['width' => $width, 'height' => $height] = $this->getValue();
 
 		if (! $width || ! $height) {
 			return '';
@@ -67,5 +57,13 @@ class Dimensions extends BaseField
 			number_format_i18n($width),
 			number_format_i18n($height)
 		));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getLabel(): string
+	{
+		return __('Dimensions', 'x3p0-media-data');
 	}
 }

@@ -47,7 +47,8 @@ class MediaDataField implements Block
 	protected int $mediaId = 0;
 
 	/**
-	 * Sets the block attributes.
+	 * Automatically ensures that block attributes exist or fall back to
+	 * their defaults. Also gets the media ID from the block context.
 	 */
 	public function __construct(
 		protected MediaFieldService $mediaFieldService,

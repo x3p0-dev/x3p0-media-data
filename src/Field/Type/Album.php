@@ -16,23 +16,23 @@ namespace X3P0\MediaData\Field\Type;
 use X3P0\MediaData\Field\BaseField;
 
 /**
- * Displays an audio album field.
+ * Displays an audio album.
  */
 class Album extends BaseField
 {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getLabel(): string
+	public function getValue(): mixed
 	{
-		return __('Album', 'x3p0-media-data');
+		return $this->media->get('album');
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getValue(): mixed
+	public function getLabel(): string
 	{
-		return $this->media->get('album');
+		return __('Album', 'x3p0-media-data');
 	}
 }

@@ -23,23 +23,9 @@ class FileName extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getLabel(): string
+	public function getValue(): ?string
 	{
-		return __('File Name', 'x3p0-media-data');
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getValue(): mixed
-	{
-		$mediaId = $this->media->mediaId();
-
-		if (! $mediaId) {
-			return null;
-		}
-
-		$file = get_attached_file($mediaId);
+		$file = get_attached_file($this->media->mediaId());
 
 		return $file ? basename($file) : null;
 	}
@@ -47,10 +33,8 @@ class FileName extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function renderValue(): string
+	public function getLabel(): string
 	{
-		$filename = $this->getValue();
-
-		return $filename ? esc_html($filename) : '';
+		return __('File Name', 'x3p0-media-data');
 	}
 }

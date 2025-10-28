@@ -23,16 +23,16 @@ class Genre extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getLabel(): string
+	public function getValue(): mixed
 	{
-		return __('Genre', 'x3p0-media-data');
+		return $this->media->get('genre');
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getValue(): mixed
+	public function getLabel(): string
 	{
-		return $this->media->get('genre');
+		return __('Genre', 'x3p0-media-data');
 	}
 }

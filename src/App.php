@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace X3P0\MediaData;
 
 use X3P0\MediaData\Contracts\{Bootable, Container};
-use X3P0\MediaData\Field\{FieldTypeProvider};
+use X3P0\MediaData\Field\{FieldProvider};
 
 /**
  * The App class is a simple container used to store and reference the various
@@ -93,7 +93,7 @@ class App implements Bootable, Container
 
 		// Register field types on `init`.
 		add_action('init', function() use ($registry) {
-			FieldTypeProvider::register($registry);
+			FieldProvider::register($registry);
 		}, PHP_INT_MIN);
 	}
 }

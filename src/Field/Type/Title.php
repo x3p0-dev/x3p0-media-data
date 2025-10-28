@@ -16,7 +16,7 @@ namespace X3P0\MediaData\Field\Type;
 use X3P0\MediaData\Field\BaseField;
 
 /**
- * Displays the image camera title.
+ * Displays the media title.
  */
 class Title extends BaseField
 {
@@ -25,9 +25,7 @@ class Title extends BaseField
 	 */
 	public function getValue(): string
 	{
-		$post_id = $this->media->mediaId();
-
-		return $post_id ? get_the_title($post_id) : '';
+		return get_the_title($this->media->mediaId());
 	}
 
 	/**
@@ -35,9 +33,7 @@ class Title extends BaseField
 	 */
 	public function renderValue(): string
 	{
-		$value = $this->getValue();
-
-		return $value ? wp_strip_all_tags($value) : '';
+		return wp_strip_all_tags($this->getValue());
 	}
 
 	/**

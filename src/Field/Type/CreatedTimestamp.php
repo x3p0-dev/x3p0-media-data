@@ -23,14 +23,6 @@ class CreatedTimestamp extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getLabel(): string
-	{
-		return __('Created', 'x3p0-media-data');
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
 	public function getValue(): mixed
 	{
 		return $this->media->get('created_timestamp');
@@ -49,5 +41,13 @@ class CreatedTimestamp extends BaseField
 			get_option('date_format'),
 			intval($timestamp)
 		));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getLabel(): string
+	{
+		return __('Created', 'x3p0-media-data');
 	}
 }

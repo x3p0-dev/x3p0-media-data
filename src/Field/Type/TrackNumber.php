@@ -23,16 +23,16 @@ class TrackNumber extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getLabel(): string
+	public function getValue(): mixed
 	{
-		return __('Track Number', 'x3p0-media-data');
+		return $this->media->get('track_number');
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getValue(): string|int|null
+	public function getLabel(): string
 	{
-		return $this->media->get('track_number');
+		return __('Track Number', 'x3p0-media-data');
 	}
 }

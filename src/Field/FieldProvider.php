@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Field type provider.
+ * Field provider.
  *
  * @author    Justin Tadlock <justintadlock@gmail.com>
  * @copyright Copyright (c) 2008-2025, Justin Tadlock
@@ -13,13 +13,17 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Field;
 
-use X3P0\MediaData\Contracts\FieldTypeRegistry;
+use X3P0\MediaData\Contracts\FieldRegistry;
 
 /**
- * Static helper class for registering the default field types for the plugin.
+ * Static helper class for registering the default fields for the plugin.
  */
-class FieldTypeProvider
+class FieldProvider
 {
+	/**
+	 * An array of field keys and their associated classes, to be stored in
+	 * the field registry.
+	 */
 	private const FIELDS = [
 		'album'               => Type\Album::class,
 		'aperture'            => Type\Aperture::class,
@@ -33,7 +37,7 @@ class FieldTypeProvider
 		'file_name'           => Type\FileName::class,
 		'focal_length'        => Type\FocalLength::class,
 		'genre'               => Type\Genre::class,
-		'iso'                 => Type\ISO::class,
+		'iso'                 => Type\Iso::class,
 		'length_formatted'    => Type\LengthFormatted::class,
 		'mime_type'           => Type\MimeType::class,
 		'orientation'         => Type\ExifOrientation::class,
@@ -46,7 +50,7 @@ class FieldTypeProvider
 	/**
 	 * Registers default fields with the registry.
 	 */
-	public static function register(FieldTypeRegistry $registry): void
+	public static function register(FieldRegistry $registry): void
 	{
 		foreach (static::FIELDS as $key => $fieldClass) {
 			$registry->register($key, $fieldClass);

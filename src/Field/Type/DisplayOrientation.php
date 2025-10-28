@@ -23,14 +23,6 @@ class DisplayOrientation extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getLabel(): string
-	{
-		return __('Orientation', 'x3p0-media-data');
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
 	public function getValue(): ?string
 	{
 		$width  = $this->media->get('width');
@@ -40,11 +32,9 @@ class DisplayOrientation extends BaseField
 			return null;
 		}
 
-		return match (true) {
-			$width > $height => 'landscape',
-			$height > $width => 'portrait',
-			default          => 'square',
-		};
+		return $width > $height
+			? 'landscape'
+			: ($height > $width ? 'portrait' : 'square');
 	}
 
 	/**
@@ -61,5 +51,13 @@ class DisplayOrientation extends BaseField
 			'portrait'  => __('Portrait', 'x3p0-media-data'),
 			default     => __('Square', 'x3p0-media-data')
 		};
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getLabel(): string
+	{
+		return __('Orientation', 'x3p0-media-data');
 	}
 }

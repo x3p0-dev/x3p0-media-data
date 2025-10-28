@@ -1,6 +1,6 @@
 <?php
 /**
- * Immutable media value object.
+ * Attachment media class.
  *
  * @author    Justin Tadlock <justintadlock@gmail.com>
  * @copyright Copyright (c) 2008-2025, Justin Tadlock
@@ -13,28 +13,48 @@ namespace X3P0\MediaData;
 
 use X3P0\MediaData\Contracts\Media;
 
+/**
+ * Wrapper around the WordPress `attachment` post type for getting data related
+ * to the post itself or its metadata. This implementation makes hides away the
+ * complexities of finding specific data with simple API functions.
+ */
 class Attachment implements Media
 {
+	/**
+	 * Accepts an attachment ID and an array of attachment metadata.
+	 */
 	public function __construct(
 		private int $mediaId,
 		private array $data
 	) {}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function mediaId(): int
 	{
 		return $this->mediaId;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function data(): array
 	{
 		return $this->data;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function has(string $key): bool
 	{
 		return $this->get($key) !== null;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function get(string $key): mixed
 	{
 		return $this->data[$key]

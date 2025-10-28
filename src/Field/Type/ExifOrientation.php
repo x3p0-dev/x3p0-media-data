@@ -23,14 +23,6 @@ class ExifOrientation extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getLabel(): string
-	{
-		return __('Orientation', 'x3p0-media-data');
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
 	public function getValue(): ?int
 	{
 		$orientation = $this->media->get('orientation');
@@ -60,5 +52,13 @@ class ExifOrientation extends BaseField
 			8 => __('Rotated 270&deg;', 'x3p0-media-data'),
 			default => ''
 		};
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getLabel(): string
+	{
+		return __('Orientation', 'x3p0-media-data');
 	}
 }

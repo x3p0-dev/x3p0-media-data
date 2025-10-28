@@ -23,14 +23,6 @@ class FocalLength extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getLabel(): string
-	{
-		return __('Focal Length', 'x3p0-media-data');
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
 	public function getValue(): mixed
 	{
 		return $this->media->get('focal_length');
@@ -50,5 +42,13 @@ class FocalLength extends BaseField
 			esc_html__('%s mm', 'x3p0-media-data'),
 			floatval($focal)
 		);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getLabel(): string
+	{
+		return __('Focal Length', 'x3p0-media-data');
 	}
 }

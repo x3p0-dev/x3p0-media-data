@@ -16,18 +16,10 @@ namespace X3P0\MediaData\Field\Type;
 use X3P0\MediaData\Field\BaseField;
 
 /**
- * Displays an image aperture field.
+ * Displays an image aperture.
  */
 class Aperture extends BaseField
 {
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getLabel(): string
-	{
-		return __('Aperture', 'x3p0-media-data');
-	}
-
 	/**
 	 * {@inheritDoc}
 	 */
@@ -41,9 +33,7 @@ class Aperture extends BaseField
 	 */
 	public function renderValue(): string
 	{
-		$aperture = $this->getValue();
-
-		if (! $aperture) {
+		if (! $aperture = $this->getValue()) {
 			return '';
 		}
 
@@ -51,5 +41,13 @@ class Aperture extends BaseField
 			'<sup>f</sup>&#8260;<sub>%s</sub>',
 			absint($aperture)
 		);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getLabel(): string
+	{
+		return __('Aperture', 'x3p0-media-data');
 	}
 }

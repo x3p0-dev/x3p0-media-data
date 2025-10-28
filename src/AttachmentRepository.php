@@ -1,6 +1,7 @@
 <?php
+
 /**
- * WordPress attachment repository implementation.
+ * Attachment Repository class.
  *
  * @author    Justin Tadlock <justintadlock@gmail.com>
  * @copyright Copyright (c) 2008-2025, Justin Tadlock
@@ -13,6 +14,12 @@ namespace X3P0\MediaData;
 
 use X3P0\MediaData\Contracts\{Media, MediaRepository};
 
+/**
+ * Repository implementation that stores attachment media objects by post ID.
+ * This implementation acts as both a repository and factory. The `find()`
+ * method creates new attachment objects when one is not found. We can later add
+ * a separate media object factory if necessary.
+ */
 final class AttachmentRepository implements MediaRepository
 {
 	/**
@@ -22,6 +29,9 @@ final class AttachmentRepository implements MediaRepository
 	 */
 	private array $cache = [];
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function find(int $mediaId): ?Media
 	{
 		// Return cached result if available
@@ -29,32 +39,42 @@ final class AttachmentRepository implements MediaRepository
 			return $this->cache[$mediaId];
 		}
 
-		// Verify the attachment exists
+		// Verify the attachment exists. If not, cache a `null` value to
+		// avoid future lookups.
 		if ('attachment' !== get_post_type($mediaId)) {
 			$this->save($mediaId, null);
 			return null;
 		}
 
-		// Get attachment metadata
+		// Get attachment metadata.
 		$metadata = wp_get_attachment_metadata($mediaId);
 
-		$media = new Attachment($mediaId, $metadata ?: []);
+		// Create and cache the new attachment object.
+		$this->save($mediaId, new Attachment($mediaId, $metadata ?: []));
 
-		$this->save($mediaId, $media);
-
-		return $media;
+		// Return the cached attachment object.
+		return $this->cache[$mediaId];
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function save(int $mediaId, ?Media $media): void
 	{
 		$this->cache[$mediaId] = $media;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function delete(int $mediaId): void
 	{
 		unset($this->cache[$mediaId]);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function has(int $mediaId): bool
 	{
 		return array_key_exists($mediaId, $this->cache);

@@ -23,14 +23,6 @@ class ShutterSpeed extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getLabel(): string
-	{
-		return __('Shutter Speed', 'x3p0-media-data');
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
 	public function getValue(): mixed
 	{
 		return $this->media->get('shutter_speed');
@@ -45,15 +37,15 @@ class ShutterSpeed extends BaseField
 			return '';
 		}
 
-		$shutter = $speed = floatval(wp_strip_all_tags($shutter));
+		$shutter = floatval(wp_strip_all_tags($shutter));
 
-		if ((1 / $speed) > 1) {
-			$num_float   = number_format((1 / $speed), 1);
-			$num_integer = number_format((1 / $speed), 0);
+		if ((1 / $shutter) > 1) {
+			$num_float   = number_format((1 / $shutter), 1);
+			$num_integer = number_format((1 / $shutter), 0);
 
 			$formatted_num = $num_float === $num_integer
-				? number_format_i18n((1 / $speed), 0, '.', '')
-				: number_format_i18n((1 / $speed), 1, '.', '');
+				? number_format_i18n((1 / $shutter), 0)
+				: number_format_i18n((1 / $shutter), 1);
 
 			$shutter = sprintf(
 				'<sup>%s</sup>&#8260;<sub>%s</sub>',
@@ -67,5 +59,13 @@ class ShutterSpeed extends BaseField
 			esc_html__('%s sec', 'x3p0-media-data'),
 			$shutter
 		);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getLabel(): string
+	{
+		return __('Shutter Speed', 'x3p0-media-data');
 	}
 }

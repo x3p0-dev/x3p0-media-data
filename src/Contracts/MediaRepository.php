@@ -20,13 +20,13 @@ namespace X3P0\MediaData\Contracts;
 interface MediaRepository
 {
 	/**
-	 * Finds a MediaData instance by post ID. Creates and caches if not
+	 * Finds a `Media` instance by media ID. Creates and caches if not
 	 * already loaded.
 	 */
 	public function find(int $mediaId): ?Media;
 
 	/**
-	 * Caches a `MediaMeta` instance or `null` by post ID.
+	 * Caches a `Media` instance or `null` by media ID.
 	 */
 	public function save(int $mediaId, ?Media $media): void;
 
@@ -36,7 +36,7 @@ interface MediaRepository
 	public function delete(int $mediaId): void;
 
 	/**
-	 * Checks if media data exists in the cache.
+	 * Checks if media exists in the cache.
 	 */
 	public function has(int $mediaId): bool;
 }

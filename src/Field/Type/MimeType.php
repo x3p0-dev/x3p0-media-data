@@ -23,24 +23,10 @@ class MimeType extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getLabel(): string
-	{
-		return __('MIME Type', 'x3p0-media-data');
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
 	public function getValue(): mixed
 	{
-		$mediaId = $this->media->mediaId();
-
-		if (! $mediaId) {
-			return null;
-		}
-
 		// Try to get from post first.
-		if ($mime = get_post_mime_type($mediaId)) {
+		if ($mime = get_post_mime_type($this->media->mediaId())) {
 			return $mime;
 		}
 
@@ -51,10 +37,8 @@ class MimeType extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function renderValue(): string
+	public function getLabel(): string
 	{
-		$mimeType = $this->getValue();
-
-		return $mimeType ? esc_html($mimeType) : '';
+		return __('MIME Type', 'x3p0-media-data');
 	}
 }

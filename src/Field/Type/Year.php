@@ -20,11 +20,17 @@ use X3P0\MediaData\Field\BaseField;
  */
 class Year extends BaseField
 {
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getValue(): mixed
 	{
 		return $this->media->get('year');
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public function getLabel(): string
 	{
 		return __('Year', 'x3p0-media-data');

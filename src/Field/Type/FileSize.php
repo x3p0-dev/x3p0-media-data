@@ -23,32 +23,19 @@ class FileSize extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getLabel(): string
-	{
-		return __('File Size', 'x3p0-media-data');
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getValue(): mixed
+	public function getValue(): ?int
 	{
 		// Try to get filesize from metadata first.
 		if ($filesize = $this->media->get('filesize')) {
-			return $filesize;
+			return absint($filesize);
 		}
 
 		// Fall back to checking the actual file.
-		$mediaId = $this->media->mediaId();
+		$file = get_attached_file($this->media->mediaId());
 
-		if (! $mediaId) {
-			return null;
-		}
-
-		$file = get_attached_file($mediaId);
-
-		if (file_exists($file)) {
-			return filesize($file);
+		// Note that `filesize()` can return an integer or false.
+		if (file_exists($file) && $size = filesize($file)) {
+			return absint($size);
 		}
 
 		return null;
@@ -59,9 +46,7 @@ class FileSize extends BaseField
 	 */
 	public function renderValue(): string
 	{
-		$filesize = $this->getValue();
-
-		if (! $filesize) {
+		if (! $filesize = $this->getValue()) {
 			return '';
 		}
 
@@ -69,5 +54,13 @@ class FileSize extends BaseField
 		$size = size_format(absint($filesize), 2);
 
 		return $size ? esc_html($size) : '';
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getLabel(): string
+	{
+		return __('File Size', 'x3p0-media-data');
 	}
 }

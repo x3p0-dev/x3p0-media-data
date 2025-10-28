@@ -9,7 +9,6 @@
  * @link      https://github.com/x3p0-dev/x3p0-media-data
  */
 
-
 namespace X3P0\MediaData\Field\Type;
 
 use X3P0\MediaData\Field\BaseField;
@@ -19,14 +18,6 @@ use X3P0\MediaData\Field\BaseField;
  */
 class AspectRatio extends BaseField
 {
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getLabel(): string
-	{
-		return __('Aspect Ratio', 'x3p0-media-data');
-	}
-
 	/**
 	 * {@inheritDoc}
 	 */
@@ -57,9 +48,7 @@ class AspectRatio extends BaseField
 	 */
 	public function renderValue(): string
 	{
-		$ratio = $this->getValue();
-
-		if (! $ratio) {
+		if (! $ratio = $this->getValue()) {
 			return '';
 		}
 
@@ -68,5 +57,13 @@ class AspectRatio extends BaseField
 			$ratio['width'],
 			$ratio['height']
 		));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function getLabel(): string
+	{
+		return __('Aspect Ratio', 'x3p0-media-data');
 	}
 }

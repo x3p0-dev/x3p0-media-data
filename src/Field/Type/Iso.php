@@ -16,7 +16,7 @@ namespace X3P0\MediaData\Field\Type;
 use X3P0\MediaData\Field\BaseField;
 
 /**
- * Displays the image ISO field.
+ * Displays the image ISO.
  */
 class Iso extends BaseField
 {

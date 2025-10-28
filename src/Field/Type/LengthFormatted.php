@@ -23,18 +23,16 @@ class LengthFormatted extends BaseField
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getLabel(): string
+	public function getValue(): mixed
 	{
-		return __('Duration', 'x3p0-media-data');
+		return $this->media->get('length_formatted');
 	}
 
 	/**
 	 * {@inheritDoc}
-	 *
-	 * @todo - if no `length_formatted` but `length`, format it.
 	 */
-	public function getValue(): mixed
+	public function getLabel(): string
 	{
-		return $this->media->get('length_formatted');
+		return __('Duration', 'x3p0-media-data');
 	}
 }
