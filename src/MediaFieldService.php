@@ -14,9 +14,10 @@ declare(strict_types=1);
 namespace X3P0\MediaData;
 
 use X3P0\MediaData\Contracts\{
+	Field,
 	FieldFactory,
 	FieldRegistry,
-	Field,
+	FieldService,
 	MediaRepository
 };
 
@@ -24,7 +25,7 @@ use X3P0\MediaData\Contracts\{
  * The media field service encapsulates the logic of building and accessing data
  * for a specific media field.
  */
-final class MediaFieldService
+class MediaFieldService implements FieldService
 {
 	/**
 	 * Accepts a media repository, field registry, and field factory, which

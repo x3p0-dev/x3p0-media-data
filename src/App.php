@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData;
 
-use X3P0\MediaData\Contracts\{Bootable, Container};
+use X3P0\MediaData\Contracts\{Bootable, Container, FieldService};
 use X3P0\MediaData\Field\{FieldProvider};
 
 /**
@@ -79,7 +79,7 @@ class App implements Bootable, Container
 		$registry   = new FieldTypes();
 		$factory    = new FieldFactory($registry);
 
-		$this->instance(MediaFieldService::class, new MediaFieldService(
+		$this->instance(FieldService::class, new MediaFieldService(
 			repository: $repository,
 			registry:   $registry,
 			factory:    $factory

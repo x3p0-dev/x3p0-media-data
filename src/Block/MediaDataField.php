@@ -14,8 +14,7 @@ declare(strict_types=1);
 namespace X3P0\MediaData\Block;
 
 use WP_Block;
-use X3P0\MediaData\Contracts\Block;
-use X3P0\MediaData\MediaFieldService;
+use X3P0\MediaData\Contracts\{Block, FieldService};
 
 /**
  * Renders the `x3p0/media-data-field` block on the front end.
@@ -51,9 +50,9 @@ class MediaDataField implements Block
 	 * their defaults. Also gets the media ID from the block context.
 	 */
 	public function __construct(
-		protected MediaFieldService $mediaFieldService,
-		protected array             $attributes,
-		protected WP_Block          $block
+		protected FieldService $fieldService,
+		protected array        $attributes,
+		protected WP_Block     $block
 	) {
 		$this->attributes['field'] = $this->attributes['field'] ?? 'title';
 		$this->attributes['label'] = $this->attributes['label'] ?? '';
@@ -71,7 +70,7 @@ class MediaDataField implements Block
 		}
 
 		// Gets the field object.
-		$field = $this->mediaFieldService->getField(
+		$field = $this->fieldService->getField(
 			$this->mediaId,
 			$this->attributes['field']
 		);
