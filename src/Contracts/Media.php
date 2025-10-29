@@ -21,12 +21,12 @@ namespace X3P0\MediaData\Contracts;
 interface Media
 {
 	/**
-	 * The media ID.
+	 * Returns the media ID.
 	 */
-	public function mediaId(): int;
+	public function id(): int;
 
 	/**
-	 * An array of string-keyed data which can have a mixed value type.
+	 * Returns an array of string-keyed data which can have a mixed type.
 	 */
 	public function data(): array;
 

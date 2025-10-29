@@ -18,7 +18,7 @@ use X3P0\MediaData\Field\BaseField;
 /**
  * Displays the media width and height.
  */
-class Dimensions extends BaseField
+final class Dimensions extends BaseField
 {
 	/**
 	 * {@inheritDoc}

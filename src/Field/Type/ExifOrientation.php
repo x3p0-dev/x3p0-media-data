@@ -18,7 +18,7 @@ use X3P0\MediaData\Field\BaseField;
 /**
  * Displays the image's EXIF orientation (values 1-8).
  */
-class ExifOrientation extends BaseField
+final class ExifOrientation extends BaseField
 {
 	/**
 	 * {@inheritDoc}

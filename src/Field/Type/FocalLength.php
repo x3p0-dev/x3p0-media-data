@@ -18,7 +18,7 @@ use X3P0\MediaData\Field\BaseField;
 /**
  * Displays the image focal length.
  */
-class FocalLength extends BaseField
+final class FocalLength extends BaseField
 {
 	/**
 	 * {@inheritDoc}

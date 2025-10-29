@@ -14,12 +14,12 @@ declare(strict_types=1);
 namespace X3P0\MediaData\Contracts;
 
 /**
- * The Field Factory makes new Media Fields. It's a factory, which makes things.
+ * The Field Factory makes new Media Fields. It's a factory; it makes things.
  */
 interface FieldFactory
 {
 	/**
-	 * Creates a new Media Field. The key should be a registered field type.
+	 * Creates a new Media Field. The key should be a registered field.
 	 */
 	public function make(string $key, Media $media): ?Field;
 }

@@ -18,7 +18,7 @@ use X3P0\MediaData\Field\BaseField;
 /**
  * Displays an image aperture.
  */
-class Aperture extends BaseField
+final class Aperture extends BaseField
 {
 	/**
 	 * {@inheritDoc}

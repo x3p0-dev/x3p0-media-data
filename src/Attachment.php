@@ -18,22 +18,22 @@ use X3P0\MediaData\Contracts\Media;
  * to the post itself or its metadata. This implementation makes hides away the
  * complexities of finding specific data with simple API functions.
  */
-class Attachment implements Media
+final class Attachment implements Media
 {
 	/**
 	 * Accepts an attachment ID and an array of attachment metadata.
 	 */
 	public function __construct(
-		private int $mediaId,
+		private int   $id,
 		private array $data
 	) {}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function mediaId(): int
+	public function id(): int
 	{
-		return $this->mediaId;
+		return $this->id;
 	}
 
 	/**

@@ -18,7 +18,7 @@ use X3P0\MediaData\Field\BaseField;
 /**
  * Displays the media file size.
  */
-class FileSize extends BaseField
+final class FileSize extends BaseField
 {
 	/**
 	 * {@inheritDoc}
@@ -31,7 +31,7 @@ class FileSize extends BaseField
 		}
 
 		// Fall back to checking the actual file.
-		$file = get_attached_file($this->media->mediaId());
+		$file = get_attached_file($this->media->id());
 
 		// Note that `filesize()` can return an integer or false.
 		if (file_exists($file) && $size = filesize($file)) {

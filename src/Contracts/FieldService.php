@@ -14,13 +14,13 @@ declare(strict_types=1);
 namespace X3P0\MediaData\Contracts;
 
 /**
- * Field service implementations should encapsulate the business logic and
- * simplify the public API for getting a field object.
+ * Describes the public API for encapsulating the business logic behind
+ * accessing media fields.
  */
 interface FieldService
 {
 	/**
 	 * Returns a media field object or `null`.
 	 */
-	public function getField(int $mediaId, string $key): ?Field;
+	public function getField(int $mediaId, string $fieldKey): ?Field;
 }

@@ -18,7 +18,7 @@ use X3P0\MediaData\Field\BaseField;
 /**
  * Displays the media artist.
  */
-class Artist extends BaseField
+final class Artist extends BaseField
 {
 	/**
 	 * {@inheritDoc}

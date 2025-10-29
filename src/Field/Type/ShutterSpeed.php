@@ -18,7 +18,7 @@ use X3P0\MediaData\Field\BaseField;
 /**
  * Displays the image camera shutter speed.
  */
-class ShutterSpeed extends BaseField
+final class ShutterSpeed extends BaseField
 {
 	/**
 	 * {@inheritDoc}

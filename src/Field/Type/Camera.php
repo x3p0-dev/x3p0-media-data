@@ -18,7 +18,7 @@ use X3P0\MediaData\Field\BaseField;
 /**
  * Displays the image camera.
  */
-class Camera extends BaseField
+final class Camera extends BaseField
 {
 	/**
 	 * {@inheritDoc}

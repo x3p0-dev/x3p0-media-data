@@ -25,34 +25,34 @@ use X3P0\MediaData\Contracts\{
  * The media field service encapsulates the logic of building and accessing data
  * for a specific media field.
  */
-class MediaFieldService implements FieldService
+final class MediaFieldService implements FieldService
 {
 	/**
 	 * Accepts a media repository, field registry, and field factory, which
 	 * are used to handle the more complex operations behind the scenes.
 	 */
 	public function __construct(
-		private MediaRepository $repository,
-		private FieldRegistry   $registry,
-		private FieldFactory    $factory
+		private MediaRepository $mediaRepository,
+		private FieldRegistry   $fieldRegistry,
+		private FieldFactory    $fieldFactory
 	) {}
 
 	/**
 	 * Returns a media field object or `null`. This method will also return
 	 * `null` if a field exists but simply doesn't have data to show.
 	 */
-	public function getField(int $mediaId, string $key): ?Field
+	public function getField(int $mediaId, string $fieldKey): ?Field
 	{
 		// Get media data from repository
-		$media = $this->repository->find($mediaId);
+		$media = $this->mediaRepository->find($mediaId);
 
 		// If no media found or field is not registered, bail.
-		if (! $media || ! $this->registry->isRegistered($key)) {
+		if (! $media || ! $this->fieldRegistry->isRegistered($fieldKey)) {
 			return null;
 		}
 
 		// Create field instance.
-		$field = $this->factory->make($key, $media);
+		$field = $this->fieldFactory->make($fieldKey, $media);
 
 		// Return the field if it exists and has a value.
 		return $field && $field->hasValue() ? $field : null;

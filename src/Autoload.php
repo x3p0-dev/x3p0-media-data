@@ -18,7 +18,7 @@ namespace X3P0\MediaData;
  *
  * @link https://www.php-fig.org/psr/psr-4/
  */
-class Autoload
+final class Autoload
 {
 	/**
 	 * Register the autoloader.

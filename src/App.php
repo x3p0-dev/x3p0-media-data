@@ -20,7 +20,7 @@ use X3P0\MediaData\Field\{FieldProvider};
  * The App class is a simple container used to store and reference the various
  * plugin components. It's also used to register the default bindings.
  */
-class App implements Bootable, Container
+final class App implements Bootable, Container
 {
 	/**
 	 * Stored definitions of single instances.
@@ -80,9 +80,9 @@ class App implements Bootable, Container
 		$factory    = new FieldFactory($registry);
 
 		$this->instance(FieldService::class, new MediaFieldService(
-			repository: $repository,
-			registry:   $registry,
-			factory:    $factory
+			mediaRepository: $repository,
+			fieldRegistry:   $registry,
+			fieldFactory:    $factory
 		));
 
 		$this->instance(Block\Register::class, new Block\Register(

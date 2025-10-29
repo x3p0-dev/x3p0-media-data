@@ -18,7 +18,7 @@ use X3P0\MediaData\Field\BaseField;
 /**
  * Displays the media's created timestamp, formatted.
  */
-class CreatedTimestamp extends BaseField
+final class CreatedTimestamp extends BaseField
 {
 	/**
 	 * {@inheritDoc}

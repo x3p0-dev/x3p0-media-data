@@ -21,15 +21,17 @@ use X3P0\MediaData\Contracts\{
 };
 
 /**
- * The field factory creates new field objects. Note that this is just a default
- * implementation of the interface because there's no current expectation that
- * additional implementations will be necessary.
+ * Registry-based field factory implementation.
+ *
+ * Creates field instances by looking up their class names in the field registry.
+ * This is the default implementation of the interface because there's no current
+ * expectation that additional implementations will be necessary.
  */
 final class FieldFactory implements FieldFactoryContract
 {
 	/**
-	 * Accepts an instance of the field type registry for retrieving the
-	 * field classes.
+	 * Accepts an instance of the field registry, which is used for creating
+	 * new field objects.
 	 */
 	public function __construct(
 		private FieldRegistry $registry

@@ -18,14 +18,14 @@ use X3P0\MediaData\Field\BaseField;
 /**
  * Displays the media title.
  */
-class Title extends BaseField
+final class Title extends BaseField
 {
 	/**
 	 * {@inheritDoc}
 	 */
 	public function getValue(): string
 	{
-		return get_the_title($this->media->mediaId());
+		return get_the_title($this->media->id());
 	}
 
 	/**

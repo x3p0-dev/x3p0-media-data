@@ -18,7 +18,7 @@ use X3P0\MediaData\Field\BaseField;
 /**
  * Displays the media genre.
  */
-class Genre extends BaseField
+final class Genre extends BaseField
 {
 	/**
 	 * {@inheritDoc}

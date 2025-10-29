@@ -18,7 +18,7 @@ use X3P0\MediaData\Field\BaseField;
 /**
  * Displays the media's duration/length, formatted.
  */
-class LengthFormatted extends BaseField
+final class LengthFormatted extends BaseField
 {
 	/**
 	 * {@inheritDoc}

@@ -18,7 +18,7 @@ use X3P0\MediaData\Field\BaseField;
 /**
  * Displays an audio album.
  */
-class Album extends BaseField
+final class Album extends BaseField
 {
 	/**
 	 * {@inheritDoc}

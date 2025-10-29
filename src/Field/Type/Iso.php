@@ -18,7 +18,7 @@ use X3P0\MediaData\Field\BaseField;
 /**
  * Displays the image ISO.
  */
-class Iso extends BaseField
+final class Iso extends BaseField
 {
 	/**
 	 * {@inheritDoc}

@@ -18,7 +18,7 @@ use X3P0\MediaData\Field\BaseField;
 /**
  * Displays the media's orientation (landscape, portrait, square).)
  */
-class DisplayOrientation extends BaseField
+final class DisplayOrientation extends BaseField
 {
 	/**
 	 * {@inheritDoc}

@@ -18,7 +18,7 @@ use X3P0\MediaData\Field\BaseField;
 /**
  * Displays the media MIME type.
  */
-class MimeType extends BaseField
+final class MimeType extends BaseField
 {
 	/**
 	 * {@inheritDoc}
@@ -26,7 +26,7 @@ class MimeType extends BaseField
 	public function getValue(): mixed
 	{
 		// Try to get from post first.
-		if ($mime = get_post_mime_type($this->media->mediaId())) {
+		if ($mime = get_post_mime_type($this->media->id())) {
 			return $mime;
 		}
 

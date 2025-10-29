@@ -18,14 +18,14 @@ use X3P0\MediaData\Field\BaseField;
 /**
  * Displays the media filename.
  */
-class FileName extends BaseField
+final class FileName extends BaseField
 {
 	/**
 	 * {@inheritDoc}
 	 */
 	public function getValue(): ?string
 	{
-		$file = get_attached_file($this->media->mediaId());
+		$file = get_attached_file($this->media->id());
 
 		return $file ? basename($file) : null;
 	}

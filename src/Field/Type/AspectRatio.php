@@ -16,7 +16,7 @@ use X3P0\MediaData\Field\BaseField;
 /**
  * Displays the media aspect ratio (generally for image and video types).
  */
-class AspectRatio extends BaseField
+final class AspectRatio extends BaseField
 {
 	/**
 	 * {@inheritDoc}

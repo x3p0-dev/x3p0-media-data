@@ -18,7 +18,7 @@ use X3P0\MediaData\Field\BaseField;
 /**
  * Displays the audio track number from an album.
  */
-class TrackNumber extends BaseField
+final class TrackNumber extends BaseField
 {
 	/**
 	 * {@inheritDoc}

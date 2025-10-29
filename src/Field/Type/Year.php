@@ -18,7 +18,7 @@ use X3P0\MediaData\Field\BaseField;
 /**
  * Displays the media published year.
  */
-class Year extends BaseField
+final class Year extends BaseField
 {
 	/**
 	 * {@inheritDoc}
