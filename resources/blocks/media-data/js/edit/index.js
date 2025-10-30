@@ -1,14 +1,8 @@
 import { __ } from '@wordpress/i18n';
-import {
-	useBlockProps,
-	useInnerBlocksProps,
-	MediaPlaceholder,
-	store as blockEditorStore,
-} from '@wordpress/block-editor';
+import { useBlockProps, useInnerBlocksProps, MediaPlaceholder } from '@wordpress/block-editor';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
 import { store as noticesStore } from '@wordpress/notices';
-import {createBlock, getBlockBindingsSource} from '@wordpress/blocks';
 import Toolbar from './toolbar';
 
 const mediaIcon = (
@@ -23,8 +17,8 @@ const TEMPLATE = [
 ];
 
 export default (props) => {
-	const { attributes, context, setAttributes, clientId, isSelected: isSingleSelected } = props;
-	const { mediaId, metadata } = attributes;
+	const { attributes, setAttributes } = props;
+	const { mediaId } = attributes;
 
 	// Fetch media details
 	const media = useSelect(
@@ -38,7 +32,6 @@ export default (props) => {
 	);
 
 	const { createErrorNotice } = useDispatch(noticesStore);
-	const { insertBlock } = useDispatch(blockEditorStore);
 
 	const blockProps = useBlockProps();
 
@@ -69,10 +62,6 @@ export default (props) => {
 
 	const onRemoveMedia = () => setAttributes({ mediaId: 0 });
 
-	const addFieldBlock = () => {
-		void insertBlock(createBlock('x3p0/media-data-field', {}), undefined, clientId);
-	};
-
 	// Show placeholder if no media is available
 	if (! mediaId) {
 		return (
@@ -102,7 +91,6 @@ export default (props) => {
 				mediaUrl={media?.source_url}
 				onSelectMedia={onSelectMedia}
 				onRemoveMedia={onRemoveMedia}
-				onAddFieldBlock={addFieldBlock}
 			/>
 			<div {...innerBlocksProps} />
 		</>
