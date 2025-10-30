@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { BlockControls, MediaReplaceFlow } from '@wordpress/block-editor';
+import { BlockControls, MediaReplaceFlow, useBlockEditingMode } from '@wordpress/block-editor';
 import { MenuItem, ToolbarButton } from '@wordpress/components';
 
 export default ({
@@ -11,6 +11,8 @@ export default ({
 	onAddFieldBlock,
 }) => {
 	const { mediaId } = attributes;
+
+	const blockEditingMode = useBlockEditingMode();
 
 	return (
 		<BlockControls group="other">
@@ -29,7 +31,7 @@ export default ({
 					</MenuItem>
 				)}
 			</MediaReplaceFlow>
-			{isSelected && (
+			{isSelected && blockEditingMode === 'default' && (
 				<ToolbarButton onClick={onAddFieldBlock}>
 					{__('Add', 'x3p0-media-data')}
 				</ToolbarButton>
