@@ -67,8 +67,9 @@ return array(
 		),
 		'attributes' => array(
 			'mediaId' => array(
-				'type' => 'number',
-				'default' => 0
+				'type' => 'integer',
+				'default' => 0,
+				'role' => 'content'
 			)
 		),
 		'editorScript' => 'file:./index.js',
@@ -138,11 +139,13 @@ return array(
 		'attributes' => array(
 			'field' => array(
 				'type' => 'string',
-				'default' => 'title'
+				'default' => 'title',
+				'role' => 'content'
 			),
 			'label' => array(
 				'type' => 'string',
-				'default' => ''
+				'default' => '',
+				'role' => 'content'
 			)
 		),
 		'editorScript' => 'file:./index.js',

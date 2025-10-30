@@ -64,8 +64,9 @@
   ],
   "attributes": {
     "mediaId": {
-      "type": "number",
-      "default": 0
+      "type": "integer",
+      "default": 0,
+      "role": "content"
     }
   },
   "editorScript": "file:./index.js",

@@ -62,11 +62,13 @@
   "attributes": {
     "field": {
       "type": "string",
-      "default": "title"
+      "default": "title",
+      "role": "content"
     },
     "label": {
       "type": "string",
-      "default": ""
+      "default": "",
+      "role": "content"
     }
   },
   "editorScript": "file:./index.js",
