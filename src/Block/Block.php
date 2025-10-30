@@ -11,7 +11,9 @@
 
 declare(strict_types=1);
 
-namespace X3P0\MediaData\Contracts;
+namespace X3P0\MediaData\Block;
+
+use X3P0\MediaData\Contracts\Renderable;
 
 /**
  * The block class renders the block type on the front end.

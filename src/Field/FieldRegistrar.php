@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Field provider.
+ * Field registrar.
  *
  * @author    Justin Tadlock <justintadlock@gmail.com>
  * @copyright Copyright (c) 2008-2025, Justin Tadlock
@@ -13,12 +13,10 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Field;
 
-use X3P0\MediaData\Contracts\FieldRegistry;
-
 /**
  * Static helper class for registering the default fields for the plugin.
  */
-class FieldProvider
+final class FieldRegistrar
 {
 	/**
 	 * An array of field keys and their associated classes, to be stored in
@@ -50,10 +48,10 @@ class FieldProvider
 	/**
 	 * Registers default fields with the registry.
 	 */
-	public static function register(FieldRegistry $registry): void
+	public static function register(FieldRegistry $fieldRegistry): void
 	{
-		foreach (static::FIELDS as $key => $fieldClass) {
-			$registry->register($key, $fieldClass);
+		foreach (self::FIELDS as $key => $fieldClass) {
+			$fieldRegistry->register($key, $fieldClass);
 		}
 	}
 }

@@ -6,15 +6,13 @@
 namespace X3P0\MediaData;
 
 use WP_Block;
-use X3P0\MediaData\Block\MediaDataField;
-use X3P0\MediaData\Contracts\FieldService;
+use X3P0\MediaData\Block\Type\MediaDataField;
 
 /**
  * @global array    $attributes Block attributes.
  * @global WP_Block $block      Block instance.
  */
-echo (new MediaDataField(
-	fieldService: plugin()->get(FieldService::class),
-	attributes:   $attributes,
-	block:        $block
-))->render();
+echo plugin()->container()->make(MediaDataField::class, [
+	'attributes' => $attributes,
+	'block'      => $block
+])->render();

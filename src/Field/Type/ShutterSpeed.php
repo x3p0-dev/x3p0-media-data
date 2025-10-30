@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Field\Type;
 
-use X3P0\MediaData\Field\BaseField;
+use X3P0\MediaData\Field\Field;
 
 /**
  * Displays the image camera shutter speed.
  */
-final class ShutterSpeed extends BaseField
+final class ShutterSpeed extends Field
 {
 	/**
 	 * {@inheritDoc}

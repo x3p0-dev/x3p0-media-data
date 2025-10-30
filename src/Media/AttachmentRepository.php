@@ -10,15 +10,13 @@
  */
 declare(strict_types=1);
 
-namespace X3P0\MediaData;
-
-use X3P0\MediaData\Contracts\{Media, MediaRepository};
+namespace X3P0\MediaData\Media;
 
 /**
  * Repository implementation that stores attachment media objects by post ID.
  * This implementation acts as both a repository and factory. The `find()`
  * method creates new attachment objects when one is not found. We can later add
- * a separate media object factory if necessary.
+ * a separate media factory if necessary.
  */
 final class AttachmentRepository implements MediaRepository
 {

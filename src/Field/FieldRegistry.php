@@ -11,14 +11,12 @@
 
 declare(strict_types=1);
 
-namespace X3P0\MediaData;
-
-use X3P0\MediaData\Contracts\FieldRegistry;
+namespace X3P0\MediaData\Field;
 
 /**
  * Stores the field classes in a registry to later be instantiated.
  */
-final class FieldTypes implements FieldRegistry
+final class FieldRegistry
 {
 	/**
 	 * Stores field type registrations: key => fully qualified class name.

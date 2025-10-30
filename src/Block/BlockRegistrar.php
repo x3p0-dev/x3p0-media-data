@@ -15,7 +15,7 @@ namespace X3P0\MediaData\Block;
 
 use X3P0\MediaData\Contracts\Bootable;
 
-class Register implements Bootable
+final class BlockRegistrar implements Bootable
 {
 	/**
 	 * Sets the path where the built blocks are stored.

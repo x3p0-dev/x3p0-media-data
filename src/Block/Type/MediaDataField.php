@@ -11,15 +11,16 @@
 
 declare(strict_types=1);
 
-namespace X3P0\MediaData\Block;
+namespace X3P0\MediaData\Block\Type;
 
 use WP_Block;
-use X3P0\MediaData\Contracts\{Block, FieldService};
+use X3P0\MediaData\Block\Block;
+use X3P0\MediaData\Field\FieldResolver;
 
 /**
  * Renders the `x3p0/media-data-field` block on the front end.
  */
-class MediaDataField implements Block
+final class MediaDataField implements Block
 {
 	/**
 	 * Creates an array of allowed HTML within field labels, which should be
@@ -50,9 +51,9 @@ class MediaDataField implements Block
 	 * their defaults. Also gets the media ID from the block context.
 	 */
 	public function __construct(
-		protected FieldService $fieldService,
-		protected array        $attributes,
-		protected WP_Block     $block
+		protected FieldResolver $fieldResolver,
+		protected array         $attributes,
+		protected WP_Block      $block
 	) {
 		$this->attributes['field'] = $this->attributes['field'] ?? 'title';
 		$this->attributes['label'] = $this->attributes['label'] ?? '';
@@ -70,7 +71,7 @@ class MediaDataField implements Block
 		}
 
 		// Gets the field object.
-		$field = $this->fieldService->getField(
+		$field = $this->fieldResolver->resolve(
 			$this->mediaId,
 			$this->attributes['field']
 		);

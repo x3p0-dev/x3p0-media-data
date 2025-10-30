@@ -11,34 +11,24 @@
 
 declare(strict_types=1);
 
-namespace X3P0\MediaData;
+namespace X3P0\MediaData\Field;
 
-use X3P0\MediaData\Contracts\{
-	FieldFactory as FieldFactoryContract,
-	FieldRegistry,
-	Media,
-	Field
-};
+use X3P0\MediaData\Media\Media;
 
 /**
- * Registry-based field factory implementation.
- *
  * Creates field instances by looking up their class names in the field registry.
- * This is the default implementation of the interface because there's no current
- * expectation that additional implementations will be necessary.
  */
-final class FieldFactory implements FieldFactoryContract
+final class FieldFactory
 {
 	/**
 	 * Accepts an instance of the field registry, which is used for creating
 	 * new field objects.
 	 */
-	public function __construct(
-		private FieldRegistry $registry
-	) {}
+	public function __construct(protected FieldRegistry $registry)
+	{}
 
 	/**
-	 * {@inheritDoc}
+	 * Creates a new Media Field. The key should be a registered field.
 	 */
 	public function make(string $key, Media $media): ?Field
 	{

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Attachment media class.
  *
@@ -7,26 +8,24 @@
  * @license   https://gnu.org/licenses/old-licenses/gpl-2.0.html GPL-2.0-or-later
  * @link      https://github.com/x3p0-dev/x3p0-media-data
  */
+
 declare(strict_types=1);
 
-namespace X3P0\MediaData;
-
-use X3P0\MediaData\Contracts\Media;
+namespace X3P0\MediaData\Media;
 
 /**
- * Wrapper around the WordPress `attachment` post type for getting data related
- * to the post itself or its metadata. This implementation makes hides away the
- * complexities of finding specific data with simple API functions.
+ * Wrapper around the WordPress `attachment` post type for getting post data or
+ * its media file metadata. This implementation essentially acts as a data store
+ * for consuming classes, hiding the complexities of accessing data via simple
+ * API methods.
  */
 final class Attachment implements Media
 {
 	/**
 	 * Accepts an attachment ID and an array of attachment metadata.
 	 */
-	public function __construct(
-		private int   $id,
-		private array $data
-	) {}
+	public function __construct(private int $id, private array $data)
+	{}
 
 	/**
 	 * {@inheritDoc}

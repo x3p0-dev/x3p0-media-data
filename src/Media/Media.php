@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace X3P0\MediaData\Contracts;
+namespace X3P0\MediaData\Media;
 
 /**
  * Media implementations represent an immutable data value object. They are

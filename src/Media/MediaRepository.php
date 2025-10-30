@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace X3P0\MediaData\Contracts;
+namespace X3P0\MediaData\Media;
 
 /**
  * Manages MediaData instances, ensuring only one instance exists per post ID.

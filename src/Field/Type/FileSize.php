@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Field\Type;
 
-use X3P0\MediaData\Field\BaseField;
+use X3P0\MediaData\Field\Field;
 
 /**
  * Displays the media file size.
  */
-final class FileSize extends BaseField
+final class FileSize extends Field
 {
 	/**
 	 * {@inheritDoc}

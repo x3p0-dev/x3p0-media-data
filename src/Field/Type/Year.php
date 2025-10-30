@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Field\Type;
 
-use X3P0\MediaData\Field\BaseField;
+use X3P0\MediaData\Field\Field;
 
 /**
  * Displays the media published year.
  */
-final class Year extends BaseField
+final class Year extends Field
 {
 	/**
 	 * {@inheritDoc}

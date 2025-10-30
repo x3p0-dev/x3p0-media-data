@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Block Bindings class.
+ * Block Bindings support class.
  *
  * @author    Justin Tadlock <justintadlock@gmail.com>
  * @copyright Copyright (c) 2025, Justin Tadlock
@@ -16,7 +16,7 @@ namespace X3P0\MediaData\Block;
 use WP_Block;
 use X3P0\MediaData\Contracts\Bootable;
 
-class Bindings implements Bootable
+final class BlockBindingsSupport implements Bootable
 {
 	/**
 	 * {@inheritdoc}
@@ -25,17 +25,17 @@ class Bindings implements Bootable
 	{
 		add_filter(
 			'block_bindings_supported_attributes_x3p0/media-data',
-			[$this, 'addBindableAttributes']
+			[$this, 'mediaDataBindableAttributes']
 		);
 
-		add_filter('render_block_context', [$this, 'addBlockContext'], 10, 3);
+		add_filter('render_block_context', [$this, 'ensureMediaIdContext'], 10, 3);
 	}
 
 	/**
 	 * Add attributes to the `x3p0/media-data` block that support block
 	 * being connected to a Block Bindings source.
 	 */
-	public function addBindableAttributes(array $attrs): array
+	public function mediaDataBindableAttributes(array $attrs): array
 	{
 		$attrs[] = 'mediaId';
 
@@ -44,10 +44,14 @@ class Bindings implements Bootable
 
 	/**
 	 * Adds the `x3p0-media-data/mediaId` context to the Media Data Field
-	 * block when the parent doesn't pass the context along. This seems to
-	 * happen when the `mediaId` attribute is tied to a block binding.
+	 * block when the parent doesn't pass the context along.
+	 *
+	 * WORKAROUND: This addresses a WordPress core issue where context isn't
+	 * propagated when the `mediaId` attribute is bound to a block binding
+	 * source. This method can potentially be removed if/when WordPress
+	 * fixes this behavior.
 	 */
-	public function addBlockContext(
+	public function ensureMediaIdContext(
 		array $context,
 		array $block,
 		?WP_Block $parent
