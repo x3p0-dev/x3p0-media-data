@@ -37,9 +37,38 @@ final class Aperture extends Field
 			return '';
 		}
 
+		// Converts fraction formats (e.g., "28/10") to decimal. This
+		// format may be stored with images from older versions of WP.
+		if (is_string($aperture) && str_contains($aperture, '/')) {
+			$parts = explode('/', $aperture);
+
+			if (
+				count($parts) === 2
+				&& is_numeric($parts[0])
+				&& is_numeric($parts[1])
+				&& $parts[1] != 0
+			) {
+				$aperture = floatval($parts[0]) / floatval($parts[1]);
+			}
+		}
+
+		// Convert to float if it's a numeric string
+		if (is_string($aperture) && is_numeric($aperture)) {
+			$aperture = floatval($aperture);
+		}
+
+		// Ensure we have a valid number
+		if (! is_numeric($aperture) || $aperture <= 0) {
+			return '';
+		}
+
+		// Format the aperture value by removing unnecessary decimal
+		// places (e.g., 2.8 instead of 2.80)
+		$aperture = rtrim(rtrim(number_format($aperture, 2, '.', ''), '0'), '.');
+
 		return sprintf(
-			'<sup>f</sup>&#8260;<sub>%s</sub>',
-			absint($aperture)
+			'f/%s',
+			esc_html($aperture)
 		);
 	}
 

@@ -96,6 +96,46 @@ function calculateAspectRatio(width, height) {
 }
 
 /**
+ * Formats an aperture number.
+ * @param aperture {string|number}
+ * @returns {string}
+ */
+function formatAperture(aperture) {
+	// Return empty string if no aperture data
+	if (!aperture && aperture !== 0) {
+		return '';
+	}
+
+	// Handle fraction format (e.g., "28/10")
+	if (typeof aperture === 'string' && aperture.includes('/')) {
+		const parts = aperture.split('/');
+		if (parts.length === 2) {
+			const numerator = parseFloat(parts[0]);
+			const denominator = parseFloat(parts[1]);
+			if (!isNaN(numerator) && !isNaN(denominator) && denominator !== 0) {
+				aperture = numerator / denominator;
+			}
+		}
+	}
+
+	// Convert to number if it's a numeric string
+	if (typeof aperture === 'string') {
+		aperture = parseFloat(aperture);
+	}
+
+	// Ensure we have a valid number.
+	if (isNaN(aperture) || aperture <= 0) {
+		return '';
+	}
+
+	// Format the aperture value by removing unnecessary decimal places
+	// (e.g., 2.8 instead of 2.80).
+	const formatted = aperture.toFixed(2).replace(/\.?0+$/, '');
+
+	return 'f/' + formatted;
+}
+
+/**
  * Formats bytes into human-readable file size
  * @param {number} bytes - File size in bytes
  * @param {number} decimals - Number of decimal places
@@ -186,9 +226,7 @@ const mediaFieldExtractors = {
 	 */
 	aperture: (media) => {
 		const aperture = getNestedProperty(media, 'media_details.image_meta.aperture');
-		return aperture
-			? `<sup>f</sup>&#8260;<sub>${Math.abs(parseInt(aperture, 10))}</sub>`
-			: '';
+		return aperture ? formatAperture(aperture) : '';
 	},
 
 	/**
