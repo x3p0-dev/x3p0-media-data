@@ -13,10 +13,13 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Core;
 
+use X3P0\MediaData\Contracts\Bootable;
+
 /**
- * Application interface for managing the application lifecycle and service providers.
+ * Defines the application interface, which should be a wrapper for a container
+ * implementation that provides access to registering service providers.
  */
-interface Application
+interface Application extends Bootable
 {
 	/**
 	 * Get the container instance.
@@ -26,10 +29,5 @@ interface Application
 	/**
 	 * Register a service provider with the application.
 	 */
-	public function register(string|ServiceProvider $provider): void;
-
-	/**
-	 * Boot all registered service providers.
-	 */
-	public function boot(): void;
+	public function register(ServiceProvider|string $provider): void;
 }

@@ -16,24 +16,26 @@ namespace X3P0\MediaData\Core;
 use Closure;
 
 /**
- * A simple container used to store and reference the various Plugin components.
+ * Defines the dependency injection container interface, which allows for
+ * binding concrete implementations to abstracts. The container supports
+ * transient, singleton, and single-instance bindings.
  */
 interface Container
 {
 	/**
 	 * Bind an abstract to a concrete implementation.
 	 */
-	public function bind(string $abstract, Closure|string|null $concrete = null, bool $shared = false): void;
+	public function bind(string $abstract, mixed $concrete = null, bool $shared = false): void;
 
 	/**
 	 * Register a transient service (new instance each time).
 	 */
-	public function transient(string $abstract, Closure|string|null $concrete = null): void;
+	public function transient(string $abstract, mixed $concrete = null): void;
 
 	/**
 	 * Bind a singleton (cached instance).
 	 */
-	public function singleton(string $abstract, Closure|string|null $concrete = null): void;
+	public function singleton(string $abstract, mixed $concrete = null): void;
 
 	/**
 	 * Register an existing instance as a singleton.
@@ -54,14 +56,4 @@ interface Container
 	 * Check if an abstract is bound.
 	 */
 	public function has(string $abstract): bool;
-
-	/**
-	 * Check if an abstract is bound as a singleton.
-	 */
-	public function isShared(string $abstract): bool;
-
-	/**
-	 * Determine if the given concrete is buildable.
-	 */
-	public function isBuildable(mixed $concrete): bool;
 }

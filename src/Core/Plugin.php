@@ -20,7 +20,7 @@ use X3P0\MediaData\Media\MediaServiceProvider;
 
 /**
  * The Plugin class is an implementation of the Application interface. It's used
- * to bootstrap the plugin and register the default service providers.
+ * to register and boot the default service providers, bootstrapping the plugin.
  */
 final class Plugin implements Application
 {
@@ -30,9 +30,33 @@ final class Plugin implements Application
 	private array $providers = [];
 
 	/**
+	 * Sets up the initial object state.
+	 */
+	public function __construct(protected readonly Container $container)
+	{
+		// Allow third-party devs to hook in before anything runs.
+		do_action('x3p0/media-data/init', $this);
+
+		// Register default bindings and service providers.
+		$this->registerDefaultBindings();
+		$this->registerDefaultProviders();
+
+		// Allow third-party devs to register service providers.
+		do_action('x3p0/media-meta/register', $this);
+	}
+
+	/**
+	 * Registers default container bindings.
+	 */
+	private function registerDefaultBindings(): void
+	{
+		$this->container->instance(Container::class, $this->container);
+	}
+
+	/**
 	 * Registers the default service providers.
 	 */
-	public function __construct(protected Container $container)
+	private function registerDefaultProviders(): void
 	{
 		$this->register(BlockServiceProvider::class);
 		$this->register(FieldServiceProvider::class);
@@ -40,7 +64,7 @@ final class Plugin implements Application
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
 	public function container(): Container
 	{
@@ -48,16 +72,16 @@ final class Plugin implements Application
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * @inheritDoc
 	 */
-	public function register(string|object $provider): void
+	public function register(ServiceProvider|string $provider): void
 	{
-		if (! is_subclass_of($provider, ServiceProvider::class)) {
-			return;
+		if (is_string($provider) && is_subclass_of($provider, ServiceProvider::class)) {
+			$provider = new $provider($this->container);
 		}
 
-		if (is_string($provider)) {
-			$provider = new $provider($this->container);
+		if (! $provider instanceof ServiceProvider) {
+			return;
 		}
 
 		$provider->register();
@@ -65,7 +89,9 @@ final class Plugin implements Application
 	}
 
 	/**
-	 * {@inheritdoc}
+	 * {@inheritDoc}
+	 *
+	 * Boots all service providers that implement the `Bootable` interface.
 	 */
 	public function boot(): void
 	{
@@ -74,5 +100,8 @@ final class Plugin implements Application
 				$provider->boot();
 			}
 		}
+
+		// Allow third-party devs access to hook in when booting.
+		do_action('x3p0/media-meta/boot', $this);
 	}
 }
