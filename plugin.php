@@ -6,7 +6,7 @@
  * Description:       Display media data via the block editor.
  * Version:           1.0.0-alpha
  * Requires at least: 6.8
- * Requires PHP:      8.0
+ * Requires PHP:      8.1
  * Author:            Justin Tadlock
  * Author URI:        https://justintadlock.com
  * License:           GPL-3.0-or-later
