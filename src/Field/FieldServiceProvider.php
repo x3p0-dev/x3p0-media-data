@@ -13,9 +13,10 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Field;
 
+use X3P0\MediaData\Contracts\Bootable;
 use X3P0\MediaData\Core\ServiceProvider;
 
-final class FieldServiceProvider extends ServiceProvider
+final class FieldServiceProvider extends ServiceProvider implements Bootable
 {
 	/**
 	 * {@inheritDoc}
@@ -25,7 +26,13 @@ final class FieldServiceProvider extends ServiceProvider
 		$this->container->singleton(FieldRegistry::class);
 		$this->container->singleton(FieldFactory::class);
 		$this->container->singleton(FieldResolver::class);
+	}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	public function boot(): void
+	{
 		FieldRegistrar::register($this->container->get(FieldRegistry::class));
 	}
 }

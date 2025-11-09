@@ -26,8 +26,8 @@ final class FieldResolver
 	 * handle the more complex operations behind the scenes.
 	 */
 	public function __construct(
-		private MediaRepository $mediaRepository,
-		private FieldFactory    $fieldFactory
+		private readonly MediaRepository $mediaRepository,
+		private readonly FieldFactory $fieldFactory
 	) {}
 
 	/**

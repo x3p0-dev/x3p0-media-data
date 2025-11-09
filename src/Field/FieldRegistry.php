@@ -13,39 +13,62 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Field;
 
+use TypeError;
+use X3P0\MediaData\Contracts\ClassRegistry;
+
 /**
  * Stores the field classes in a registry to later be instantiated.
  */
-final class FieldRegistry
+final class FieldRegistry implements ClassRegistry
 {
 	/**
 	 * Stores field type registrations: key => fully qualified class name.
 	 *
 	 * @var array<string, string>
 	 */
-	private array $types = [];
+	private array $fields = [];
 
 	/**
-	 * {@inheritDoc}
+	 * Add a field class.
+	 *
+	 * @param class-string<Field> $className
 	 */
-	public function register(string $key, string $fieldClass): void
+	public function register(string $key, string $className): void
 	{
-		$this->types[$key] = $fieldClass;
+		if (! is_subclass_of($className, Field::class)) {
+			throw new TypeError(esc_html(sprintf(
+				// Translators: %s is a PHP class name.
+				__('Only %s classes can be registered', 'x3p0-breadcrumbs'),
+				Field::class
+			)));
+		}
+
+		$this->fields[$key] = $className;
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Removes a field class.
+	 */
+	public function unregister(string $key): void
+	{
+		unset($this->fields[$key]);
+	}
+
+	/**
+	 * Checks if a field class is registered.
 	 */
 	public function isRegistered(string $key): bool
 	{
-		return isset($this->types[$key]);
+		return isset($this->fields[$key]);
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Returns a crumb type.
+	 *
+	 * @return null|class-string<Field>
 	 */
 	public function get(string $key): ?string
 	{
-		return $this->types[$key] ?? null;
+		return $this->isRegistered($key) ? $this->fields[$key] : null;
 	}
 }

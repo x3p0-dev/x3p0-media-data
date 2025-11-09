@@ -24,7 +24,7 @@ final class FieldFactory
 	 * Accepts an instance of the field registry, which is used for creating
 	 * new field objects.
 	 */
-	public function __construct(protected FieldRegistry $registry)
+	public function __construct(private readonly FieldRegistry $fieldRegistry)
 	{}
 
 	/**
@@ -32,8 +32,10 @@ final class FieldFactory
 	 */
 	public function make(string $key, Media $media): ?Field
 	{
-		$fieldClass = $this->registry->get($key);
+		if ($field = $this->fieldRegistry->get($key)) {
+			return new $field($media);
+		}
 
-		return $fieldClass ? new $fieldClass($media) : null;
+		return null;
 	}
 }
