@@ -24,8 +24,10 @@ final class Attachment implements Media
 	/**
 	 * Accepts an attachment ID and an array of attachment metadata.
 	 */
-	public function __construct(private int $id, private array $data)
-	{}
+	public function __construct(
+		private readonly int $id,
+		private readonly array $data
+	) {}
 
 	/**
 	 * {@inheritDoc}

@@ -22,9 +22,6 @@ final class MediaServiceProvider extends ServiceProvider
 	 */
 	public function register(): void
 	{
-		$this->container->singleton(
-			MediaRepository::class,
-			AttachmentRepository::class
-		);
+		$this->container->singleton(MediaRepository::class, AttachmentRepository::class);
 	}
 }
