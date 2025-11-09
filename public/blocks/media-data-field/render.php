@@ -12,7 +12,9 @@ use X3P0\MediaData\Block\Type\MediaDataField;
  * @global array    $attributes Block attributes.
  * @global WP_Block $block      Block instance.
  */
-echo plugin()->container()->make(MediaDataField::class, [
+// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
+echo container()->get(MediaDataField::class, [
 	'attributes' => $attributes,
 	'block'      => $block
 ])->render();
+// phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped

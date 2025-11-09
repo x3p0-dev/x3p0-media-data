@@ -28,7 +28,7 @@ final class BlockRegistrar implements Bootable
 	 */
 	public function boot(): void
 	{
-		add_action('init', [$this, 'register']);
+		add_action('init', $this->register(...));
 	}
 
 	/**

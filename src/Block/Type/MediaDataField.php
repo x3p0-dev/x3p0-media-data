@@ -29,16 +29,22 @@ final class MediaDataField implements Block
 	 * @todo Type hint with PHP 8.3+ requirement.
 	 */
 	protected const ALLOWED_HTML = [
-		'abbr'    => [ 'title' => true ],
-		'acronym' => [ 'title' => true ],
-		'code'    => true,
-		'em'      => true,
+		'abbr'    => [ 'class' => true, 'title' => true ],
+		'acronym' => [ 'class' => true, 'title' => true ],
+		'b'       => [ 'class' => true ],
+		'cite'    => [ 'class' => true ],
+		'code'    => [ 'class' => true ],
+		'del'     => [ 'class' => true ],
+		'em'      => [ 'class' => true ],
+		'i'       => [ 'class' => true ],
+		'ins'     => [ 'class' => true ],
+		'mark'    => [ 'class' => true ],
+		's'       => [ 'class' => true ],
 		'span'    => [ 'class' => true ],
-		'strong'  => true,
-		'sup'     => true,
-		'sub'     => true,
-		'i'       => true,
-		'b'       => true
+		'strong'  => [ 'class' => true ],
+		'sub'     => [ 'class' => true ],
+		'sup'     => [ 'class' => true ],
+		'u'       => [ 'class' => true ]
 	];
 
 	/**

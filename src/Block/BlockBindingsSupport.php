@@ -25,10 +25,10 @@ final class BlockBindingsSupport implements Bootable
 	{
 		add_filter(
 			'block_bindings_supported_attributes_x3p0/media-data',
-			[$this, 'mediaDataBindableAttributes']
+			$this->mediaDataBindableAttributes(...)
 		);
 
-		add_filter('render_block_context', [$this, 'ensureMediaIdContext'], 10, 3);
+		add_filter('render_block_context', $this->ensureMediaIdContext(...), 10, 3);
 	}
 
 	/**
