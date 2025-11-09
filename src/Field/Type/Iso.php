@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Field\Type;
 
-use X3P0\MediaData\Field\Field;
+use X3P0\MediaData\Field\AbstractField;
 
 /**
  * Displays the image ISO.
  */
-final class Iso extends Field
+final class Iso extends AbstractField
 {
 	/**
 	 * {@inheritDoc}

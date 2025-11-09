@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Field\Type;
 
-use X3P0\MediaData\Field\Field;
+use X3P0\MediaData\Field\AbstractField;
 
 /**
  * Displays the media title.
  */
-final class Title extends Field
+final class Title extends AbstractField
 {
 	/**
 	 * {@inheritDoc}

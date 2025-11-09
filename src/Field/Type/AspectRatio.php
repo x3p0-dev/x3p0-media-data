@@ -11,12 +11,12 @@
 
 namespace X3P0\MediaData\Field\Type;
 
-use X3P0\MediaData\Field\Field;
+use X3P0\MediaData\Field\AbstractField;
 
 /**
  * Displays the media aspect ratio (generally for image and video types).
  */
-final class AspectRatio extends Field
+final class AspectRatio extends AbstractField
 {
 	/**
 	 * {@inheritDoc}

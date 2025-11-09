@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Abstract field class.
+ * Field interface.
  *
  * @author    Justin Tadlock <justintadlock@gmail.com>
  * @copyright Copyright (c) 2008-2025, Justin Tadlock
@@ -15,43 +15,25 @@ namespace X3P0\MediaData\Field;
 
 use X3P0\MediaData\Media\Media;
 
-/**
- * Abstract field class, which serves as a helper between the contract and field
- * subclasses by defining reasonable defaults for some methods.
- */
-abstract class Field
+interface Field
 {
-	/**
-	 * Creates a new field instance with the given media object.
-	 */
-	final public function __construct(protected Media $media)
-	{}
-
 	/**
 	 * Checks if the field has a value for the current media.
 	 */
-	public function hasValue(): bool
-	{
-		return ! empty($this->getValue());
-	}
+	public function hasValue(): bool;
 
 	/**
 	 * Returns the raw, unformatted value of the field.
 	 */
-	abstract public function getValue(): mixed;
+	public function getValue(): mixed;
 
 	/**
 	 * Returns the escaped and formatted field value as a string.
 	 */
-	public function renderValue(): string
-	{
-		$value = $this->getValue();
-
-		return $value ? esc_html(strval($value)) : '';
-	}
+	public function renderValue(): string;
 
 	/**
 	 * Returns the field label.
 	 */
-	abstract public function getLabel(): string;
+	public function getLabel(): string;
 }

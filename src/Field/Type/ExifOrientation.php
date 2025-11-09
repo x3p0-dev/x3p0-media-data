@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Field\Type;
 
-use X3P0\MediaData\Field\Field;
+use X3P0\MediaData\Field\AbstractField;
 
 /**
  * Displays the image's EXIF orientation (values 1-8).
  */
-final class ExifOrientation extends Field
+final class ExifOrientation extends AbstractField
 {
 	/**
 	 * {@inheritDoc}

@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Field\Type;
 
-use X3P0\MediaData\Field\Field;
+use X3P0\MediaData\Field\AbstractField;
 
 /**
  * Displays the image focal length.
  */
-final class FocalLength extends Field
+final class FocalLength extends AbstractField
 {
 	/**
 	 * {@inheritDoc}
