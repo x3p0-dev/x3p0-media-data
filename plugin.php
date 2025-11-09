@@ -21,12 +21,10 @@ namespace X3P0\MediaData;
 # Prevent direct access.
 defined('ABSPATH') || exit;
 
-# Register autoloader for classes.
-require_once 'src/Autoload.php';
-Autoload::register();
-
-# Load functions files.
-require_once 'src/functions-helpers.php';
+# Load the autoloader.
+if (is_file(__DIR__ . '/vendor/autoload.php')) {
+	require_once __DIR__ . '/vendor/autoload.php';
+}
 
 # Bootstrap the plugin.
 add_action('plugins_loaded', fn() => plugin()->boot(), PHP_INT_MIN);

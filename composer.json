@@ -13,6 +13,17 @@
 		],
 		"zip": "composer archive --file=x3p0-media-data"
 	},
+	"autoload": {
+		"psr-4": {
+			"X3P0\\MediaData\\": "src/"
+		},
+		"files" : [
+			"src/functions-helpers.php"
+		],
+		"exclude-from-classmap": [
+			"vendor/"
+		]
+	},
 	"require": {
                 "php": ">=8.1"
 	},
@@ -27,7 +38,9 @@
 	},
 	"archive": {
 		"exclude": [
-			"/vendor"
+			"/vendor",
+			"!/vendor/autoload.php",
+			"!/vendor/composer/"
 		]
 	},
 	"authors": [
