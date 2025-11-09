@@ -13,20 +13,29 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData;
 
-use X3P0\MediaData\Core\{Application, Plugin, ServiceContainer};
+use X3P0\MediaData\Core\{Application, Container, Plugin, ServiceContainer};
 
 /**
- * Stores the single instance of the plugin in the static `$plugin` variable.
- * Devs can access any concrete implementation by passing in a reference to its
- * abstract identifier via `plugin()->container()->get($abstract)`.
+ * Returns the `Plugin` object, which is stored as a single instance in the
+ * static `$plugin` variable.
  */
 function plugin(): Application
 {
 	static $plugin;
 
 	if (! $plugin instanceof Plugin) {
-		do_action('x3p0/media-data/init', $plugin = new Plugin(new ServiceContainer()));
+		$plugin = new Plugin(new ServiceContainer());
 	}
 
 	return $plugin;
+}
+
+/**
+ * Helper function for quickly accessing the plugin service container. Devs can
+ * access any concrete implementation by passing in a reference to its abstract
+ * identifier via `container()->get($abstract)`.
+ */
+function container(): Container
+{
+	return plugin()->container();
 }
