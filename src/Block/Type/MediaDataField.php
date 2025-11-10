@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Media meta field block class.
+ * Media data field block class.
  *
  * @author    Justin Tadlock <justintadlock@gmail.com>
  * @copyright Copyright (c) 2025, Justin Tadlock
@@ -56,20 +56,17 @@ final class MediaDataField implements Block
 	/**
 	 * {@inheritdoc}
 	 */
-	public function render(array $attributes, string $content, WP_Block $block): string {
-		$attributes['field'] = $attributes['field'] ?? 'title';
+	public function render(array $attributes, string $content, WP_Block $block): string
+	{
+		$fieldType = $attributes['field'] ?? 'title';
 
-		$mediaId = $block->context['x3p0-media-data/mediaId'] ?? 0;
-
-		if (! $mediaId) {
+		// Get the media ID and bail early if there isn't one.
+		if (! $mediaId = $block->context['x3p0-media-data/mediaId'] ?? null) {
 			return '';
 		}
 
-		// Gets the field object.
-		$field = $this->fieldResolver->resolve($mediaId, $attributes['field']);
-
-		// If no field, bail early.
-		if (! $field) {
+		// Get the field and bail early if there isn't one.
+		if (! $field = $this->fieldResolver->resolve($mediaId, $fieldType)) {
 			return '';
 		}
 
@@ -90,7 +87,7 @@ final class MediaDataField implements Block
 		$attr = get_block_wrapper_attributes([
 			'class' => sanitize_html_class(sprintf(
 				'wp-block-x3p0-media-data-field--%s',
-				str_replace('_', '-', $attributes['field'])
+				str_replace('_', '-', $fieldType)
 			))
 		]);
 
