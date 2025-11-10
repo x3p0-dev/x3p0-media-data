@@ -21,11 +21,13 @@ use X3P0\MediaData\Block\Type\MediaDataField;
 
 /**
  * @global array    $attributes Block attributes.
+ * @global string   $content    The block content.
  * @global WP_Block $block      Block instance.
  */
 // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
-echo container()->get(MediaDataField::class, [
-	'attributes' => $attributes,
-	'block'      => $block
-])->render();
+echo container()->get(MediaDataField::class)->render(
+	attributes: $attributes,
+	content:    $content,
+	block:      $block
+);
 // phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped

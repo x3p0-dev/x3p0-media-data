@@ -29,7 +29,7 @@ final class BlockServiceProvider extends ServiceProvider implements Bootable
 	{
 		$this->container->singleton(BlockRegistrar::class);
 		$this->container->singleton(BlockBindingsSupport::class);
-		$this->container->transient(MediaDataField::class);
+		$this->container->singleton(MediaDataField::class);
 	}
 
 	/**

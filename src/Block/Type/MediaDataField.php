@@ -48,39 +48,25 @@ final class MediaDataField implements Block
 	];
 
 	/**
-	 * The media attachment ID.
+	 * Sets up the initial object state.
 	 */
-	protected int $mediaId = 0;
-
-	/**
-	 * Automatically ensures that block attributes exist or fall back to
-	 * their defaults. Also gets the media ID from the block context.
-	 */
-	public function __construct(
-		protected FieldResolver $fieldResolver,
-		protected array         $attributes,
-		protected WP_Block      $block
-	) {
-		$this->attributes['field'] = $this->attributes['field'] ?? 'title';
-		$this->attributes['label'] = $this->attributes['label'] ?? '';
-
-		$this->mediaId = $this->block->context['x3p0-media-data/mediaId'] ?? 0;
-	}
+	public function __construct(protected readonly FieldResolver $fieldResolver)
+	{}
 
 	/**
 	 * {@inheritdoc}
 	 */
-	public function render(): string
-	{
-		if (! $this->mediaId) {
+	public function render(array $attributes, string $content, WP_Block $block): string {
+		$attributes['field'] = $attributes['field'] ?? 'title';
+
+		$mediaId = $block->context['x3p0-media-data/mediaId'] ?? 0;
+
+		if (! $mediaId) {
 			return '';
 		}
 
 		// Gets the field object.
-		$field = $this->fieldResolver->resolve(
-			$this->mediaId,
-			$this->attributes['field']
-		);
+		$field = $this->fieldResolver->resolve($mediaId, $attributes['field']);
 
 		// If no field, bail early.
 		if (! $field) {
@@ -88,7 +74,7 @@ final class MediaDataField implements Block
 		}
 
 		// Get the user label if there is one. Fall back to field label.
-		$label = $this->attributes['label'] ?: $field->getLabel();
+		$label = $attributes['label'] ?: $field->getLabel();
 
 		// Create the label HTML.
 		$labelHtml = '<div class="wp-block-x3p0-media-data-field__label">';
@@ -104,7 +90,7 @@ final class MediaDataField implements Block
 		$attr = get_block_wrapper_attributes([
 			'class' => sanitize_html_class(sprintf(
 				'wp-block-x3p0-media-data-field--%s',
-				str_replace('_', '-', $this->attributes['field'])
+				str_replace('_', '-', $attributes['field'])
 			))
 		]);
 
