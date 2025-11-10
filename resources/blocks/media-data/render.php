@@ -1,0 +1,33 @@
+<?php
+
+/**
+ * Block render.
+ *
+ * @author    Justin Tadlock <justintadlock@gmail.com>
+ * @copyright Copyright (c) 2025, Justin Tadlock
+ * @license   https://www.gnu.org/licenses/gpl-3.0.html GPL-3.0-or-later
+ * @link      https://github.com/x3p0-dev/x3p0-media-data
+ */
+
+declare(strict_types=1);
+
+namespace X3P0\MediaData;
+
+# Prevent direct access.
+defined('ABSPATH') || exit;
+
+use WP_Block;
+use X3P0\MediaData\Block\Type\MediaData;
+
+/**
+ * @global array    $attributes Block attributes.
+ * @global string   $content    The block content.
+ * @global WP_Block $block      Block instance.
+ */
+// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
+echo container()->get(MediaData::class)->render(
+	attributes: $attributes,
+	content:    $content,
+	block:      $block
+);
+// phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
