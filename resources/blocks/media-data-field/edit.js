@@ -7,17 +7,19 @@
  * @link      https://github.com/x3p0-dev/x3p0-media-data
  */
 
-import BlockToolbar from './components/BlockToolbar';
-import BlockContent from './components/BlockContent';
+import BlockToolbar   from './components/BlockToolbar';
+import BlockInspector from './components/BlockInspector';
+import BlockContent   from './components/BlockContent';
 
 /**
- * Renders the block edit component.
+ * Returns the block edit component.
  * @param props
  * @returns {JSX.Element}
  */
 export default (props) => (
 	<>
 		<BlockToolbar {...props}/>
+		<BlockInspector {...props}/>
 		<BlockContent {...props}/>
 	</>
 );

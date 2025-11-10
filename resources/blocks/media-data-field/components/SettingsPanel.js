@@ -1,17 +1,28 @@
+/**
+ * Settings panel.
+ *
+ * @author    Justin Tadlock <justintadlock@gmail.com>
+ * @copyright Copyright (c) 2025, Justin Tadlock
+ * @license   https://www.gnu.org/licenses/gpl-3.0.html GPL-3.0-or-later
+ * @link      https://github.com/x3p0-dev/x3p0-media-data
+ */
 
-// WordPress dependencies.
+import { useMediaFieldOptions } from '../hooks';
+
 import { useInstanceId } from '@wordpress/compose';
 import { __ } from '@wordpress/i18n';
-
 import {
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
 	SelectControl,
 	TextControl
 } from '@wordpress/components';
-import {useMediaFieldOptions} from "../hooks";
 
-// Exports the post taxonomy panel.
+/**
+ * Renders the block settings panel.
+ * @param props
+ * @returns {JSX.Element}
+ */
 const SettingsPanel = ({
 	attributes: {
 		field,
@@ -19,12 +30,8 @@ const SettingsPanel = ({
 	},
 	setAttributes
 }) => {
-	const panelId = useInstanceId(SettingsPanel);
-
-	// Get display label
+	const panelId      = useInstanceId(SettingsPanel);
 	const fieldOptions = useMediaFieldOptions();
-	const currentField = fieldOptions.find((option) => option.value === field);
-	const displayLabel = currentField?.label || __('Data', 'x3p0-media-data');
 
 	return (
 		<ToolsPanel
@@ -36,12 +43,12 @@ const SettingsPanel = ({
 			panelId={panelId}
 		>
 			<ToolsPanelItem
-				key="x3p0-media-data-panel-label"
+				key="x3p0-media-data-panel-field"
 				label={__('Field', 'x3p0-media-data')}
 				hasValue={() => field !== 'title'}
 				onDeselect={() => setAttributes({ field: 'title' })}
 				panelId={panelId}
-				isShownByDefault={true}
+				isShownByDefault
 			>
 				<SelectControl
 					label={__('Field', 'x3p0-media-data')}
@@ -53,20 +60,23 @@ const SettingsPanel = ({
 				/>
 			</ToolsPanelItem>
 			<ToolsPanelItem
-				key="x3p0-media-data-panel-field"
-				label={__('Field', 'x3p0-media-data')}
+				key="x3p0-media-data-panel-label"
+				label={__('Label', 'x3p0-media-data')}
 				hasValue={() => field !== 'title'}
 				onDeselect={() => setAttributes({ field: 'title' })}
 				panelId={panelId}
-				isShownByDefault={true}
+				isShownByDefault
 			>
 				<TextControl
-					__next40pxDefaultSize
-					__nextHasNoMarginBottom
 					label={__('Label', 'x3p0-media-data')}
-					placeholder={displayLabel}
+					placeholder={
+						fieldOptions.find((option) => option.value === field)?.label
+						|| __('Data', 'x3p0-media-data')
+					}
 					value={label}
 					onChange={(value) => setAttributes({ label: value })}
+					__next40pxDefaultSize
+					__nextHasNoMarginBottom
 				/>
 			</ToolsPanelItem>
 		</ToolsPanel>

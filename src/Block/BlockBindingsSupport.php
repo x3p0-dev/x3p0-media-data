@@ -58,7 +58,7 @@ final class BlockBindingsSupport implements Bootable
 	): array {
 		if (
 			$block['blockName'] === 'x3p0/media-data-field'
-			&& 0 === $context['x3p0-media-data/mediaId']
+			&& 0 === ($context['x3p0-media-data/mediaId'] ?? null)
 			&& $parent instanceof WP_Block
 			&& $parent->name === 'x3p0/media-data'
 			&& isset($parent->attributes['mediaId'])

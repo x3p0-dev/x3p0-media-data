@@ -1,5 +1,5 @@
 /**
- * Breadcrumbs toolbar (block controls) component.
+ * Media data field toolbar (block controls) component.
  *
  * @author    Justin Tadlock <justintadlock@gmail.com>
  * @copyright Copyright (c) 2025, Justin Tadlock
@@ -8,13 +8,17 @@
  */
 
 import MediaReplaceControl from './MediaReplaceControl';
-
 import { BlockControls } from '@wordpress/block-editor';
 
-const MediaDataToolbar = (props) => !! props.attributes.mediaId && (
+/**
+ * Returns the block toolbar controls.
+ * @param props
+ * @returns {JSX.Element}
+ */
+const BlockToolbar = (props) => (
 	<BlockControls group="other">
 		<MediaReplaceControl {...props}/>
 	</BlockControls>
 );
 
-export default MediaDataToolbar;
+export default BlockToolbar;

@@ -1,7 +1,20 @@
-import { __ } from '@wordpress/i18n';
-import { icons } from "./icons";
+/**
+ * Block variations.
+ *
+ * @author    Justin Tadlock <justintadlock@gmail.com>
+ * @copyright Copyright (c) 2025, Justin Tadlock
+ * @license   https://www.gnu.org/licenses/gpl-3.0.html GPL-3.0-or-later
+ * @link      https://github.com/x3p0-dev/x3p0-media-data
+ */
 
-const variations = [
+import { VARIATION_ICONS } from './utils';
+import { __ } from '@wordpress/i18n';
+
+/**
+ * Stores an array of variations to register.
+ * @type array
+ */
+const VARIATIONS = [
 	{
 		name: 'album',
 		title: __('Album', 'x3p0-media-data'),
@@ -31,7 +44,7 @@ const variations = [
 		name: 'created_timestamp',
 		title: __('Created', 'x3p0-media-data'),
 		description: __('Displays when the media was created.', 'x3p0-media-data'),
-		icon: icons.year
+		icon: VARIATION_ICONS.year
 	},
 	{
 		name: 'dimensions',
@@ -106,8 +119,12 @@ const variations = [
 	}
 ];
 
-export default variations.map(variation => ({
-	icon: icons?.[variation.name] || null,
+/**
+ * Exports the block variations.
+ * @return {array}
+ */
+export default VARIATIONS.map(variation => ({
+	icon: VARIATION_ICONS?.[variation.name] || null,
 	attributes: { field: variation.name },
 	scope: ['inserter'],
 	isActive: ['field'],

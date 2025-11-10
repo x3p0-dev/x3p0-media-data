@@ -1,4 +1,20 @@
-export const icons = {
+/**
+ * Icon variations.
+ *
+ * Provides functions for extracting and formatting media metadata from
+ * WordPress media objects.
+ *
+ * @author    Justin Tadlock <justintadlock@gmail.com>
+ * @copyright Copyright (c) 2025, Justin Tadlock
+ * @license   https://www.gnu.org/licenses/gpl-3.0.html GPL-3.0-or-later
+ * @link      https://github.com/x3p0-dev/x3p0-media-data
+ */
+
+/**
+ * Block variation icons.
+ * @type {object}
+ */
+export const VARIATION_ICONS = {
 	// https://fonts.google.com/icons?icon.query=music&icon.size=24&icon.color=%235f6368&icon.set=Material+Symbols&selected=Material+Symbols+Outlined:library_music:FILL@0;wght@400;GRAD@0;opsz@24
 	album: (
 		<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M500-360q42 0 71-29t29-71v-220h120v-80H560v220q-13-10-28-15t-32-5q-42 0-71 29t-29 71q0 42 29 71t71 29ZM320-240q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320Zm0-80h480v-480H320v480ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z"/></svg>
