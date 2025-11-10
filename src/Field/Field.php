@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Field;
 
-use X3P0\MediaData\Media\Media;
-
 interface Field
 {
 	/**

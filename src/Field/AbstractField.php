@@ -24,7 +24,7 @@ abstract class AbstractField implements Field
 	/**
 	 * Creates a new field instance with the given media object.
 	 */
-	final public function __construct(protected Media $media)
+	final public function __construct(protected readonly Media $media)
 	{}
 
 	/**

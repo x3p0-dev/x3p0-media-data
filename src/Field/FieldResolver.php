@@ -34,7 +34,7 @@ final class FieldResolver
 	 * Returns a media field object or `null`. This method will also return
 	 * `null` if a field exists but simply doesn't have data to show.
 	 */
-	public function resolve(int $mediaId, string $fieldKey): ?Field
+	public function resolve(int $mediaId, string $key): ?Field
 	{
 		// Get media data from repository
 		if (! $media = $this->mediaRepository->find($mediaId)) {
@@ -42,7 +42,7 @@ final class FieldResolver
 		}
 
 		// Create field instance.
-		$field = $this->fieldFactory->make($fieldKey, $media);
+		$field = $this->fieldFactory->make($key, $media);
 
 		// Return the field if it exists and has a value.
 		return $field && $field->hasValue() ? $field : null;
