@@ -38,7 +38,7 @@ final class BlockServiceProvider extends ServiceProvider implements Bootable
 	public function boot(): void
 	{
 		$this->container->get(BlockRegistrar::class, [
-			'path' => self::BLOCKS_PATH,
+			'path' => self::BLOCKS_PATH
 		])->boot();
 
 		$this->container->get(BlockBindingsSupport::class)->boot();
