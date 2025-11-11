@@ -22,11 +22,12 @@ namespace X3P0\MediaData\Media;
 final class MediaRepository
 {
 	/**
-	 * Cache of Media instances indexed by media ID.
+	 * Cache of Media instances indexed by media ID. By default, the cache
+	 * includes the ID of `0` as `null`, which will bypass any lookups.
 	 *
 	 * @var array<int, Media|null>
 	 */
-	private array $cache = [];
+	private array $cache = [0 => null];
 
 	/**
 	 * Finds a `Media` instance by media ID. Creates and caches if not

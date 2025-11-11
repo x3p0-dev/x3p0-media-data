@@ -80,10 +80,6 @@ final class Plugin implements Application
 			$provider = new $provider($this->container);
 		}
 
-		if (! $provider instanceof ServiceProvider) {
-			return;
-		}
-
 		$provider->register();
 		$this->providers[] = $provider;
 	}

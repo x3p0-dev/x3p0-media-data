@@ -59,13 +59,11 @@ final class MediaDataField implements Block
 	public function render(array $attributes, string $content, WP_Block $block): string
 	{
 		$fieldType = $attributes['field'] ?? 'title';
+		$mediaId   = $block->context['x3p0-media-data/mediaId'] ?? 0;
 
-		// Get the media ID and bail early if there isn't one.
-		if (! $mediaId = $block->context['x3p0-media-data/mediaId'] ?? null) {
-			return '';
-		}
-
-		// Get the field and bail early if there isn't one.
+		// Get the field and bail early if there isn't one. Note that
+		// even if `mediaId` equals `0`, we should still pass it along
+		// because it'll be cached as `null`.
 		if (! $field = $this->fieldResolver->resolve($mediaId, $fieldType)) {
 			return '';
 		}
@@ -74,12 +72,12 @@ final class MediaDataField implements Block
 		$label = $attributes['label'] ?: $field->getLabel();
 
 		// Create the label HTML.
-		$labelHtml = '<div class="wp-block-x3p0-media-data-field__label">';
+		$labelHtml  = '<div class="wp-block-x3p0-media-data-field__label">';
 		$labelHtml .= wp_kses($label, self::ALLOWED_HTML);
 		$labelHtml .= '</div>';
 
 		// Create the content HTML.
-		$contentHtml = '<div class="wp-block-x3p0-media-data-field__value">';
+		$contentHtml  = '<div class="wp-block-x3p0-media-data-field__value">';
 		$contentHtml .= $field->renderValue();
 		$contentHtml .= '</div>';
 

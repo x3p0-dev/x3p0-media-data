@@ -232,7 +232,7 @@ final class ServiceContainer implements Container
 		return $param->isDefaultValueAvailable()
 			? $param->getDefaultValue()
 			: throw new Exception(esc_html(sprintf(
-			// Translators: %s is a parameter name.
+				// Translators: %s is a parameter name.
 				__('Cannot resolve parameter %s.', 'x3p0-media-meta'),
 				$param->getName()
 			)));

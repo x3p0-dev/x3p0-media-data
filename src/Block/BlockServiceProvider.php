@@ -11,7 +11,6 @@
 
 namespace X3P0\MediaData\Block;
 
-use X3P0\MediaData\Block\Type\MediaData;
 use X3P0\MediaData\Block\Type\MediaDataField;
 use X3P0\MediaData\Contracts\Bootable;
 use X3P0\MediaData\Core\ServiceProvider;
@@ -19,7 +18,7 @@ use X3P0\MediaData\Core\ServiceProvider;
 final class BlockServiceProvider extends ServiceProvider implements Bootable
 {
 	/**
-	 * Stores the path to the plugins blocks directory.
+	 * Stores the path to the plugin's blocks directory.
 	 */
 	private const BLOCKS_PATH = __DIR__ . '/../../public/blocks';
 
@@ -30,7 +29,6 @@ final class BlockServiceProvider extends ServiceProvider implements Bootable
 	{
 		$this->container->singleton(BlockRegistrar::class);
 		$this->container->singleton(BlockBindingsSupport::class);
-		$this->container->singleton(MediaData::class);
 		$this->container->singleton(MediaDataField::class);
 	}
 

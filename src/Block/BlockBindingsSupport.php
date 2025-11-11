@@ -16,6 +16,10 @@ namespace X3P0\MediaData\Block;
 use WP_Block;
 use X3P0\MediaData\Contracts\Bootable;
 
+/**
+ * Adds filters related to block bindings. The primary job of this class is to
+ * register the bindable attributes for the plugin's blocks.
+ */
 final class BlockBindingsSupport implements Bootable
 {
 	/**
