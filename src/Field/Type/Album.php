@@ -35,4 +35,38 @@ final class Album extends AbstractField
 	{
 		return __('Album', 'x3p0-media-data');
 	}
+
+	protected function renderLabel(string $label = ''): string
+	{
+		return sprintf(
+			'<div class="%s" property="name">%s</div>',
+			$this->scopeClass('label'),
+			$label ?: $this->getLabel()
+		);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function renderValue(): string
+	{
+		return sprintf(
+			'<div class="%s" property="value">%s</div>',
+			$this->scopeClass('value'),
+			wp_strip_all_tags($this->getValue())
+		);
+	}
+
+	public function render(string $attrs, string $label = ''): string {
+		if (! $this->hasValue()) {
+			return '';
+		}
+
+		return sprintf(
+			'<div %s property="exifData" typeof="PropertyValue">%s %s</div>',
+			$attrs,
+			$this->renderLabel($label),
+			$this->renderValue()
+		);
+	}
 }

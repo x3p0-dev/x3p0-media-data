@@ -31,6 +31,26 @@ final class Aperture extends AbstractField
 	/**
 	 * {@inheritDoc}
 	 */
+	public function getLabel(): string
+	{
+		return __('Aperture', 'x3p0-media-data');
+	}
+
+	protected function renderLabel(string $label = ''): string
+	{
+		$label = $label ?: $this->getLabel();
+
+		return sprintf(
+			'<div class="%s"%s>%s</div>',
+			$this->scopeClass('label'),
+			'Aperture' === $label ? '  property="name"' : '',
+			$label
+		);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function renderValue(): string
 	{
 		if (! $aperture = $this->getValue()) {
@@ -66,17 +86,24 @@ final class Aperture extends AbstractField
 		// places (e.g., 2.8 instead of 2.80)
 		$aperture = rtrim(rtrim(number_format($aperture, 2, '.', ''), '0'), '.');
 
+
 		return sprintf(
-			'f/%s',
-			esc_html($aperture)
+			'<div class="%s" property="value">%s</div>',
+			$this->scopeClass('value'),
+			sprintf('f/%s', esc_html($aperture))
 		);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getLabel(): string
-	{
-		return __('Aperture', 'x3p0-media-data');
+	public function render(string $attrs, string $label = ''): string {
+		if (! $this->hasValue()) {
+			return '';
+		}
+
+		return sprintf(
+			'<div %s property="exifData" typeof="PropertyValue">%s %s</div>',
+			$attrs,
+			$this->renderLabel($label),
+			$this->renderValue()
+		);
 	}
 }

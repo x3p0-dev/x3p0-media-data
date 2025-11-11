@@ -21,6 +21,8 @@ use X3P0\MediaData\Media\Media;
  */
 abstract class AbstractField implements Field
 {
+	protected const NAMESPACE = 'wp-block-x3p0-media-data-field';
+
 	/**
 	 * Creates a new field instance with the given media object.
 	 */
@@ -43,5 +45,27 @@ abstract class AbstractField implements Field
 		$value = $this->getValue();
 
 		return $value ? esc_html(strval($value)) : '';
+	}
+
+	protected function renderLabel(string $label = ''): string
+	{
+		return sprintf(
+			'<div class="%s">%s</div>',
+			$this->scopeClass('label'),
+			$label ?: $this->getLabel()
+		);
+	}
+
+	/**
+	 * Helper method for prefixing classes with the namespace.
+	 */
+	protected function scopeClass(string|array $class): string
+	{
+		$namespace = self::NAMESPACE;
+
+		return implode(' ', array_map(
+			fn($className) => "{$namespace}__{$className}",
+			(array) $class
+		));
 	}
 }

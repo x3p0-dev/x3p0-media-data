@@ -35,14 +35,30 @@ final class ExifOrientation extends AbstractField
 	/**
 	 * {@inheritDoc}
 	 */
+	public function getLabel(): string
+	{
+		return __('Orientation', 'x3p0-media-data');
+	}
+
+	protected function renderLabel(string $label = ''): string
+	{
+		return sprintf(
+			'<div class="%s" property="name">%s</div>',
+			$this->scopeClass('label'),
+			$label ?: $this->getLabel()
+		);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function renderValue(): string
 	{
 		if (! $value = $this->getValue()) {
 			return '';
 		}
 
-		return match ($value) {
-			1 => __('Normal', 'x3p0-media-data'),
+		$orientation = match ($value) {
 			2 => __('Mirrored Horizontally', 'x3p0-media-data'),
 			3 => __('Rotated 180&deg;', 'x3p0-media-data'),
 			4 => __('Mirrored Vertically', 'x3p0-media-data'),
@@ -50,15 +66,26 @@ final class ExifOrientation extends AbstractField
 			6 => __('Rotated 90&deg;', 'x3p0-media-data'),
 			7 => __('Rotated 270&deg;, Mirrored Horizontally', 'x3p0-media-data'),
 			8 => __('Rotated 270&deg;', 'x3p0-media-data'),
-			default => ''
+			default => __('Normal', 'x3p0-media-data') // 1: orientation
 		};
+
+		return sprintf(
+			'<div class="%s" property="value">%s</div>',
+			$this->scopeClass('value'),
+			esc_html($orientation)
+		);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getLabel(): string
-	{
-		return __('Orientation', 'x3p0-media-data');
+	public function render(string $attrs, string $label = ''): string {
+		if (! $this->hasValue()) {
+			return '';
+		}
+
+		return sprintf(
+			'<div %s property="exifData" typeof="PropertyValue">%s %s</div>',
+			$attrs,
+			$this->renderLabel($label),
+			$this->renderValue()
+		);
 	}
 }

@@ -31,23 +31,41 @@ final class CreatedTimestamp extends AbstractField
 	/**
 	 * {@inheritDoc}
 	 */
+	public function getLabel(): string
+	{
+		return __('Created', 'x3p0-media-data');
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function renderValue(): string
 	{
 		if (! $timestamp = $this->getValue()) {
 			return '';
 		}
 
-		return esc_html(wp_date(
-			get_option('date_format'),
-			intval($timestamp)
-		));
+		return sprintf(
+			'<time class="%s" datetime="%s" property="dateCreated">%s</time>',
+			$this->scopeClass('value'),
+			esc_attr(wp_date('c', intval($timestamp))),
+			esc_html(wp_date(
+				get_option('date_format'),
+				intval($timestamp)
+			))
+		);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getLabel(): string
-	{
-		return __('Created', 'x3p0-media-data');
+	public function render(string $attrs, string $label = ''): string {
+		if (! $this->hasValue()) {
+			return '';
+		}
+
+		return sprintf(
+			'<div %s>%s %s</div>',
+			$attrs,
+			$this->renderLabel($label),
+			$this->renderValue()
+		);
 	}
 }

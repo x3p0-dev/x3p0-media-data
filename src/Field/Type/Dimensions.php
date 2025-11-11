@@ -43,6 +43,14 @@ final class Dimensions extends AbstractField
 	/**
 	 * {@inheritDoc}
 	 */
+	public function getLabel(): string
+	{
+		return __('Dimensions', 'x3p0-media-data');
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function renderValue(): string
 	{
 		['width' => $width, 'height' => $height] = $this->getValue();
@@ -51,19 +59,36 @@ final class Dimensions extends AbstractField
 			return '';
 		}
 
-		return esc_html(sprintf(
-			// Translators: Media dimensions - 1 is width and 2 is height.
-			__('%1$s &#215; %2$s', 'x3p0-media-data'),
-			number_format_i18n($width),
-			number_format_i18n($height)
-		));
+		return sprintf(
+			'<div class="%s">%s</div>',
+			$this->scopeClass('value'),
+			esc_html(sprintf(
+				// Translators: Media dimensions - 1 is width and 2 is height.
+				__('%1$s &#215; %2$s', 'x3p0-media-data'),
+				number_format_i18n($width),
+				number_format_i18n($height)
+			))
+		);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getLabel(): string
+	public function render(string $attrs, string $label = ''): string
 	{
-		return __('Dimensions', 'x3p0-media-data');
+		['width' => $width, 'height' => $height] = $this->getValue();
+
+		if (! $width || ! $height) {
+			return '';
+		}
+
+		$widthMeta = sprintf('<meta property="width" content="%s"/>', esc_attr($width));
+		$heightMeta = sprintf('<meta property="height" content="%s"/>', esc_attr($height));
+
+		return sprintf(
+			'<div %s>%s%s%s %s</div>',
+			$attrs,
+			$widthMeta,
+			$heightMeta,
+			$this->renderLabel($label),
+			$this->renderValue()
+		);
 	}
 }

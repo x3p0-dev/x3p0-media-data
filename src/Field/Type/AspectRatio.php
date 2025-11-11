@@ -46,24 +46,41 @@ final class AspectRatio extends AbstractField
 	/**
 	 * {@inheritDoc}
 	 */
+	public function getLabel(): string
+	{
+		return __('Aspect Ratio', 'x3p0-media-data');
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function renderValue(): string
 	{
 		if (! $ratio = $this->getValue()) {
 			return '';
 		}
 
-		return esc_html(sprintf(
-			'%d:%d',
-			$ratio['width'],
-			$ratio['height']
-		));
+		return sprintf(
+			'<div class="%s">%s</div>',
+			$this->scopeClass('value'),
+			esc_html(sprintf(
+				'%d:%d',
+				esc_html(number_format_i18n($ratio['width'])),
+				esc_html(number_format_i18n($ratio['height']))
+			))
+		);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getLabel(): string
-	{
-		return __('Aspect Ratio', 'x3p0-media-data');
+	public function render(string $attrs, string $label = ''): string {
+		if (! $this->hasValue()) {
+			return '';
+		}
+
+		return sprintf(
+			'<div %s>%s %s</div>',
+			$attrs,
+			$this->renderLabel($label),
+			$this->renderValue()
+		);
 	}
 }

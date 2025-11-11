@@ -44,6 +44,14 @@ final class FileSize extends AbstractField
 	/**
 	 * {@inheritDoc}
 	 */
+	public function getLabel(): string
+	{
+		return __('File Size', 'x3p0-media-data');
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function renderValue(): string
 	{
 		if (! $filesize = $this->getValue()) {
@@ -53,14 +61,23 @@ final class FileSize extends AbstractField
 		// Note that `size_format()` can return a string or false.
 		$size = size_format(absint($filesize), 2);
 
-		return $size ? esc_html($size) : '';
+		return sprintf(
+			'<div class="%s" property="name">%s</div>',
+			$this->scopeClass('value'),
+			$size ? esc_html($size) : ''
+		);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getLabel(): string
-	{
-		return __('File Size', 'x3p0-media-data');
+	public function render(string $attrs, string $label = ''): string {
+		if (! $this->hasValue()) {
+			return '';
+		}
+
+		return sprintf(
+			'<div %s>%s %s</div>',
+			$attrs,
+			$this->renderLabel($label),
+			$this->renderValue()
+		);
 	}
 }

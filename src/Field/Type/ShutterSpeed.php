@@ -31,6 +31,23 @@ final class ShutterSpeed extends AbstractField
 	/**
 	 * {@inheritDoc}
 	 */
+	public function getLabel(): string
+	{
+		return __('Shutter Speed', 'x3p0-media-data');
+	}
+
+	protected function renderLabel(string $label = ''): string
+	{
+		return sprintf(
+			'<div class="%s" property="name">%s</div>',
+			$this->scopeClass('label'),
+			$label ?: $this->getLabel()
+		);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function renderValue(): string
 	{
 		if (! $shutter = $this->getValue()) {
@@ -55,17 +72,26 @@ final class ShutterSpeed extends AbstractField
 		}
 
 		return sprintf(
-			// Translators: %s is the shutter speed of a camera.
-			esc_html__('%s sec', 'x3p0-media-data'),
-			$shutter
+			'<div class="%s" property="value">%s</div>',
+			$this->scopeClass('value'),
+			sprintf(
+				// Translators: %s is the shutter speed of a camera.
+				esc_html__('%s sec', 'x3p0-media-data'),
+				$shutter
+			)
 		);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getLabel(): string
-	{
-		return __('Shutter Speed', 'x3p0-media-data');
+	public function render(string $attrs, string $label = ''): string {
+		if (! $this->hasValue()) {
+			return '';
+		}
+
+		return sprintf(
+			'<div %s property="exifData" typeof="PropertyValue">%s %s</div>',
+			$attrs,
+			$this->renderLabel($label),
+			$this->renderValue()
+		);
 	}
 }

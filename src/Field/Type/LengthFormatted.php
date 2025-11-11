@@ -35,4 +35,63 @@ final class LengthFormatted extends AbstractField
 	{
 		return __('Duration', 'x3p0-media-data');
 	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function renderValue(): string
+	{
+		if (! $duration = $this->getValue()) {
+			return '';
+		}
+
+		if ($seconds = $this->media->get('length')) {
+			return sprintf(
+				'<time class="%s" datetime="%s" property="duration">%s</time>',
+				$this->scopeClass('value'),
+				esc_attr($this->secondsToIso8601($seconds)),
+				esc_html($duration)
+			);
+		}
+
+		return sprintf(
+			'<div class="%s">%s</div>',
+			$this->scopeClass('value'),
+			esc_html($duration)
+		);
+	}
+
+	public function render(string $attrs, string $label = ''): string {
+		if (! $this->hasValue()) {
+			return '';
+		}
+
+		return sprintf(
+			'<div %s>%s %s</div>',
+			$attrs,
+			$this->renderLabel($label),
+			$this->renderValue()
+		);
+	}
+
+	private function secondsToIso8601(int $seconds): string
+	{
+		$hours = floor($seconds / 3600);
+		$minutes = floor(($seconds % 3600) / 60);
+		$secs = $seconds % 60;
+
+		$duration = 'PT';
+
+		if ($hours > 0) {
+			$duration .= $hours . 'H';
+		}
+		if ($minutes > 0) {
+			$duration .= $minutes . 'M';
+		}
+		if ($secs > 0 || $seconds === 0) {
+			$duration .= $secs . 'S';
+		}
+
+		return $duration;
+	}
 }

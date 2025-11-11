@@ -11,6 +11,7 @@
 
 namespace X3P0\MediaData\Block;
 
+use X3P0\MediaData\Block\Type\MediaData;
 use X3P0\MediaData\Block\Type\MediaDataField;
 use X3P0\MediaData\Contracts\Bootable;
 use X3P0\MediaData\Core\ServiceProvider;
@@ -29,6 +30,7 @@ final class BlockServiceProvider extends ServiceProvider implements Bootable
 	{
 		$this->container->singleton(BlockRegistrar::class);
 		$this->container->singleton(BlockBindingsSupport::class);
+		$this->container->singleton(MediaData::class);
 		$this->container->singleton(MediaDataField::class);
 	}
 

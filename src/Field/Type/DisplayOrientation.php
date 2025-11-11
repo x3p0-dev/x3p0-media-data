@@ -40,24 +40,52 @@ final class DisplayOrientation extends AbstractField
 	/**
 	 * {@inheritDoc}
 	 */
+	public function getLabel(): string
+	{
+		return __('Orientation', 'x3p0-media-data');
+	}
+
+	protected function renderLabel(string $label = ''): string
+	{
+		return sprintf(
+			'<div class="%s">%s</div>',
+			$this->scopeClass('label'),
+			$label ?: $this->getLabel()
+		);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function renderValue(): string
 	{
 		if (! $value = $this->getValue()) {
 			return '';
 		}
 
-		return match ($value) {
+		$orientation = match ($value) {
 			'landscape' => __('Landscape', 'x3p0-media-data'),
 			'portrait'  => __('Portrait', 'x3p0-media-data'),
 			default     => __('Square', 'x3p0-media-data')
 		};
+
+		return sprintf(
+			'<div class="%s">%s</div>',
+			$this->scopeClass('value'),
+			esc_html($orientation)
+		);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getLabel(): string
-	{
-		return __('Orientation', 'x3p0-media-data');
+	public function render(string $attrs, string $label = ''): string {
+		if (! $this->hasValue()) {
+			return '';
+		}
+
+		return sprintf(
+			'<div %s>%s %s</div>',
+			$attrs,
+			$this->renderLabel($label),
+			$this->renderValue()
+		);
 	}
 }

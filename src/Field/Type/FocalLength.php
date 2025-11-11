@@ -31,6 +31,23 @@ final class FocalLength extends AbstractField
 	/**
 	 * {@inheritDoc}
 	 */
+	public function getLabel(): string
+	{
+		return __('Focal Length', 'x3p0-media-data');
+	}
+
+	protected function renderLabel(string $label = ''): string
+	{
+		return sprintf(
+			'<div class="%s" property="name">%s</div>',
+			$this->scopeClass('label'),
+			$label ?: $this->getLabel()
+		);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	public function renderValue(): string
 	{
 		if (! $focal = $this->getValue()) {
@@ -38,17 +55,26 @@ final class FocalLength extends AbstractField
 		}
 
 		return sprintf(
-			// Translators: %s is the focal length of a camera.
-			esc_html__('%s mm', 'x3p0-media-data'),
-			floatval($focal)
+			'<div class="%s" property="value">%s</div>',
+			$this->scopeClass('value'),
+			sprintf(
+				// Translators: %s is the focal length of a camera.
+				esc_html__('%s mm', 'x3p0-media-data'),
+				floatval($focal)
+			)
 		);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public function getLabel(): string
-	{
-		return __('Focal Length', 'x3p0-media-data');
+	public function render(string $attrs, string $label = ''): string {
+		if (! $this->hasValue()) {
+			return '';
+		}
+
+		return sprintf(
+			'<div %s property="exifData" typeof="PropertyValue">%s %s</div>',
+			$attrs,
+			$this->renderLabel($label),
+			$this->renderValue()
+		);
 	}
 }

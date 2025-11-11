@@ -89,6 +89,11 @@ final class MediaDataField implements Block
 			))
 		]);
 
+		if (method_exists($field, 'render')) {
+			return $field->render($attr, $attributes['label'] ?: '');
+		}
+
+
 		// Return the formatted block.
 		return "<div {$attr}>{$labelHtml} {$contentHtml}</div>";
 	}

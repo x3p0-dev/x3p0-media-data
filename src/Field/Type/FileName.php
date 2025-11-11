@@ -37,4 +37,29 @@ final class FileName extends AbstractField
 	{
 		return __('File Name', 'x3p0-media-data');
 	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public function renderValue(): string
+	{
+		return sprintf(
+			'<div class="%s">%s</div>',
+			$this->scopeClass('value'),
+			wp_strip_all_tags($this->getValue())
+		);
+	}
+
+	public function render(string $attrs, string $label = ''): string {
+		if (! $this->hasValue()) {
+			return '';
+		}
+
+		return sprintf(
+			'<div %s>%s %s</div>',
+			$attrs,
+			$this->renderLabel($label),
+			$this->renderValue()
+		);
+	}
 }
