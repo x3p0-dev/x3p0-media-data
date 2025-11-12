@@ -17,46 +17,6 @@ return array(
 			'exif'
 		),
 		'textdomain' => 'x3p0-media-data',
-		'supports' => array(
-			'html' => false,
-			'align' => array(
-				'wide',
-				'full'
-			),
-			'__experimentalStyle' => array(
-				'css' => '&.is-layout-flex { gap: var(--wp--custom--x-3-p-0-media-data--gap, 0.5rem); }',
-				'spacing' => array(
-					'blockGap' => 'var(--wp--custom--x-3-p-0-media-meta--gap, 0.5rem)'
-				)
-			),
-			'layout' => array(
-				'allowCustomContentAndWideSize' => false,
-				'allowEditing' => false,
-				'allowInheriting' => false,
-				'allowJustification' => true,
-				'allowOrientation' => false,
-				'allowSizingOnChildren' => false,
-				'allowSwitching' => true,
-				'allowVerticalAlignment' => true,
-				'default' => array(
-					'type' => 'constrained'
-				)
-			),
-			'spacing' => array(
-				'margin' => true,
-				'padding' => true,
-				'blockGap' => true
-			),
-			'color' => array(
-				'text' => true,
-				'background' => true,
-				'link' => true
-			),
-			'typography' => array(
-				'fontSize' => true,
-				'lineHeight' => true
-			)
-		),
 		'providesContext' => array(
 			'x3p0-media-data/mediaId' => 'mediaId',
 			'x3p0-media-data/metadata' => 'metadata'
@@ -65,6 +25,8 @@ return array(
 			'postId',
 			'postType'
 		),
+		'editorScript' => 'file:./index.js',
+		'style' => 'file:./style-index.css',
 		'attributes' => array(
 			'mediaId' => array(
 				'type' => 'integer',
@@ -72,8 +34,76 @@ return array(
 				'role' => 'content'
 			)
 		),
-		'editorScript' => 'file:./index.js',
-		'style' => 'file:./style-index.css'
+		'supports' => array(
+			'html' => false,
+			'align' => array(
+				'wide',
+				'full'
+			),
+			'__experimentalBorder' => array(
+				'radius' => true,
+				'color' => true,
+				'width' => true,
+				'style' => true,
+				'__experimentalDefaultControls' => array(
+					'width' => true,
+					'color' => true
+				)
+			),
+			'__experimentalStyle' => array(
+				'css' => '&.is-layout-flex { gap: var(--wp--custom--x-3-p-0-media-data--gap, 0.5rem); }',
+				'spacing' => array(
+					'blockGap' => 'var(--wp--custom--x-3-p-0-media-data--gap, 0.5rem)'
+				)
+			),
+			'color' => array(
+				'link' => false,
+				'gradients' => true,
+				'__experimentalDefaultControls' => array(
+					'background' => true,
+					'text' => true
+				)
+			),
+			'layout' => array(
+				'allowCustomContentAndWideSize' => false,
+				'allowEditing' => false,
+				'allowInheriting' => false,
+				'allowJustification' => true,
+				'allowOrientation' => true,
+				'allowSizingOnChildren' => false,
+				'allowSwitching' => true,
+				'allowVerticalAlignment' => true,
+				'default' => array(
+					'type' => 'flex',
+					'flexWrap' => 'wrap',
+					'orientation' => 'vertical',
+					'justifyContent' => 'stretch'
+				)
+			),
+			'shadow' => true,
+			'spacing' => array(
+				'blockGap' => true,
+				'margin' => true,
+				'padding' => true,
+				'__experimentalDefaultControls' => array(
+					'blockGap' => true,
+					'margin' => false,
+					'padding' => true
+				)
+			),
+			'typography' => array(
+				'fontSize' => true,
+				'lineHeight' => true,
+				'__experimentalFontStyle' => true,
+				'__experimentalFontWeight' => true,
+				'__experimentalFontFamily' => true,
+				'__experimentalLetterSpacing' => true,
+				'__experimentalTextTransform' => true,
+				'__experimentalDefaultControls' => array(
+					'fontSize' => true
+				)
+			)
+		)
 	),
 	'media-data-field' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
@@ -94,22 +124,50 @@ return array(
 			'x3p0/media-data'
 		),
 		'textdomain' => 'x3p0-media-data',
+		'usesContext' => array(
+			'x3p0-media-data/mediaId',
+			'x3p0-media-data/metadata'
+		),
+		'editorScript' => 'file:./index.js',
+		'render' => 'file:./render.php',
+		'attributes' => array(
+			'field' => array(
+				'type' => 'string',
+				'default' => 'title',
+				'role' => 'content'
+			),
+			'label' => array(
+				'type' => 'string',
+				'default' => '',
+				'role' => 'content'
+			)
+		),
 		'supports' => array(
+			'anchor' => true,
 			'html' => false,
-			'__experimentalStyle' => array(
-				'css' => '&.is-layout-flex { gap: var(--wp--custom--x-3-p-0-media-data--gap, 0.5rem); }',
-				'spacing' => array(
-					'blockGap' => 'var(--wp--custom--x-3-p-0-media-meta--gap, 0.5rem)'
+			'__experimentalBorder' => array(
+				'radius' => true,
+				'color' => true,
+				'width' => true,
+				'style' => true,
+				'__experimentalDefaultControls' => array(
+					'width' => true,
+					'color' => true
 				)
 			),
-			'spacing' => array(
-				'margin' => true,
-				'padding' => true
+			'__experimentalStyle' => array(
+				'css' => '&.is-layout-flex { gap: var(--wp--custom--x-3-p-0-media-data-field--gap, 0.5rem); }',
+				'spacing' => array(
+					'blockGap' => 'var(--wp--custom--x-3-p-0-media-data-field--gap, 0.5rem)'
+				)
 			),
 			'color' => array(
-				'text' => true,
-				'background' => true,
-				'link' => true
+				'link' => false,
+				'gradients' => true,
+				'__experimentalDefaultControls' => array(
+					'background' => true,
+					'text' => true
+				)
 			),
 			'layout' => array(
 				'allowCustomContentAndWideSize' => false,
@@ -127,28 +185,29 @@ return array(
 					'justifyContent' => 'space-between'
 				)
 			),
+			'shadow' => true,
+			'spacing' => array(
+				'blockGap' => true,
+				'margin' => true,
+				'padding' => true,
+				'__experimentalDefaultControls' => array(
+					'blockGap' => true,
+					'margin' => false,
+					'padding' => true
+				)
+			),
 			'typography' => array(
 				'fontSize' => true,
-				'lineHeight' => true
+				'lineHeight' => true,
+				'__experimentalFontStyle' => true,
+				'__experimentalFontWeight' => true,
+				'__experimentalFontFamily' => true,
+				'__experimentalLetterSpacing' => true,
+				'__experimentalTextTransform' => true,
+				'__experimentalDefaultControls' => array(
+					'fontSize' => true
+				)
 			)
-		),
-		'usesContext' => array(
-			'x3p0-media-data/mediaId',
-			'x3p0-media-data/metadata'
-		),
-		'attributes' => array(
-			'field' => array(
-				'type' => 'string',
-				'default' => 'title',
-				'role' => 'content'
-			),
-			'label' => array(
-				'type' => 'string',
-				'default' => '',
-				'role' => 'content'
-			)
-		),
-		'editorScript' => 'file:./index.js',
-		'render' => 'file:./render.php'
+		)
 	)
 );

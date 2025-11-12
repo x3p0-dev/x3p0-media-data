@@ -10,22 +10,47 @@
 	"keywords": ["media", "metadata", "field", "meta"],
 	"parent": ["x3p0/media-data"],
 	"textdomain": "x3p0-media-data",
+	"usesContext": ["x3p0-media-data/mediaId", "x3p0-media-data/metadata"],
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php",
+	"attributes": {
+		"field": {
+			"type": "string",
+			"default": "title",
+			"role": "content"
+		},
+		"label": {
+			"type": "string",
+			"default": "",
+			"role": "content"
+		}
+	},
 	"supports": {
+		"anchor": true,
 		"html": false,
-		"__experimentalStyle": {
-			"css": "&.is-layout-flex { gap: var(--wp--custom--x-3-p-0-media-data--gap, 0.5rem); }",
-			"spacing": {
-				"blockGap": "var(--wp--custom--x-3-p-0-media-meta--gap, 0.5rem)"
+		"__experimentalBorder": {
+			"radius": true,
+			"color": true,
+			"width": true,
+			"style": true,
+			"__experimentalDefaultControls": {
+				"width": true,
+				"color": true
 			}
 		},
-		"spacing": {
-			"margin": true,
-			"padding": true
+		"__experimentalStyle": {
+			"css": "&.is-layout-flex { gap: var(--wp--custom--x-3-p-0-media-data-field--gap, 0.5rem); }",
+			"spacing": {
+				"blockGap": "var(--wp--custom--x-3-p-0-media-data-field--gap, 0.5rem)"
+			}
 		},
 		"color": {
-			"text": true,
-			"background": true,
-			"link": true
+			"link": false,
+			"gradients": true,
+			"__experimentalDefaultControls": {
+				"background": true,
+				"text": true
+			}
 		},
 		"layout": {
 			"allowCustomContentAndWideSize": false,
@@ -43,24 +68,28 @@
 				"justifyContent": "space-between"
 			}
 		},
+		"shadow": true,
+		"spacing": {
+			"blockGap": true,
+			"margin": true,
+			"padding": true,
+			"__experimentalDefaultControls": {
+				"blockGap": true,
+				"margin": false,
+				"padding": true
+			}
+		},
 		"typography": {
 			"fontSize": true,
-			"lineHeight": true
+			"lineHeight": true,
+			"__experimentalFontStyle": true,
+			"__experimentalFontWeight": true,
+			"__experimentalFontFamily": true,
+			"__experimentalLetterSpacing": true,
+			"__experimentalTextTransform": true,
+			"__experimentalDefaultControls": {
+				"fontSize": true
+			}
 		}
-	},
-	"usesContext": ["x3p0-media-data/mediaId", "x3p0-media-data/metadata"],
-	"attributes": {
-		"field": {
-			"type": "string",
-			"default": "title",
-			"role": "content"
-		},
-		"label": {
-			"type": "string",
-			"default": "",
-			"role": "content"
-		}
-	},
-	"editorScript": "file:./index.js",
-	"render": "file:./render.php"
+	}
 }
