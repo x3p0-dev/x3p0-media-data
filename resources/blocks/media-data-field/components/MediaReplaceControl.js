@@ -8,16 +8,11 @@
  */
 
 import { MediaReplaceButton } from '../../../components';
-import { useBlockPosition }    from '../hooks';
+import { useBlockPosition }   from '../hooks';
+import { MEDIA_ID_CONTEXT }   from '../utils';
 
 import { store as blockEditorStore } from '@wordpress/block-editor';
 import { useDispatch } from '@wordpress/data';
-
-/**
- * Context name for getting media ID from parent block.
- * @type {string}
- */
-const MEDIA_ID_CONTEXT = 'x3p0-media-data/mediaId';
 
 /**
  * Returns the inner block media replace control, which allows replacing the
