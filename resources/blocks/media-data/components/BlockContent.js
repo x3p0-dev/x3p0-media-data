@@ -11,12 +11,6 @@ import MediaPlaceholderControl from './MediaPlaceholderControl';
 import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 
 /**
- * Array of allowed inner blocks.
- * @type {string[]}
- */
-const ALLOWED_BLOCKS = ['x3p0/media-data-field'];
-
-/**
  * Inner blocks template.
  * @type {array}
  */
@@ -37,7 +31,6 @@ const BlockContent = (props) => {
 
 	const blockProps = useBlockProps();
 	const innerBlocksProps = useInnerBlocksProps(blockProps, {
-		allowedBlocks: ALLOWED_BLOCKS,
 		template: TEMPLATE,
 		templateLock: false,
 		templateInsertUpdatesSelection: true

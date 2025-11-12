@@ -27,6 +27,9 @@ return array(
 		),
 		'editorScript' => 'file:./index.js',
 		'style' => 'file:./style-index.css',
+		'allowedBlocks' => array(
+			'x3p0/media-data-field'
+		),
 		'attributes' => array(
 			'mediaId' => array(
 				'type' => 'integer',

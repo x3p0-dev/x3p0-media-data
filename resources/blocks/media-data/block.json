@@ -16,6 +16,7 @@
 	"usesContext": ["postId", "postType"],
 	"editorScript": "file:./index.js",
 	"style": "file:./style-index.css",
+	"allowedBlocks": ["x3p0/media-data-field"],
 	"attributes": {
 		"mediaId": {
 			"type": "integer",
