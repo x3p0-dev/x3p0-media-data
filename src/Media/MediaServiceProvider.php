@@ -9,7 +9,7 @@
  * @link      https://github.com/x3p0-dev/x3p0-media-data
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace X3P0\MediaData\Media;
 

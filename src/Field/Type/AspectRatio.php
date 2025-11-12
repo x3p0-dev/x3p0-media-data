@@ -9,6 +9,8 @@
  * @link      https://github.com/x3p0-dev/x3p0-media-data
  */
 
+declare(strict_types=1);
+
 namespace X3P0\MediaData\Field\Type;
 
 use X3P0\MediaData\Field\AbstractField;
@@ -31,7 +33,7 @@ final class AspectRatio extends AbstractField
 		}
 
 		// Calculate GCD for aspect ratio
-		$gcd = function($a, $b) use (&$gcd) {
+		$gcd = function ($a, $b) use (&$gcd) {
 			return $b ? $gcd($b, $a % $b) : $a;
 		};
 
