@@ -9,16 +9,27 @@
 
 import MediaReplaceControl from './MediaReplaceControl';
 import { BlockControls } from '@wordpress/block-editor';
+import { useHasBoundMediaId } from '../../../hooks';
 
 /**
  * Renders the block toolbar controls.
  * @param props
  * @returns {false|JSX.Element}
  */
-const BlockToolbar = (props) => !! props.attributes.mediaId && (
-	<BlockControls group="other">
-		<MediaReplaceControl {...props}/>
-	</BlockControls>
-);
+const BlockToolbar = (props) => {
+	const hasBoundMediaId = useHasBoundMediaId(props.attributes.metadata);
+
+	// Don't allow replacing the media if there's no media already or if
+	// it's already bound.
+	if (! props.attributes.mediaId || hasBoundMediaId) {
+		return null;
+	}
+
+	return (
+		<BlockControls group="other">
+			<MediaReplaceControl {...props}/>
+		</BlockControls>
+	);
+}
 
 export default BlockToolbar;

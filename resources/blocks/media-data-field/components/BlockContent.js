@@ -7,29 +7,14 @@
  * @link      https://github.com/x3p0-dev/x3p0-media-data
  */
 
-import {
-	useBlockInsertOnEnter,
-	useHasBoundMediaId,
-	useMediaField,
-	useMediaFieldOptions
-} from '../hooks';
+import { useHasBoundMediaId } from '../../../hooks';
+import { useBlockInsertOnEnter, useMediaField, useMediaFieldOptions } from '../hooks';
+import { MEDIA_ID_CONTEXT, METADATA_CONTEXT } from '../utils';
 
 import { RichText, useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 import { Notice }  from '@wordpress/components';
 import { RawHTML } from '@wordpress/element';
 import { __ }      from '@wordpress/i18n';
-
-/**
- * Media ID context key.
- * @type {string}
- */
-const MEDIA_ID_CONTEXT = 'x3p0-media-data/mediaId';
-
-/**
- * Metadata context key.
- * @type {string}
- */
-const METADATA_CONTEXT = 'x3p0-media-data/metadata';
 
 /**
  * Returns the block content.

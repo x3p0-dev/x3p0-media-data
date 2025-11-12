@@ -9,6 +9,5 @@
 
 export { useBlockInsertOnEnter } from './useBlockInsertOnEnter';
 export { useBlockPosition }      from './useBlockPosition';
-export { useHasBoundMediaId }    from './useHasBoundMediaId';
 export { useMediaField }         from './useMediaField';
 export { useMediaFieldOptions }  from './useMediaFieldOptions';

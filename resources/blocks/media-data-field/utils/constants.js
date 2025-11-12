@@ -10,6 +10,18 @@
 import {__, _x} from "@wordpress/i18n";
 
 /**
+ * Media ID context key.
+ * @type {string}
+ */
+export const MEDIA_ID_CONTEXT = 'x3p0-media-data/mediaId';
+
+/**
+ * Metadata context key.
+ * @type {string}
+ */
+export const METADATA_CONTEXT = 'x3p0-media-data/metadata';
+
+/**
  * EXIF orientation values and their human-readable labels.
  */
 export const EXIF_ORIENTATIONS = {

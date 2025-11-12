@@ -8,6 +8,8 @@
  */
 
 import MediaReplaceControl from './MediaReplaceControl';
+import { useHasBoundMediaId } from '../../../hooks';
+import { METADATA_CONTEXT } from '../utils';
 import { BlockControls } from '@wordpress/block-editor';
 
 /**
@@ -15,10 +17,20 @@ import { BlockControls } from '@wordpress/block-editor';
  * @param props
  * @returns {JSX.Element}
  */
-const BlockToolbar = (props) => (
-	<BlockControls group="other">
-		<MediaReplaceControl {...props}/>
-	</BlockControls>
-);
+const BlockToolbar = (props) => {
+	const parentMetadata  = props.context[METADATA_CONTEXT];
+	const hasBoundMediaId = useHasBoundMediaId(parentMetadata);
+
+	// Don't allow replacing the media it's already bound.
+	if (hasBoundMediaId) {
+		return null;
+	}
+
+	return (
+		<BlockControls group="other">
+			<MediaReplaceControl {...props}/>
+		</BlockControls>
+	);
+}
 
 export default BlockToolbar;

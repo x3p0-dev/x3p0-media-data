@@ -7,4 +7,5 @@
  * @link      https://github.com/x3p0-dev/x3p0-media-data
  */
 
+export { useHasBoundMediaId } from './useHasBoundMediaId';
 export { useMediaById } from './useMediaById';

@@ -14,7 +14,7 @@
 export {getMediaField} from './extractors';
 
 // Constants
-export {EXIF_ORIENTATIONS, BYTE_UNITS} from './constants';
+export {MEDIA_ID_CONTEXT, METADATA_CONTEXT, EXIF_ORIENTATIONS, BYTE_UNITS} from './constants';
 export {VARIATION_ICONS} from './variation-icons';
 
 // Formatters
