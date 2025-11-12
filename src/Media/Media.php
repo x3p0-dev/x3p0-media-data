@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Attachment media class.
+ * Media class.
  *
  * @author    Justin Tadlock <justintadlock@gmail.com>
  * @copyright Copyright (c) 2008-2025, Justin Tadlock

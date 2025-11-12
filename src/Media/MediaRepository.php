@@ -16,14 +16,14 @@ namespace X3P0\MediaData\Media;
 /**
  * Repository implementation that stores attachment media objects by post ID.
  * This implementation acts as both a repository and factory. The `find()`
- * method creates new attachment objects when one is not found. We can later add
- * a separate media factory if necessary.
+ * method creates new media objects when one is not found. We can later add a
+ * separate media factory if necessary.
  */
 final class MediaRepository
 {
 	/**
 	 * Cache of Media instances indexed by media ID. By default, the cache
-	 * includes the ID of `0` as `null`, which will bypass any lookups.
+	 * includes the ID of `0` as `null`, which will bypass lookups for it.
 	 *
 	 * @var array<int, Media|null>
 	 */
@@ -50,10 +50,10 @@ final class MediaRepository
 		// Get attachment metadata.
 		$metadata = wp_get_attachment_metadata($mediaId);
 
-		// Create and cache the new attachment object.
+		// Create and cache the new media object.
 		$this->save($mediaId, new Media($mediaId, $metadata ?: []));
 
-		// Return the cached attachment object.
+		// Return the cached media object.
 		return $this->cache[$mediaId];
 	}
 

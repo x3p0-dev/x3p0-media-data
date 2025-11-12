@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace X3P0\MediaData\Core;
 
 /**
- * Service providers allow you to connect services to the application container.
- * This base class should be extended with at least the `register()` method for
+ * Service providers allow you to register services with the service container.
+ * This base class should be extended with the `register()` method for
  * registering services.
  */
 abstract class ServiceProvider

@@ -28,7 +28,7 @@ final class MediaDataField implements Block
 	 *
 	 * @todo Type hint with PHP 8.3+ requirement.
 	 */
-	protected const ALLOWED_HTML = [
+	private const ALLOWED_HTML = [
 		'abbr'    => [ 'class' => true, 'title' => true ],
 		'acronym' => [ 'class' => true, 'title' => true ],
 		'b'       => [ 'class' => true ],
@@ -50,7 +50,7 @@ final class MediaDataField implements Block
 	/**
 	 * Sets up the initial object state.
 	 */
-	public function __construct(protected readonly FieldResolver $fieldResolver)
+	public function __construct(private readonly FieldResolver $fieldResolver)
 	{}
 
 	/**

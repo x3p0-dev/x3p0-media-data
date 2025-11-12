@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Core;
 
-use Closure;
-
 /**
  * Defines the dependency injection container interface, which allows for
  * binding concrete implementations to abstracts. The container supports
