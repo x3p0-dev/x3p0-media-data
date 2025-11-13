@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Attachment Repository class.
+ * Media repository class.
  *
  * @author    Justin Tadlock <justintadlock@gmail.com>
  * @copyright Copyright (c) 2008-2025, Justin Tadlock
@@ -15,9 +15,8 @@ namespace X3P0\MediaData\Media;
 
 /**
  * Repository implementation that stores attachment media objects by post ID.
- * This implementation acts as both a repository and factory. The `find()`
- * method creates new media objects when one is not found. We can later add a
- * separate media factory if necessary.
+ * The `find()` method will use the media factory to create a new media object
+ * if one is not already stored and the ID is valid.
  */
 final class MediaRepository
 {
@@ -28,6 +27,12 @@ final class MediaRepository
 	 * @var array<int, Media|null>
 	 */
 	private array $cache = [0 => null];
+
+	/**
+	 * Sets up the initial object state.
+	 */
+	public function __construct(private readonly MediaFactory $mediaFactory)
+	{}
 
 	/**
 	 * Finds a `Media` instance by media ID. Creates and caches if not
@@ -48,10 +53,10 @@ final class MediaRepository
 		}
 
 		// Get attachment metadata.
-		$metadata = wp_get_attachment_metadata($mediaId);
+		$metadata = wp_get_attachment_metadata($mediaId) ?: [];
 
 		// Create and cache the new media object.
-		$this->save($mediaId, new Media($mediaId, $metadata ?: []));
+		$this->save($mediaId, $this->mediaFactory->make($mediaId, $metadata));
 
 		// Return the cached media object.
 		return $this->cache[$mediaId];

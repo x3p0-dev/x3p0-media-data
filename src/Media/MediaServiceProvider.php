@@ -22,6 +22,8 @@ final class MediaServiceProvider extends ServiceProvider
 	 */
 	public function register(): void
 	{
+		$this->container->transient(Media::class);
+		$this->container->singleton(MediaFactory::class);
 		$this->container->singleton(MediaRepository::class);
 	}
 }
