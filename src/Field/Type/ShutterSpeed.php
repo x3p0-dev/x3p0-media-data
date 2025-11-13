@@ -41,10 +41,10 @@ final class ShutterSpeed extends AbstractField
 
 		if ((1 / $shutter) > 1) {
 			$num_float   = number_format((1 / $shutter), 1);
-			$num_integer = number_format((1 / $shutter), 0);
+			$num_integer = number_format((1 / $shutter));
 
 			$formatted_num = $num_float === $num_integer
-				? number_format_i18n((1 / $shutter), 0)
+				? number_format_i18n((1 / $shutter))
 				: number_format_i18n((1 / $shutter), 1);
 
 			$shutter = sprintf(
