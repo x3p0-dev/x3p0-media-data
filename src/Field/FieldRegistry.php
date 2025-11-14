@@ -38,7 +38,7 @@ final class FieldRegistry implements ClassRegistry
 		if (! is_subclass_of($className, Field::class)) {
 			throw new TypeError(esc_html(sprintf(
 				// Translators: %s is a PHP class name.
-				__('Only %s classes can be registered', 'x3p0-breadcrumbs'),
+				__('Only %s classes can be registered', 'x3p0-media-data'),
 				Field::class
 			)));
 		}

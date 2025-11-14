@@ -233,7 +233,7 @@ final class ServiceContainer implements Container
 			? $param->getDefaultValue()
 			: throw new Exception(esc_html(sprintf(
 				// Translators: %s is a parameter name.
-				__('Cannot resolve parameter %s.', 'x3p0-media-meta'),
+				__('Cannot resolve parameter %s.', 'x3p0-media-data'),
 				$param->getName()
 			)));
 	}
