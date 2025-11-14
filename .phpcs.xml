@@ -18,6 +18,15 @@
 	<rule ref="WordPress.DB"/>
 	<rule ref="WordPress.Security"/>
 
+	<!-- Define the plugin's textdomain to check. -->
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="x3p0-media-data"/>
+			</property>
+		</properties>
+	</rule>
+
 	<!-- No need to check Yoda conditions. -->
 	<rule ref="WordPress.PHP">
 		<exclude name="WordPress.PHP.YodaConditions.NotYoda"/>
