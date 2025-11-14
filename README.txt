@@ -84,6 +84,6 @@ Yes. If running WordPress 6.9 or newer, developers can add custom bindings for t
 
 **Added**
 
-- Everything. It's version 1.0.0, after all!
+- 🎉 Literally everything. This is version 1.0, after all.
 
 For complete version history, see the [changelog on GitHub](https://github.com/x3p0-dev/x3p0-media-data/blob/master/CHANGELOG.md).
