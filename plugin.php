@@ -4,7 +4,7 @@
  * Plugin Name:       X3P0: Media Data
  * Plugin URI:        https://github.com/x3p0-dev/x3p0-media-data
  * Description:       Display media data via the block editor.
- * Version:           1.0.0-alpha
+ * Version:           1.0.0
  * Requires at least: 6.8
  * Requires PHP:      8.1
  * Author:            Justin Tadlock
