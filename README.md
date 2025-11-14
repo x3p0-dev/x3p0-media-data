@@ -2,9 +2,11 @@
 
 ![Mostly decorative banner that displays a screenshot of the Media Data block in action and Nova, the brand's mascot, in a city holding a camera.](/.wporg/banner-1544x500.jpg)
 
-Did you know that WordPress stores data, such as EXIF and ID3 tags, from the media that you upload? It does this very well, but WordPress itself has never had easy ways of obtaining and displaying that data. That's where the **Media Data** plugin comes in.
+Display image, audio, and video metadata fields—EXIF, ID3, and more—right inside the WordPress block editor, instantly and flexibly.
 
-Media Data is a plugin that registers two blocks for displaying your media data right from the block editor. It supports image, audio, video, and all other media types allowed by WordPress.
+Your photos, songs, and videos hold more information than you might think—camera settings, recording details, dimensions, and more. WordPress quietly saves all of that data when you upload a file but doesn't make it easy to showcase it. **X3P0: Media Data changes that.**
+
+Media Data introduces powerful yet simple blocks for showing metadata from any WordPress media file. Whether you're a photographer displaying EXIF details, a podcaster highlighting episode metadata, or an archivist cataloging digital assets, this plugin brings your media's data to the forefront—right from the block editor.
 
 ## Usage
 
@@ -19,7 +21,36 @@ From there, you can select a different field type via the **Field** option in th
 
 You can also change a field's label directly from the content canvas in the editor or via the **Label** option in the sidebar.
 
-## Development
+## Developers
+
+### Block Bindings Support
+
+With WordPress 6.9+, the Media Data block supports Block Bindings on its `mediaID` attribute. This means that you can feed it any media attachment ID in WordPress and have it automatically output the data (very useful for things like attachment templates!).
+
+The following is an example of using a custom source to connect an ID to the `mediaID` attribute. Just replace `your-namespace/your-source` with your binding source and configure any `args` necessary for it.
+
+```html
+<!-- wp:x3p0/media-data {
+	"metadata":{
+		"bindings":{
+			"mediaId":{
+				"source":"your-namespace/your-source",
+				"args":{"key":"id"}
+			}
+		}
+	}
+} -->
+<div class="wp-block-x3p0-media-data">
+	<!-- wp:x3p0/media-data-field {"field":"dimensions"} /-->
+	<!-- wp:x3p0/media-data-field {"field":"created_timestamp"} /-->
+	<!-- wp:x3p0/media-data-field {"field":"camera"} /-->
+	<!-- wp:x3p0/media-data-field {"field":"aperture"} /-->
+	<!-- ... -->
+</div>
+<!-- /wp:x3p0/media-data -->
+```
+
+### Developing Media Data
 
 This plugin requires composer, so if you're Git cloning the repository, you must run these two commands in your command line program to get up and running:
 
