@@ -1,10 +1,10 @@
-=== X3P0: Media Data ===
+=== Media Data ===
 
 Contributors: greenshady
 Donate link: http://a.co/02ggsr2
 Tags: media, metadata, exif, id3, images
 Requires at least: 6.8
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 8.1
 Stable tag: 1.0.0
 License: GPL-3.0-or-later
