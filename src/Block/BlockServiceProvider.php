@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace X3P0\MediaData\Block;
 
 use X3P0\MediaData\Block\Type\MediaDataField;
-use X3P0\MediaData\Contracts\Bootable;
-use X3P0\MediaData\Core\ServiceProvider;
+use X3P0\MediaData\Framework\Contracts\Bootable;
+use X3P0\MediaData\Framework\Core\ServiceProvider;
 
 final class BlockServiceProvider extends ServiceProvider implements Bootable
 {
@@ -29,7 +29,10 @@ final class BlockServiceProvider extends ServiceProvider implements Bootable
 	 */
 	public function register(): void
 	{
-		$this->container->singleton(BlockRegistrar::class);
+		$this->container->singleton(
+			BlockRegistrar::class,
+			fn($container) => new BlockRegistrar(self::BLOCKS_PATH)
+		);
 		$this->container->singleton(BlockBindingsSupport::class);
 		$this->container->singleton(MediaDataField::class);
 	}
@@ -39,10 +42,7 @@ final class BlockServiceProvider extends ServiceProvider implements Bootable
 	 */
 	public function boot(): void
 	{
-		$this->container->get(BlockRegistrar::class, [
-			'path' => self::BLOCKS_PATH
-		])->boot();
-
+		$this->container->get(BlockRegistrar::class)->boot();
 		$this->container->get(BlockBindingsSupport::class)->boot();
 	}
 }

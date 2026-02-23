@@ -11,23 +11,37 @@
 			"composer update",
 			"composer dump-autoload"
 		],
+		"prelude": "X3P0\\MediaData\\Scripts\\Prelude::compose",
+		"post-install-cmd": [
+			"@prelude"
+		],
+		"post-update-cmd": [
+			"@prelude"
+		],
 		"zip": "composer archive --file=x3p0-media-data",
 		"lint:php": "./vendor/bin/phpcs -d error_reporting=E_ALL^E_DEPRECATED -s --colors .",
 		"fix:php": "./vendor/bin/phpcbf -d error_reporting=E_ALL^E_DEPRECATED -s --colors ."
 	},
 	"autoload": {
 		"psr-4": {
-			"X3P0\\MediaData\\": "src/"
+			"X3P0\\MediaData\\": "src/",
+			"X3P0\\MediaData\\Framework\\": "packages/x3p0-dev/x3p0-framework/src/",
+			"X3P0\\MediaData\\Scripts\\": "scripts/"
 		},
 		"files" : [
 			"src/functions-helpers.php"
 		],
+		"classmap": [
+			"packages/"
+		],
 		"exclude-from-classmap": [
+			"scripts/",
 			"vendor/"
 		]
 	},
 	"require": {
-                "php": ">=8.1"
+                "php": ">=8.1",
+		"x3p0-dev/x3p0-framework": "dev-master"
 	},
 	"require-dev": {
 		"symfony/var-dumper": "^7.1",
@@ -41,6 +55,16 @@
 		"archive-format": "zip",
 		"allow-plugins": {
 			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	},
+	"extra": {
+		"x3p0": {
+			"prelude": {
+				"vendor-path": "x3p0-dev",
+				"output-path": "packages",
+				"search-namespace": "X3P0",
+				"replace-namespace": "X3P0\\MediaData"
+			}
 		}
 	},
 	"archive": {

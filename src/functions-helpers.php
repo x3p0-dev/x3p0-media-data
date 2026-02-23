@@ -13,7 +13,8 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData;
 
-use X3P0\MediaData\Core\{Application, Container, Plugin, ServiceContainer};
+use X3P0\MediaData\Framework\Core\Application;
+use X3P0\MediaData\Framework\Container\{Container, ServiceContainer};
 
 /**
  * Returns the `Plugin` object, which is stored as a single instance in the

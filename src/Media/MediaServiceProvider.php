@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Media;
 
-use X3P0\MediaData\Core\ServiceProvider;
+use X3P0\MediaData\Framework\Core\ServiceProvider;
 
 final class MediaServiceProvider extends ServiceProvider
 {
@@ -22,7 +22,6 @@ final class MediaServiceProvider extends ServiceProvider
 	 */
 	public function register(): void
 	{
-		$this->container->transient(Media::class);
 		$this->container->singleton(MediaFactory::class);
 		$this->container->singleton(MediaRepository::class);
 	}

@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace X3P0\MediaData\Field;
 
 use TypeError;
-use X3P0\MediaData\Contracts\ClassRegistry;
+use X3P0\MediaData\Framework\Contracts\ClassRegistry;
 
 /**
  * Stores the field classes in a registry to later be instantiated.

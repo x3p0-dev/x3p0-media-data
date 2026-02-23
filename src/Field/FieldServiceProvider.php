@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Field;
 
-use X3P0\MediaData\Contracts\Bootable;
-use X3P0\MediaData\Core\ServiceProvider;
+use X3P0\MediaData\Framework\Contracts\Bootable;
+use X3P0\MediaData\Framework\Core\ServiceProvider;
 
 final class FieldServiceProvider extends ServiceProvider implements Bootable
 {

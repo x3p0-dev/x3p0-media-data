@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Block;
 
-use X3P0\MediaData\Contracts\Bootable;
+use X3P0\MediaData\Framework\Contracts\Bootable;
 
 /**
  * Registers the plugin's block types with WordPress.

@@ -13,27 +13,16 @@ declare(strict_types=1);
 
 namespace X3P0\MediaData\Media;
 
-use X3P0\MediaData\Core\Container;
-
 /**
  * The media factory is responsible for creating new media objects.
  */
 final class MediaFactory
 {
 	/**
-	 * Sets up the initial object state.
-	 */
-	public function __construct(private readonly Container $container)
-	{}
-
-	/**
 	 * Creates a new instance of a media object.
 	 */
 	public function make(int $id, array $data): Media
 	{
-		return $this->container->get(Media::class, [
-			'id'   => $id,
-			'data' => $data
-		]);
+		return new Media(id: $id, data: $data);
 	}
 }
