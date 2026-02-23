@@ -22,12 +22,12 @@ namespace X3P0\MediaData;
 defined('ABSPATH') || exit;
 
 # Load the autoloader.
-if (is_file(__DIR__ . '/vendor/autoload.php')) {
+if (! class_exists(Plugin::class) && is_file(__DIR__ . '/vendor/autoload.php')) {
 	require_once __DIR__ . '/vendor/autoload.php';
 }
 
 # Initialize the plugin.
-add_action('plugins_loaded', plugin(...), 9999);
+add_action('plugins_loaded', plugin(...), 999);
 
 # Boot registered services.
-add_action('plugins_loaded', fn() => plugin()->boot(), PHP_INT_MAX);
+add_action('plugins_loaded', fn() => plugin()->boot(), 999999);
