@@ -21,9 +21,12 @@ namespace X3P0\MediaData;
 # Prevent direct access.
 defined('ABSPATH') || exit;
 
+# Define the plugin constants.
+const PLUGIN_DIR  = __DIR__;
+
 # Load the autoloader.
-if (! class_exists(Plugin::class) && is_file(__DIR__ . '/vendor/autoload.php')) {
-	require_once __DIR__ . '/vendor/autoload.php';
+if (! class_exists(Plugin::class) && is_file(PLUGIN_DIR . '/vendor/autoload.php')) {
+	require_once PLUGIN_DIR . '/vendor/autoload.php';
 }
 
 # Initialize the plugin and boot registered services.
