@@ -26,8 +26,5 @@ if (! class_exists(Plugin::class) && is_file(__DIR__ . '/vendor/autoload.php')) 
 	require_once __DIR__ . '/vendor/autoload.php';
 }
 
-# Initialize the plugin.
-add_action('plugins_loaded', plugin(...), 999);
-
-# Boot registered services.
-add_action('plugins_loaded', fn() => plugin()->boot(), 999999);
+# Initialize the plugin and boot registered services.
+add_action('plugins_loaded', fn() => plugin()->boot(), -999);
